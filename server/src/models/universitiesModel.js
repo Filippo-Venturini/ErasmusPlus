@@ -1,7 +1,8 @@
 const mongoose = require('mongoose')
 
 const universitySchema = new mongoose.Schema({
-    name: String
+    name: String,
+    country: String,
 });
 
-module.exports = mongoose.model('University', universitySchema);
+module.exports = mongoose.model('universities', universitySchema);
