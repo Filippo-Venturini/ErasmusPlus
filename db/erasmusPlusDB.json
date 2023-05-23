@@ -1,3 +1,9 @@
-{"name":"UPC","country":"Spain"}
-{"name":"WPC","country":"Spain"}
-{"name":"Unibo","country":"Spain"}
+{"name": "Universitat Politecnica de Catalunya", "country": "Spagna", "city":"Barcellona", "logo":"", "wallpaper":"", "cardImg":""}
+{"name": "Vrije Universitet Amsterdam", "country": "Olanda", "city":"Amsterdam", "logo":"", "wallpaper":"", "cardImg":""}
+{"name": "Warsaw University of Technology", "country": "Polonia", "city":"Varsavia", "logo":"", "wallpaper":"", "cardImg":""}
+{"name": "Cambridge University", "country": "Regno Unito", "city":"Londra", "logo":"", "wallpaper":"", "cardImg":""}
+{"name": "Humboldt University", "country": "Germania", "city":"Berlino", "logo":"", "wallpaper":"", "cardImg":""}
+{"name": "KTH Royal Institute of Technology University", "country": "Svezia", "city":"Stoccolma", "logo":"", "wallpaper":"", "cardImg":""}
+{"name": "University of Oulu", "country": "Finlandia", "city":"Oulu", "logo":"oulu.jpg", "wallpaper":"oulu.jpg", "cardImg":"finland.jpg"}
+{"name": "University of P.Porto", "country": "Portogallo", "city":"Porto", "logo":"pporto.jpg", "wallpaper":"pporto.jpg", "cardImg":"porto.jpg"}
+{"name": "Sorbonne Universitè", "country": "Francia", "city":"Parigi", "logo":"sorbonne.jpg", "wallpaper":"sorbonne.jpg", "cardImg":"paris.jpg"}
