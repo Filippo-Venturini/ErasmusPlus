@@ -1,7 +1,7 @@
 <template>
   <div class="row">
-    <div class="col">
-      <UniversityCard v-for="university in universities" :university="university" :key="university.id"></UniversityCard>
+    <div class ="col-4" v-for="university in universities">
+      <UniversityCard :university="university" :key="university.id"></UniversityCard>
     </div>
   </div>
 
