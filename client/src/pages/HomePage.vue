@@ -1,22 +1,27 @@
 <template>
   <Header></Header>
-  <div>ciao</div>
-  <Button></Button>
+  <OffersContainer :universities="universities" :key="universities.id"></OffersContainer>
 </template>
 
 <script>
-import Button from "../components/Button.vue";
 import Header from "@/components/Header.vue";
 import axios from "axios";
 import {defineComponent} from "vue";
+import OffersContainer from "@/components/OffersContainer.vue";
 
 export default defineComponent({
   name: "HomePage",
-  components: {Header, Button},
+  components: {OffersContainer, Header},
+  data(){
+    return{
+      universities: []
+    }
+  },
   methods:{
     getAllUniversities(){
       axios.get('http://localhost:3000/universities').then(response =>{
         console.log(response.data);
+        this.universities = response.data;
       }
       ).catch(err => {
         console.log(err);
