@@ -5,7 +5,7 @@
 
 <script>
 import Header from "@/components/Header.vue";
-import ProfileBadge from "@/components/ProfileBadge.vue";
+import ProfileBadge from "@/components/profile/ProfileBadge.vue";
 import axios from "axios";
 import {defineComponent} from "vue";
 

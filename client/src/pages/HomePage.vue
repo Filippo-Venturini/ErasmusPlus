@@ -11,9 +11,9 @@
 import Header from "@/components/Header.vue";
 import axios from "axios";
 import {defineComponent} from "vue";
-import OffersContainer from "@/components/OffersContainer.vue";
-import FilterMenu from "@/components/FilterMenu.vue";
-import MapContainer from "@/components/MapContainer.vue";
+import OffersContainer from "@/components/home/OffersContainer.vue";
+import FilterMenu from "@/components/home/FilterMenu.vue";
+import MapContainer from "@/components/home/MapContainer.vue";
 
 export default defineComponent({
   name: "HomePage",

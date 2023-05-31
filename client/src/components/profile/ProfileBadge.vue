@@ -8,7 +8,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <img src="../assets/img/universityLogos/kth.png" class="rounded mx-auto d-block h" alt="...">
+  <img src="../../assets/img/universityLogos/kth.png" class="rounded mx-auto d-block h" alt="...">
   <h1 class="text-center">{{ user.name }}</h1>
   <h2 class="text-center">{{ user.role }}</h2>
 </template>

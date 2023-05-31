@@ -12,8 +12,8 @@
 import {defineComponent} from "vue";
 import Header from "@/components/Header.vue";
 import axios from "axios";
-import InfoPanel from "../components/InfoPanel.vue";
-import CircleIcon from "../components/CircleIcon.vue";
+import InfoPanel from "../components/offer/InfoPanel.vue";
+import CircleIcon from "../components/offer/CircleIcon.vue";
 
 export default defineComponent({
   name: "UniversityDetailPage",

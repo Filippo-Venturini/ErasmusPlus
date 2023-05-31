@@ -1,5 +1,5 @@
 <template>
-  <img class="rounded-circle circleIcon" src="src/assets/img/icon/peopleOutline.png">
+  <img class="rounded-circle circleIcon" src="../../assets/img/icon/peopleOutline.png">
 </template>
 
 <script>

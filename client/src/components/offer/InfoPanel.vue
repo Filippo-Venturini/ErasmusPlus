@@ -1,7 +1,7 @@
 <template>
   <div class="w-50 p-3 mt-4 infoPanel">
     <div class="row">
-      <img class="col-md-1 stylizedIcon" src="src/assets/img/icon/peopleOutline.png">
+      <img class="col-md-1 stylizedIcon" src="../../assets/img/icon/peopleOutline.png">
       <div class="col-md-3 panel-heading">Posti disponibili: {{offer.country}}</div>
       </div>
     <div class="row">

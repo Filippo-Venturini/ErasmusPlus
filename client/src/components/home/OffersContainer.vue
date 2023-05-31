@@ -8,7 +8,7 @@
 </template>
 <script>
 import {defineComponent} from "vue";
-import UniversityCard from "@/components/UniversityCard.vue";
+import UniversityCard from "@/components/home/UniversityCard.vue";
 
 export default defineComponent({
   name: "OffersContainer",
