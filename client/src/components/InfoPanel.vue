@@ -2,7 +2,7 @@
   <div class="w-50 p-3 mt-4 infoPanel">
     <div class="row">
       <img class="col-md-1 stylizedIcon" src="src/assets/img/icon/peopleOutline.png">
-      <div class="col-md-3 panel-heading">Posti disponibili: 8</div>
+      <div class="col-md-3 panel-heading">Posti disponibili: {{offer.country}}</div>
       </div>
     <div class="row">
       <div class="col-md-1"></div>
@@ -15,7 +15,11 @@
 import {defineComponent} from "vue";
 
 export default defineComponent({
-  name: "InfoPanel"
+  name: "InfoPanel",
+  props: ['offer'],
+  methods:{
+
+  }
 })
 </script>
 

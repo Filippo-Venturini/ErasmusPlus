@@ -1,7 +1,9 @@
 <template>
   <Header></Header>
-
-  <InfoPanel></InfoPanel>
+<!--<infopanel :title="Posti diposnibili x">
+    <infopanel :title="Ambito di studi x">
+    -->
+  <InfoPanel :offer="offer" :key="offer.id"></InfoPanel>
 
   <CircleIcon></CircleIcon>
 </template>
@@ -14,12 +16,18 @@ import InfoPanel from "../components/InfoPanel.vue";
 import CircleIcon from "../components/CircleIcon.vue";
 
 export default defineComponent({
-  name: "UniversityDetail",
+  name: "UniversityDetailPage",
   components: {CircleIcon, Header, InfoPanel},
+  data(){
+    return{
+      offer: []
+    }
+  },
   methods:{
-    getUniversityDetali(){
-      axios.get('http://localhost:3000/universities/universitydetail').then(response =>{
+    getUniversityDetail(){
+      axios.get('http://localhost:3000/universitydetail').then(response =>{
             console.log(response.data);
+            this.offer = response.data;
           }
       ).catch(err => {
         console.log(err);
@@ -27,7 +35,7 @@ export default defineComponent({
     }
   },
   mounted() {
-    this.getUniversityDetali();
+    this.getUniversityDetail();
   }
 })
 </script>
