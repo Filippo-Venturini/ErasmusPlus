@@ -1,9 +1,10 @@
 <template>
-  <div class="card" style="width: 18rem;">
-    <img class="card-img-top" :src="getImageUrl()" alt="University Image">
+  <div class="card" style="width: 20rem;">
+    <img class="card-img-top h-50" :src="getImageUrl()" alt="University Image">
     <div class="card-body">
       <h5 class="card-title">{{ university.name }}</h5>
       <p class="card-text">{{university.city}}, {{university.country}}</p>
+      <a href="#" class="stretched-link"></a>
     </div>
   </div>
 </template>

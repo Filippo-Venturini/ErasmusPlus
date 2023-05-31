@@ -1,6 +1,8 @@
 <template>
   <Header></Header>
-  <OffersContainer :universities="universities" :key="universities.id"></OffersContainer>
+  <FilterMenu></FilterMenu>
+  <MapContainer v-if="toMap" @toList="switchView"></MapContainer>
+  <OffersContainer v-if="!toMap" @toMap="switchView" :universities="universities" :key="universities.id"></OffersContainer>
 </template>
 
 <script>
@@ -8,16 +10,22 @@ import Header from "@/components/Header.vue";
 import axios from "axios";
 import {defineComponent} from "vue";
 import OffersContainer from "@/components/OffersContainer.vue";
+import FilterMenu from "@/components/FilterMenu.vue";
+import MapContainer from "@/components/MapContainer.vue";
 
 export default defineComponent({
   name: "HomePage",
-  components: {OffersContainer, Header},
+  components: {MapContainer, FilterMenu, OffersContainer, Header},
   data(){
     return{
+      toMap: false,
       universities: []
     }
   },
   methods:{
+    switchView(value){
+      this.toMap = value;
+    },
     getAllUniversities(){
       axios.get('http://localhost:3000/universities').then(response =>{
         console.log(response.data);
@@ -29,7 +37,6 @@ export default defineComponent({
     }
   },
   mounted() {
-    console.log("MOUNTED");
     this.getAllUniversities();
   }
 })
