@@ -18,8 +18,8 @@ export default defineComponent({
 <style scoped>
 .show-map{
   top: 850px;
-  left: 850px;
-  width: 200px;
+  top: 600px;
+  left: 550px;
   position: fixed;
 }
 </style>

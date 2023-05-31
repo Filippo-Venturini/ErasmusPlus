@@ -1,8 +1,10 @@
 <template>
-  <Header></Header>
-  <FilterMenu></FilterMenu>
-  <MapContainer v-if="toMap" @toList="switchView"></MapContainer>
-  <OffersContainer v-if="!toMap" @toMap="switchView" :universities="universities" :key="universities.id"></OffersContainer>
+  <div style="overflow-x: hidden">
+    <Header></Header>
+    <FilterMenu></FilterMenu>
+    <MapContainer v-if="toMap" @toList="switchView"></MapContainer>
+    <OffersContainer v-if="!toMap" @toMap="switchView" :universities="universities" :key="universities.id"></OffersContainer>
+  </div>
 </template>
 
 <script>
