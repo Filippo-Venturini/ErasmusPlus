@@ -5,14 +5,13 @@
 
 <script>
 import Header from "@/components/Header.vue";
-import Button from "@/components/Button.vue";
 import ProfileBadge from "@/components/ProfileBadge.vue";
 import axios from "axios";
 import {defineComponent} from "vue";
 
 export default defineComponent ({
   name: "UserProfilePage",
-  components: {Header, Button, ProfileBadge},
+  components: {Header, ProfileBadge},
   methods:{
     getAllUsers(){
       axios.get('http://localhost:3000/users').then(response =>{
