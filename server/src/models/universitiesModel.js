@@ -6,7 +6,8 @@ const universitySchema = new mongoose.Schema({
     city: String,
     logo: String,
     wallpaper: String,
-    cardImg: String
+    cardImg: String,
+    plot: String,
 });
 
 module.exports = mongoose.model('universities', universitySchema);
