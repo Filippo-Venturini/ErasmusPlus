@@ -1,5 +1,5 @@
 <template>
-  <div class="w-50 p-3 mt-4 infoPanel" style="background-color:{{bg}}">
+  <div class="w-50 p-3 mt-4 infoPanel">
     <div class="row">
       <img class="col-md-1 stylizedIcon" src="../../assets/img/icon/peopleOutline.png">
       <div class="col-md-4 panel-heading">{{title}} {{offer.city}}</div>
