@@ -6,7 +6,7 @@ const router = express.Router();
 router.route('/universities')
     .get((req, res) => universitiesController.all_universities(req, res));
 
-router.route('/universitydetail')
+router.route('/universitydetail:id')
     .get((req, res) => universityDetailController.university_detail(req, res));
 
 

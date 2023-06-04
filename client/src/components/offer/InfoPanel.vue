@@ -1,8 +1,8 @@
 <template>
-  <div class="w-50 p-3 mt-4 infoPanel">
+  <div class="w-50 p-3 mt-4 infoPanel" style="background-color:{{bg}}">
     <div class="row">
       <img class="col-md-1 stylizedIcon" src="../../assets/img/icon/peopleOutline.png">
-      <div class="col-md-3 panel-heading">Posti disponibili: {{offer.country}}</div>
+      <div class="col-md-4 panel-heading">{{title}} {{offer.city}}</div>
       </div>
     <div class="row">
       <div class="col-md-1"></div>
@@ -16,16 +16,14 @@ import {defineComponent} from "vue";
 
 export default defineComponent({
   name: "InfoPanel",
-  props: ['offer'],
+  props: ['offer','title', 'bg'],
   methods:{
-
   }
 })
 </script>
 
 <style scoped>
 
-.infoPanel{
-  background-color: #BB2E29;
-}
+
+
 </style>
