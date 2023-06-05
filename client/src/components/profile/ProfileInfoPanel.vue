@@ -1,17 +1,23 @@
 <template>
-  <div class="w-50 p-3 mt-4 infoPanel">
+  <div class="infopanel">
     <div class="row">
-      <i v-if="title === 'Contatti'" class="bi bi-envelope icon"></i>
-      <i v-else class="bi bi-person-lines-fill icon"></i>
-      <div class="col-md-4 panel-heading">{{title}}</div>
+      <div class="col-1">
+        <i v-if="title === 'Contatti'" class="bi-envelope d-flex justify-content-center" ></i>
+        <i v-else class="bi-person-lines-fill d-flex justify-content-center"></i>
+      </div>
+      <div class="col-3 panel-heading" style="margin: 10px">{{title}}</div>
     </div>
     <div class="row">
-      <div v-if="title === 'Contatti'">
-        <div class="col-md-11 panel-body">{{user.mail}}</div>
-        <div class="col-md-11 panel-body">{{user.cellphone}}</div>
+      <div class="row" v-if="title === 'Contatti'">
+        <div class="col-1"></div>
+        <div class="col-11 panel-body">{{user.mail}}</div>
+        <div class="col-1"></div>
+        <div class="col-11 panel-body">{{user.cellphone}}</div>
       </div>
-      <div v-else>
+      <div class="row" v-else>
+        <div class="col-1"></div>
         <div class="col-md-11">{{user.immatricolationYear}}</div>
+        <div class="col-1"></div>
         <div class="col-md-11">{{ user.course }}</div>
       </div>
 
@@ -32,8 +38,13 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.icon{
+i{
+  margin: 20px;
+  font-size: 2rem;
+
+}
+
+.infopanel{
   font-size: 1.5rem;
-  color: #FFFFFF;
 }
 </style>

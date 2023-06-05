@@ -1,12 +1,26 @@
 <template>
   <Header></Header>
   <ProfileBadge :user="user" :key="user.id"></ProfileBadge>
-  <ProfileInfoPanel :title="msgContacts" :user="user" class="bgGrayContacts"></ProfileInfoPanel>
-  <UserProfileCircleIcon :title="msgContacts" class="circleIconContacts"></UserProfileCircleIcon>
-  <ProfileInfoPanel  :title="msgPersonalInfo" :user="user" class="bgRedPersonalInfo"></ProfileInfoPanel>
-  <UserProfileCircleIcon :title="msgPersonalInfo" class="circleIconPersonalInfo"></UserProfileCircleIcon>
+  <div class="row" style="margin-top: 100px">
+    <div class="col-6">
+      <ProfileInfoPanel :title="msgContacts" :user="user" class="bgGrayContacts"></ProfileInfoPanel>
+    </div>
+    <div class="col-3"></div>
+    <div class="col-3 circleIconCol" style="margin-top: 50px">
+      <UserProfileCircleIcon :title="msgContacts" class="circleIconContacts"></UserProfileCircleIcon>
+    </div>
+  </div>
+  <div class="row" style="margin-top: 100px">
+    <div class="col-3 circleIconCol">
+      <UserProfileCircleIcon :title="msgPersonalInfo" class="circleIconPersonalInfo"></UserProfileCircleIcon>
+    </div>
+    <div class="col-3"></div>
+    <div class="col-6">
+      <ProfileInfoPanel  :title="msgPersonalInfo" :user="user" class="bgRedPersonalInfo"></ProfileInfoPanel>
+    </div>
+  </div>
 
-  <div class="row d-flex text-center" style="margin-top: 400px">
+  <div class="row d-flex text-center" style="margin-top: 120px">
     <h2>Le mie candidature</h2>
   </div>
   <div class="row d-flex justify-content-center">
@@ -88,31 +102,26 @@ export default defineComponent ({
 
 <style scoped>
 
+.bgRedPersonalInfo{
+  background-color: #D91A1A;
+  color: #FFFFFF;
+  height: 200px;
+}
 .bgGrayContacts{
   background-color: #717171;
-  color: white;
-  float: right;
-  height: 150px;
-  position: relative;
-  top: 300px;
-}
-.bgRedPersonalInfo{
-  background-color: #BB2E29;
-  color: white;
-  height: 150px;
-  position: relative;
-  top: 100px;
- }
-.circleIconContacts{
-  position: relative;
-  top: 400px;
-  left: 450px;
+  color: #FFFFFF;
+  height: 200px;
 }
 .circleIconPersonalInfo{
   float: right;
-  position: relative;
-  top: 0px;
-  right: 400px;
 }
+.circleIconContacts{
+  float: left;
+}
+
+.circleIconCol{
+  margin-top: 50px
+}
+
 
 </style>
