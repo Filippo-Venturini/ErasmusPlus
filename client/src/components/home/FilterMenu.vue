@@ -1,7 +1,7 @@
 <template>
 <div class="filter-menu row">
   <div class="col-1 d-flex justify-content-center align-items-center">
-    <i class="bi bi-globe filter-icon"></i>
+    <i class="bi bi-globe filter-icon" @click="this.onWorldClick()"></i>
   </div>
   <div class="col-1 d-flex justify-content-center align-items-center">
     <i class="bi bi-geo-alt filter-icon"></i>
@@ -13,10 +13,10 @@
     <i class="bi bi-book filter-icon"></i>
   </div>
   <div class="col-1 d-flex justify-content-center align-items-center">
-    <i class="bi bi-circle-half filter-icon"></i>
+    <i class="bi bi-circle-half filter-icon" @click="this.onHalfClicked()"></i>
   </div>
   <div class="col-1 d-flex justify-content-center align-items-center">
-    <i class="bi bi-circle-fill filter-icon"></i>
+    <i class="bi bi-circle-fill filter-icon" @click="this.onFullClicked()"></i>
   </div>
 </div>
 </template>
@@ -25,7 +25,18 @@
 import {defineComponent} from "vue";
 
 export default defineComponent({
-  name: "FilterMenu"
+  name: "FilterMenu",
+  methods:{
+    onWorldClick(){
+      this.$emit("filterClicked", "")
+    },
+    onHalfClicked(){
+      this.$emit("filterClicked", "half");
+    },
+    onFullClicked(){
+      this.$emit("filterClicked", "full");
+    }
+  }
 });
 </script>
 
@@ -39,5 +50,6 @@ export default defineComponent({
 .filter-icon{
   font-size: 1.5rem;
   color: #717171;
+  cursor: pointer;
 }
 </style>
