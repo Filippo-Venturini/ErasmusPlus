@@ -1,7 +1,11 @@
 <template>
-  <div class="row d-flex text-center">
-    <h2>{{ universityName }}</h2>
-    <p>Posti disponibili: 3</p>
+  <div class="row d-flex justify-content-center">
+    <div class="col-5">
+      <h2>{{ universityName }}</h2>
+      <div class="m-lg-3">
+        <p>Posti disponibili: {{universityPlaces}}</p>
+      </div>
+    </div>
   </div>
   <div class="row d-flex justify-content-center">
     <div v-if="this.applicationPresent" class="col-5">
@@ -43,7 +47,7 @@
 import {defineComponent} from "vue";
 export default defineComponent({
   name: "UniversityApplicationPanel",
-  props: ["universityName", "applications"],
+  props: ["universityName", "universityPlaces", "applications"],
   data(){
     return{
       applicationPresent: false
