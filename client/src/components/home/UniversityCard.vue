@@ -17,6 +17,7 @@ export default defineComponent({
   props: ['university'],
   methods:{
     getImageUrl(){
+      console.log(this.university.cardImg);
       return new URL(`${this.university.cardImg}`, import.meta.url)
     }
   }

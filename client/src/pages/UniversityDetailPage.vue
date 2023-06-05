@@ -1,6 +1,9 @@
 <template>
   <Header></Header>
 
+  <Wallpaper :srcImg="srcImgWallpaper"></Wallpaper>
+  <UniversityLogo :srcImg="srcImgUniversityLogo"></UniversityLogo>
+
   <InfoPanel :title="msgApplicationsAvailable" :msgDescribe="msgDescribeApplicationsAvailable" :icon="iconApplicationsAvailable" :styleIcon="styleCSSIconMessage" :offerUniversity="msgInfoApplicationsAvailable" :key="offerUniversity.id" class="bgRedApplicationsAvailable" ></InfoPanel>
   <CircleIcon class="circleIconApplicationsAvailable" :icon="iconApplicationsAvailable" :styleIcon="styleCSSIcon"></CircleIcon>
 
@@ -18,11 +21,13 @@ import Header from "@/components/Header.vue";
 import axios from "axios";
 import InfoPanel from "../components/offer/InfoPanel.vue";
 import CircleIcon from "../components/offer/CircleIcon.vue";
+import Wallpaper from "../components/offer/Wallpaper.vue";
+import UniversityLogo from "../components/offer/UniversityLogo.vue";
 
 export default defineComponent({
   name: "UniversityDetailPage",
   props:['id'],
-  components: {CircleIcon, Header, InfoPanel},
+  components: {UniversityLogo, Wallpaper, CircleIcon, Header, InfoPanel},
   data(){
     return{
       offerUniversity: [],
@@ -47,16 +52,19 @@ export default defineComponent({
       iconFieldOfStudy : "bi bi-diagram-3",
       styleCSSIconMessage: "font-size: 2.5rem; color: #FFFFFF;",
       styleCSSIcon: "font-size: 2.5rem; color: #FFFFFF; background-color: #D9D9D9; border-radius: 50%; width: 100px; height: 100px; text-align: center; padding-top: 20px;",
-
+      srcImgWallpaper: "",
+      srcImgUniversityLogo: "",
     }
   },
   methods:{
     getUniversityDetail(id){
-      axios.get('http://localhost:3000/universitydetail' + "647dd2b19eb3ed3888a12f4d").then(response =>{
+      axios.get('http://localhost:3000/universitydetail' + "647de2f09eb3ed3888a12f61").then(response =>{
             this.offerUniversity = response.data;
             this.msgInfoApplicationsAvailable = this.offerUniversity.offer.places;
             this.msgInfoExchangePeriod = this.offerUniversity.offer.period;
             this.msgInfoFieldOfStudy = this.offerUniversity.offer.field;
+            this.srcImgWallpaper = this.offerUniversity.wallpaper;
+            this.srcImgUniversityLogo = this.offerUniversity.logo;
           }
       ).catch(err => {
         console.log(err);
@@ -83,7 +91,7 @@ export default defineComponent({
 .circleIconApplicationsAvailable{
   float: right;
   position: absolute;
-  top: 300px;
+  top: 1000px;
   right: 100px;
 
 }
@@ -99,7 +107,7 @@ export default defineComponent({
 .circleIconExchangePeriod{
   float: left;
   position: absolute;
-  top: 650px;
+  top: 1350px;
   left: 100px;
 
 }
@@ -113,7 +121,7 @@ export default defineComponent({
 .circleIconFieldOfStudy{
   float: right;
   position: absolute;
-  top: 1000px;
+  top: 1700px;
   right: 100px;
 
 

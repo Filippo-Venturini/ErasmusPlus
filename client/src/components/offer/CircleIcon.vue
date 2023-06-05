@@ -3,10 +3,12 @@
 </template>
 
 <script>
-export default {
+import {defineComponent} from "vue";
+
+export default defineComponent({
   name: "CircleIcon",
   props: ['icon', 'styleIcon'],
-}
+})
 </script>
 
 <style scoped>
