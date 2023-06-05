@@ -1,10 +1,11 @@
 <template>
-  <img class="rounded-circle circleIcon" src="../../assets/img/icon/peopleOutline.png">
+  <i :class="icon" :style="styleIcon"></i>
 </template>
 
 <script>
 export default {
-  name: "CircleIcon"
+  name: "CircleIcon",
+  props: ['icon', 'styleIcon'],
 }
 </script>
 
