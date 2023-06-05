@@ -2,7 +2,7 @@
   <div class="w-50 p-3 mt-4 infoPanel">
     <div class="row">
       <div class="col-md-1 "> <i :class="icon" :style="styleIcon"> </i> </div>
-      <div class="col-md-5 panel-heading pt-3 ps-4">{{title}} {{offer.city}}</div>
+      <div class="col-md-5 panel-heading pt-3 ps-4">{{title}} {{offerUniversity}}</div>
     </div>
     <div class="row">
       <div class="col-md-1"></div>
@@ -16,17 +16,19 @@ import {defineComponent} from "vue";
 
 export default defineComponent({
   name: "InfoPanel",
-  props: ['offer','title', 'bg', 'icon', 'styleIcon', 'msgDescribe'],
+  props: ['offerUniversity','title', 'bg', 'icon', 'styleIcon', 'msgDescribe'],
   methods:{
+    print(){
+      //console.log(this.offerUniversity.city);
+    }
+  },
+  mounted() {
+    this.print();
   }
 })
 </script>
 
 <style scoped>
 
-.msg-icon{
-  font-size: 2.5rem;
-  color: #717171;
-}
 
 </style>

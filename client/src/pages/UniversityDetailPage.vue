@@ -1,13 +1,13 @@
 <template>
   <Header></Header>
 
-  <InfoPanel :title="msgApplicationsAvailable" :msgDescribe="msgDescribeApplicationsAvailable" :icon="iconApplicationsAvailable" :styleIcon="styleCSSIconMessage" :offer="offer" :key="offer.id" class="bgRedApplicationsAvailable" ></InfoPanel>
+  <InfoPanel :title="msgApplicationsAvailable" :msgDescribe="msgDescribeApplicationsAvailable" :icon="iconApplicationsAvailable" :styleIcon="styleCSSIconMessage" :offerUniversity="msgInfoApplicationsAvailable" :key="offerUniversity.id" class="bgRedApplicationsAvailable" ></InfoPanel>
   <CircleIcon class="circleIconApplicationsAvailable" :icon="iconApplicationsAvailable" :styleIcon="styleCSSIcon"></CircleIcon>
 
-  <InfoPanel :title="msgExchangePeriod" :msgDescribe="msgDescribeExchangePeriod" :icon="iconExchangePeriod" :styleIcon="styleCSSIconMessage" :offer="offer" :key="offer.id" class="bgGray"></InfoPanel>
+  <InfoPanel :title="msgExchangePeriod" :msgDescribe="msgDescribeExchangePeriod" :icon="iconExchangePeriod" :styleIcon="styleCSSIconMessage" :offerUniversity="msgInfoExchangePeriod" :key="offerUniversity.id" class="bgGray"></InfoPanel>
   <CircleIcon class="circleIconExchangePeriod" :icon="iconExchangePeriod" :styleIcon="styleCSSIcon"></CircleIcon>
 
-  <InfoPanel :title="msgFieldOfStudy" :msgDescribe="msgDescribeFieldOfStudy" :icon="iconFieldOfStudy" :styleIcon="styleCSSIconMessage" :offer="offer" :key="offer.id" class="bgRedFieldOfStudy"></InfoPanel>
+  <InfoPanel :title="msgFieldOfStudy" :msgDescribe="msgDescribeFieldOfStudy" :icon="iconFieldOfStudy" :styleIcon="styleCSSIconMessage" :offerUniversity="msgInfoFieldOfStudy" :key="offerUniversity.id" class="bgRedFieldOfStudy"></InfoPanel>
   <CircleIcon class="circleIconFieldOfStudy" :icon="iconFieldOfStudy" :styleIcon="styleCSSIcon"></CircleIcon>
 
 </template>
@@ -25,7 +25,7 @@ export default defineComponent({
   components: {CircleIcon, Header, InfoPanel},
   data(){
     return{
-      offer: [],
+      offerUniversity: [],
       title: [],
       msgApplicationsAvailable: "Posti disponibili: ",
       msgExchangePeriod: "Periodo di scambio: ",
@@ -33,10 +33,15 @@ export default defineComponent({
       msgDescribeApplicationsAvailable: "Questo dato indica i posti disponibili per l’offerta Erasmus. Le candidature verranno valutate dal responsabile di scambio e i risultati saranno disponabili appena le valutazioni saranno concluse.",
       msgDescribeExchangePeriod: "Questo dato indica i posti disponibili per l’offerta Erasmus. Le candidature verranno valutate dal responsabile di scambio e i risultati saranno disponabili appena le valutazioni saranno concluse.",
       msgDescribeFieldOfStudy: "Questo dato indica il persorso di studi consigliato a cui fa riferimento la presente offerta. La coerenza dell'ambito dell'offerta con il proprio persorso di studio verrà valutata dal responsabile di scambio.",
+      msgInfoApplicationsAvailable: "",
+      msgInfoExchangePeriod: "",
+      msgInfoFieldOfStudy: "",
       bgRed: [],
       icon: [],
       styleIcon: [],
       msgDescribe: [],
+      offer: [],
+      places: [],
       iconApplicationsAvailable : "bi bi-people msg-icon",
       iconExchangePeriod : "bi bi-calendar-week",
       iconFieldOfStudy : "bi bi-diagram-3",
@@ -47,8 +52,11 @@ export default defineComponent({
   },
   methods:{
     getUniversityDetail(id){
-      axios.get('http://localhost:3000/universitydetail' + "647d9bbd9eb3ed3888a12f39").then(response =>{
-            this.offer = response.data;
+      axios.get('http://localhost:3000/universitydetail' + "647dd2b19eb3ed3888a12f4d").then(response =>{
+            this.offerUniversity = response.data;
+            this.msgInfoApplicationsAvailable = this.offerUniversity.offer.places;
+            this.msgInfoExchangePeriod = this.offerUniversity.offer.period;
+            this.msgInfoFieldOfStudy = this.offerUniversity.offer.field;
           }
       ).catch(err => {
         console.log(err);
