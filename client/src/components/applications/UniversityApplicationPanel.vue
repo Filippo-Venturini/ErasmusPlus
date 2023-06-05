@@ -1,10 +1,10 @@
 <template>
   <div class="row d-flex text-center">
-    <h2>Universitat Politecnica de Catalunia</h2>
+    <h2>{{ universityName }}</h2>
     <p>Posti disponibili: 3</p>
   </div>
   <div class="row d-flex justify-content-center">
-    <div class="col-5">
+    <div v-if="this.applicationPresent" class="col-5">
       <table class="table table-bordered">
         <thead>
         <tr>
@@ -12,34 +12,27 @@
           <th scope="col">Università</th>
           <th scope="col">Studente</th>
           <th scope="col">Data candidatura</th>
+          <th scope="col">Accettazione</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>
-            <div class="d-flex justify-content-end">
-              <button class="btn-circle-yes btn-xl d-flex justify-content-center align-items-center">
-                <i class="bi bi-check-lg accept-icon"></i>
-              </button>
-              <button class="btn-circle-no btn-xl d-flex justify-content-center align-items-center">
-                <i class="bi bi-x-lg reject-icon"></i></button>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td colspan="2">Larry the Bird</td>
-          <td>@twitter</td>
-        </tr>
+        <template v-for="application in this.applications">
+          <tr v-if="universityName === application.university">
+            <th scope="row">1</th>
+            <td>{{application.university}}</td>
+            <td>{{application.student}}</td>
+            <td>{{application.date}}</td>
+            <td>
+              <div class="d-flex justify-content-end">
+                <button class="btn-circle-yes btn-xl d-flex justify-content-center align-items-center">
+                  <i class="bi bi-check-lg accept-icon"></i>
+                </button>
+                <button class="btn-circle-no btn-xl d-flex justify-content-center align-items-center">
+                  <i class="bi bi-x-lg reject-icon"></i></button>
+              </div>
+            </td>
+          </tr>
+        </template>
         </tbody>
       </table>
     </div>
@@ -49,7 +42,25 @@
 <script>
 import {defineComponent} from "vue";
 export default defineComponent({
-  name: "UniversityApplicationPanel"
+  name: "UniversityApplicationPanel",
+  props: ["universityName", "applications"],
+  data(){
+    return{
+      applicationPresent: false
+    }
+  },
+  methods:{
+    isApplicationPresent(){
+      this.applications.forEach(a => {
+        if(a.university === this.universityName){
+          this.applicationPresent = true;
+        }
+      })
+    }
+  },
+  mounted() {
+    this.isApplicationPresent();
+  }
 });
 </script>
 
