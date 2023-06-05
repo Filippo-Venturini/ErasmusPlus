@@ -1,11 +1,16 @@
 <template>
-  <img class="rounded-circle circleIcon" src="../../assets/img/icon/peopleOutline.png">
+  <i v-if="title === 'Contatti'" class="bi bi-envelope icon"></i>
+  <i v-else class="rounded-circle bi bi-person-lines-fill icon"></i>
 </template>
 
 <script>
-export default {
-  name: "UserProfileCircleIcon"
-}
+import {defineComponent} from "vue";
+export default defineComponent({
+  name: "UserProfileCircleIcon",
+  props: ['title'],
+  methods:{
+  }
+})
 </script>
 
 <style scoped>

@@ -1,14 +1,19 @@
 <template>
   <div class="w-50 p-3 mt-4 infoPanel">
     <div class="row">
-      <img class="col-md-1 stylizedIcon" src="../../assets/img/icon/peopleOutline.png">
-      <div class="col-md-4 panel-heading">Contatti</div>
+      <i v-if="title === 'Contatti'" class="bi bi-envelope icon"></i>
+      <i v-else class="bi bi-person-lines-fill icon"></i>
+      <div class="col-md-4 panel-heading">{{title}}</div>
     </div>
     <div class="row">
-      <div class="col-md-1"></div>
-      <div class="col-md-11 panel-body">leonardo.dicaprio@studio.unibo.it</div>
-      <div class="col-md-1"></div>
-      <div class="col-md-11 panel-body">3428343628</div>
+      <div v-if="title === 'Contatti'">
+        <div class="col-md-11 panel-body">{{user.mail}}</div>
+        <div class="col-md-11 panel-body">{{user.cellphone}}</div>
+      </div>
+      <div v-else>
+        <div class="col-md-11">{{user.immatricolationYear}}</div>
+        <div class="col-md-11">{{ user.course }}</div>
+      </div>
 
     </div>
   </div>
@@ -16,11 +21,19 @@
 
 
 <script>
-export default {
-  name: "ProfileInfoPanel"
-}
+
+import {defineComponent} from "vue";
+export default defineComponent({
+  name: "ProfileInfoPanel",
+  props: ['title', 'user'],
+  methods:{
+  }
+})
 </script>
 
 <style scoped>
-
+.icon{
+  font-size: 1.5rem;
+  color: #FFFFFF;
+}
 </style>

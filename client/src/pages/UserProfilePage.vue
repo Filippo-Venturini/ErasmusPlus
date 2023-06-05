@@ -1,10 +1,52 @@
 <template>
   <Header></Header>
   <ProfileBadge :user="user" :key="user.id"></ProfileBadge>
-  <ProfileInfoPanel class="bgGrayContacts"></ProfileInfoPanel>
-  <UserProfileCircleIcon class="circleIconContacts"></UserProfileCircleIcon>
-  <ProfileInfoPanel class="bgRedPersonalInfo"></ProfileInfoPanel>
-  <UserProfileCircleIcon class="circleIconPersonalInfo"></UserProfileCircleIcon>
+  <ProfileInfoPanel :title="msgContacts" :user="user" class="bgGrayContacts"></ProfileInfoPanel>
+  <UserProfileCircleIcon :title="msgContacts" class="circleIconContacts"></UserProfileCircleIcon>
+  <ProfileInfoPanel  :title="msgPersonalInfo" :user="user" class="bgRedPersonalInfo"></ProfileInfoPanel>
+  <UserProfileCircleIcon :title="msgPersonalInfo" class="circleIconPersonalInfo"></UserProfileCircleIcon>
+
+  <div class="row d-flex text-center" style="margin-top: 400px">
+    <h2>Le mie candidature</h2>
+  </div>
+  <div class="row d-flex justify-content-center">
+    <div class="col-5 m-3">
+      <table class="table table-bordered">
+        <thead>
+        <tr>
+          <th scope="col"></th>
+          <th scope="col">Università</th>
+          <th scope="col">Città</th>
+          <th scope="col">Data candidatura</th>
+          <th scope="col">Stato</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>Universitat Politecnica</td>
+          <td>Barcelona</td>
+          <td>12/03/2022</td>
+          <td style="color: #D91A1A">Rifiutata</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Universitat Politecnica</td>
+          <td>Barcelona</td>
+          <td>12/03/2022</td>
+          <td style="color: springgreen">Accettata</td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td>Universitat Politecnica</td>
+          <td>Barcelona</td>
+          <td>12/03/2022</td>
+          <td style="color: #D91A1A">Rifiutata</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
 </template>
 
@@ -22,12 +64,14 @@ export default defineComponent ({
   components: {UserProfileCircleIcon, ProfileInfoPanel, Header, ProfileBadge},
   data(){
     return{
-      user: []
+      user: [],
+      msgContacts: "Contatti",
+      msgPersonalInfo: "Informazioni Personali"
     }
   },
   methods:{
     getUser(id){
-      axios.get('http://localhost:3000/users'+"64761111db9ca6b5838e985a").then(response =>{
+      axios.get('http://localhost:3000/users'+"647da7ad6c95774219e08c2b").then(response =>{
             console.log(response.data);
             this.user = response.data;
       }).catch(err => {
@@ -60,16 +104,15 @@ export default defineComponent ({
   top: 100px;
  }
 .circleIconContacts{
-  float: right;
   position: relative;
-  top: 130px;
+  top: 400px;
   left: 450px;
 }
 .circleIconPersonalInfo{
   float: right;
   position: relative;
-  top: 210px;
+  top: 0px;
   right: 400px;
-
 }
+
 </style>

@@ -1,2 +1,2 @@
-{"name": "Pietro Lelli", "role": "Studente", "profileImg": "profilo1.jpg"}
+{"identificationNumber": "00001", "name": "Pietro", "surname": "Lelli", "role": "Studente", "profileImg": "../../assets/img/profileImages/profilo1.jpg", "mail": "pietro.lelli@studio.unibo.it", "cellphone": "3428345619", "course": "Ingegneria e Scienze informatiche", "immatricolationYear": "2022/23"}
 
