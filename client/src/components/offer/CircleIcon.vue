@@ -12,9 +12,5 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.circleIcon{
-  background-color: #D9D9D9;
-  width: 100px;
-  height: auto;
-}
+
 </style>

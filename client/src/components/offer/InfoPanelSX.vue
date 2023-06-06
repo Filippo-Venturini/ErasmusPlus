@@ -1,12 +1,12 @@
 <template>
   <div class="w-50 p-3 mt-4 infoPanel">
-    <div class="row">
+    <div class="row " style="margin-left: 20px">
       <div class="col-md-1 "> <i :class="icon" :style="styleIcon"> </i> </div>
-      <div class="col-md-5 panel-heading pt-3 ps-4">{{title}} {{offerUniversity}}</div>
+      <div class="col-md-11 panel-heading pt-3 ps-4" style="font-weight: bold; font-size: 20px; ">{{title}} {{offerUniversity}}</div>
     </div>
-    <div class="row">
+    <div class="row" style="margin-left: 20px">
       <div class="col-md-1"></div>
-      <div class="col-md-11 panel-body">{{msgDescribe}}</div>
+      <p class="col-md-11 panel-body" style="margin-top: 40px; padding-right: 50px" >{{msgDescribe}}</p>
     </div>
   </div>
 </template>
@@ -15,7 +15,7 @@
 import {defineComponent} from "vue";
 
 export default defineComponent({
-  name: "InfoPanel",
+  name: "InfoPanelSX",
   props: ['offerUniversity','title', 'bg', 'icon', 'styleIcon', 'msgDescribe'],
   methods:{
     print(){
@@ -29,6 +29,11 @@ export default defineComponent({
 </script>
 
 <style scoped>
+
+
+.panel-body{
+  margin-left: 70px;
+}
 
 
 </style>
