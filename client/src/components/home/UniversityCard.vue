@@ -26,7 +26,6 @@ export default defineComponent({
   },
   methods:{
     getImageUrl(){
-      console.log(this.university.cardImg);
       return new URL(`${this.university.cardImg}`, import.meta.url)
     }
   }
