@@ -1,63 +1,23 @@
 <template>
 <FilterMenu @filterClicked="filterClicked"></FilterMenu>
-<h1>MAPPA!</h1>
-  <GoogleMapLoader
-      :mapConfig="mapConfig"
-      apiKey="AIzaSyBUPW3FVdvim2r6KkMIvIYCouiBb1dPkvI"
-      @google="onGoogle"
-      @map="onMap"
-  >
-    <template>
-      <GoogleMapMarker
-          v-for="marker in markers"
-          :key="marker.id"
-          :marker="marker"
-          :google="this.google"
-          :map="this.map"
-      />
-    </template>
-  </GoogleMapLoader>
-
+  <GoogleMap api-key="AIzaSyBUPW3FVdvim2r6KkMIvIYCouiBb1dPkvI" style="width: 100%; height: 500px" :center="center" :zoom="15">
+    <Marker :options="{ position: center }" />
+  </GoogleMap>
   <button type="button" class="btn btn-secondary show-map" @click="switchToList()">Mostra elenco</button>
 </template>
 
 <script>
 import {defineComponent} from "vue";
-import {mapSettings} from "@/components/home/constants/mapSettings";
 import FilterMenu from "@/components/home/FilterMenu.vue";
-import GoogleMapLoader from "@/components/home/GoogleMapLoader.vue";
-import GoogleMapMarker from "@/components/home/GoogleMapMarker.vue";
+import {GoogleMap, Marker} from "vue3-google-map";
 export default defineComponent({
   name: "MapContainer",
-  components: {GoogleMapMarker, GoogleMapLoader, FilterMenu},
+  components: {FilterMenu, GoogleMap, Marker},
   emits: ["toList"],
-  data() {
-    return {
-      google: null,
-      map: null,
-      markers: [
-        {
-          id: "a",
-          position: {lat: 3, lng: 101}
-        },
-        {
-          id: "b",
-          position: {lat: 5, lng: 99}
-        },
-        {
-          id: "c",
-          position: {lat: 6, lng: 97}
-        }
-      ]
-    }
-  },
-  computed: {
-    mapConfig () {
-      return {
-        ...mapSettings,
-        center: { lat: 0, lng: 0 }
-      }
-    }
+  setup() {
+    const center = { lat: 40.689247, lng: -74.044502 };
+
+    return { center };
   },
   methods:{
     switchToList(){
@@ -65,13 +25,6 @@ export default defineComponent({
     },
     filterClicked(filter){
 
-    },
-    onGoogle(value){
-      this.google = value;
-      console.log(this.google);
-    },
-    onMap(value){
-      this.map = value;
     }
   }
 });
