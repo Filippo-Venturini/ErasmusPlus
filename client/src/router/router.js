@@ -7,7 +7,7 @@ import ApplicationsPage from "@/pages/ApplicationsPage.vue";
 const routes = [
     { path: '/', name: 'Home', component: HomePage },
     { path: '/users', name: 'UserProfilePage', component: UserProfilePage },
-    { path: '/universitydetail', name: 'UniversityDetailPage', component: UniversityDetailPage, props: true}, //TODO aggiungere id
+    { path: '/universitydetail/:id', name: 'UniversityDetailPage', component: UniversityDetailPage}, //TODO aggiungere id
     { path: '/applications', name: 'ApplicationsPage', component: ApplicationsPage }
 ]
 

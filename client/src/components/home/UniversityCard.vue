@@ -1,5 +1,5 @@
 <template>
-  <RouterLink class="nav-link" :to="{name: this.routeName, props: {universityId}}">
+  <RouterLink class="nav-link" :to="{path: '/universitydetail/'+this.university._id}">
     <div class="card" style="width: 20rem; height: 20rem;">
       <img class="card-img-top h-50" :src="getImageUrl()" alt="University Image">
       <div class="card-body">
@@ -21,8 +21,7 @@ export default defineComponent({
   props: ['university'],
   data(){
     return{
-      routeName: "UniversityDetailPage",
-      universityId: this.university.id
+      routeName: "UniversityDetailPage"
     }
   },
   methods:{

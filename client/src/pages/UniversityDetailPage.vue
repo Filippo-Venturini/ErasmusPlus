@@ -73,6 +73,7 @@ export default defineComponent({
     }
   },
   mounted() {
+    console.log("ID:"+this.$route.params.id);
     this.getUniversityDetail(this.id);
   }
 })
