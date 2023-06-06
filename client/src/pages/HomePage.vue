@@ -1,7 +1,7 @@
 <template>
   <div style="overflow-x: hidden">
     <Header></Header>
-    <MapContainer v-if="toMap" @toList="switchView"></MapContainer>
+    <MapContainer v-if="toMap" @toList="switchView" :universities="universities" :key="universities.id"></MapContainer>
     <OffersContainer v-if="!toMap" @toMap="switchView" :universities="universities" :key="universities.id"></OffersContainer>
   </div>
 </template>

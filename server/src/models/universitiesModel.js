@@ -5,6 +5,8 @@ const universitySchema = new mongoose.Schema({
     name: String,
     country: String,
     city: String,
+    latitude: Number,
+    longitude: Number,
     offer: {
         period: String,
         places: String,

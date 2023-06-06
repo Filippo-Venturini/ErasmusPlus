@@ -1,7 +1,13 @@
 <template>
 <FilterMenu @filterClicked="filterClicked"></FilterMenu>
-  <GoogleMap api-key="AIzaSyBUPW3FVdvim2r6KkMIvIYCouiBb1dPkvI" style="width: 100%; height: 500px" :center="center" :zoom="15">
-    <Marker :options="{ position: center }" />
+  <GoogleMap api-key="AIzaSyBUPW3FVdvim2r6KkMIvIYCouiBb1dPkvI" class="map" :center="center" :zoom="5">
+    <template v-for="university in this.universities">
+      <CustomMarker :options="{ position: {lat: university.latitude, lng: university.longitude}, anchorPoint: 'BOTTOM_CENTER' }">
+        <div style="text-align: center">
+          <img src="src/assets/img/universityLogos/upc.png" width="50" height="50" style="margin-top: 8px" />
+        </div>
+      </CustomMarker>
+    </template>
   </GoogleMap>
   <button type="button" class="btn btn-secondary show-map" @click="switchToList()">Mostra elenco</button>
 </template>
@@ -9,13 +15,15 @@
 <script>
 import {defineComponent} from "vue";
 import FilterMenu from "@/components/home/FilterMenu.vue";
-import {GoogleMap, Marker} from "vue3-google-map";
+import {GoogleMap, Marker, CustomMarker} from "vue3-google-map";
+import UniversityCard from "@/components/home/UniversityCard.vue";
 export default defineComponent({
   name: "MapContainer",
-  components: {FilterMenu, GoogleMap, Marker},
+  components: {UniversityCard, FilterMenu, GoogleMap, Marker, CustomMarker},
+  props: ["universities"],
   emits: ["toList"],
   setup() {
-    const center = { lat: 40.689247, lng: -74.044502 };
+    const center = { lat: 41.3850639, lng: 2.1734035};
 
     return { center };
   },
@@ -31,6 +39,10 @@ export default defineComponent({
 </script>
 
 <style scoped>
+.map{
+  width: 100%;
+  height: 800px;
+}
 .show-map{
   position: fixed;
   margin-top: 35%;
