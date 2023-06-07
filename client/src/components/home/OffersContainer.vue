@@ -1,5 +1,5 @@
 <template>
-  <FilterMenu @filterClicked="filterClicked"></FilterMenu>
+  <FilterMenu @filterClicked="filterClicked" @toMap="this.switchToMap()"></FilterMenu>
   <div class="row mt-4">
     <template v-for="university in universities">
       {{this.checkUniversity(university)}}
@@ -7,7 +7,6 @@
         <UniversityCard :university="university" :key="university.id"></UniversityCard>
       </div>
     </template>
-    <button type="button" class="btn btn-secondary show-map" @click="switchToMap()">Mostra mappa</button>
   </div>
 </template>
 <script>
@@ -56,10 +55,4 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.show-map{
-  position: fixed;
-  margin-top: 15%;
-  margin-left: 45%;
-  width: 200px;
-}
 </style>

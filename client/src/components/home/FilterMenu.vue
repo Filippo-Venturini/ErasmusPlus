@@ -1,12 +1,6 @@
 <template>
 <div class="filter-menu row">
   <div class="col-1 d-flex justify-content-center align-items-center">
-    <i class="bi bi-globe filter-icon" @click="this.onWorldClick()"></i>
-  </div>
-  <div class="col-1 d-flex justify-content-center align-items-center">
-    <i class="bi bi-geo-alt filter-icon"></i>
-  </div>
-  <div class="col-1 d-flex justify-content-center align-items-center">
     <i class="bi bi-bookmark-star filter-icon"></i>
   </div>
   <div class="col-1 d-flex justify-content-center align-items-center">
@@ -18,6 +12,15 @@
   <div class="col-1 d-flex justify-content-center align-items-center">
     <i class="bi bi-circle-fill filter-icon" @click="this.onFullClicked()"></i>
   </div>
+  <div class="col-6">
+
+  </div>
+  <div class="col-1 d-flex justify-content-end align-items-center">
+    <i class="bi bi-globe filter-icon" @click="this.switchToMap()"></i>
+  </div>
+  <div class="col-1 d-flex justify-content-start align-items-center">
+    <i class="bi bi-card-list filter-icon" @click="this.switchToList()"></i>
+  </div>
 </div>
 </template>
 
@@ -26,9 +29,13 @@ import {defineComponent} from "vue";
 
 export default defineComponent({
   name: "FilterMenu",
+  emits: ["toMap", "toList"],
   methods:{
-    onWorldClick(){
-      this.$emit("filterClicked", "")
+    switchToMap(){
+      this.$emit('toMap', true);
+    },
+    switchToList(){
+      this.$emit('toList', false);
     },
     onHalfClicked(){
       this.$emit("filterClicked", "half");

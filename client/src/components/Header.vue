@@ -1,6 +1,8 @@
 <template>
-  <header class="header">
-    <img class="logo" src="src/assets/img/logoErasmusPlus.png">
+  <header class="erasmus-header">
+    <RouterLink class="nav-link" :to="{path: '/'}" style="width: 300px">
+      <img class="header-logo" src="../assets/img/logoErasmusPlus.png">
+    </RouterLink>
   </header>
 </template>
 
@@ -13,12 +15,12 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.header{
+.erasmus-header{
   background-color: #BB2E29;
   height: 120px;
 }
 
-.logo{
+.header-logo{
   height: 120px;
 }
 </style>
