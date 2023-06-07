@@ -19,6 +19,8 @@ export default defineComponent({
 <style scoped>
 .wallpaper-css{
   width: 100%;
+  height: 450px;
+  object-fit: cover;
 }
 
 </style>

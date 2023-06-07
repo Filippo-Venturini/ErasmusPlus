@@ -1,5 +1,5 @@
 <template>
-  <i :class="icon" :style="styleIcon"></i>
+  <i :class="icon" class="icon" :style="styleIcon"></i>
 </template>
 
 <script>
@@ -12,5 +12,9 @@ export default defineComponent({
 </script>
 
 <style scoped>
+
+.icon{
+  margin-top: 100px;
+}
 
 </style>

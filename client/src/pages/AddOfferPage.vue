@@ -11,7 +11,12 @@
 
   <div class="row d-flex justify-content-center">
     <div class="mb-3 col-5">
-      <input class="form-control" type="text" placeholder="Città">
+      <GMapAutocomplete
+          placeholder="This is a placeholder"
+          @place_changed="setPlace"
+      >
+      </GMapAutocomplete>
+      <!--<input class="form-control" type="text" placeholder="Città">-->
     </div>
   </div>
 
@@ -72,9 +77,10 @@
 <script>
 import {defineComponent} from "vue";
 import Header from "@/components/Header.vue";
+import {GoogleMap} from "vue3-google-map";
 export default defineComponent({
   name: "AddOfferPage",
-  components: {Header},
+  components: {Header, GoogleMap},
   data(){
     return{
       wallpaperImage: "src/assets/img/placeholder.png",

@@ -4,19 +4,19 @@
   <Wallpaper :srcImg="srcImgWallpaper"></Wallpaper>
   <UniversityLogo :srcImg="srcImgUniversityLogo"></UniversityLogo>
 
-  <div class="row">
+  <div class="row me-5">
     <div class="col-md-3"></div>
-    <div class="col-md-9">
+    <div class="col-md-9 ">
       <div class="title">{{this.offerUniversity.name}}</div>
     </div>
   </div>
-  <div class="row">
+  <div class="row me-5">
     <div class="col-md-3"></div>
-    <div class="col-md-9">
+    <div class="col-md-9 ">
       <div class="place">{{this.offerUniversity.city}}, {{this.offerUniversity.country}}</div>
     </div>
   </div>
-  <div class="row">
+  <div class="row me-5">
     <div class="col-md-3"></div>
     <div class="col-md-9">
       <div class="plot">{{this.offerUniversity.plot}}</div>
@@ -24,30 +24,34 @@
   </div>
 
   <div class="row" style="margin-top: 200px">
-    <div class="col-md-9">
+    <div class="col-md-10">
     <InfoPanelSX :title="msgApplicationsAvailable" :msgDescribe="msgDescribeApplicationsAvailable" :icon="iconApplicationsAvailable" :styleIcon="styleCSSIconMessage" :offerUniversity="msgInfoApplicationsAvailable" :key="offerUniversity.id" class="bgRedApplicationsAvailable" ></InfoPanelSX>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-1">
       <CircleIcon class="circleIconApplicationsAvailable" :icon="iconApplicationsAvailable" :styleIcon="styleCSSIcon"></CircleIcon>
     </div>
+    <div class="col-md-1"></div>
+
   </div>
 
-  <div class="row">
-    <div class="col-md-3">
+  <div class="row" style="margin-top: 300px">
+    <div class="col-md-1"></div>
+    <div class="col-md-1">
       <CircleIcon class="circleIconExchangePeriod" :icon="iconExchangePeriod" :styleIcon="styleCSSIcon"></CircleIcon>
     </div>
-    <div class="col-md-9">
+    <div class="col-md-10">
       <InfoPanelDX :title="msgExchangePeriod" :msgDescribe="msgDescribeExchangePeriod" :icon="iconExchangePeriod" :styleIcon="styleCSSIconMessage" :offerUniversity="msgInfoExchangePeriod" :key="offerUniversity.id" class="bgGray"></InfoPanelDX>
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-md-9">
+  <div class="row mb-5" style="margin-top: 300px">
+    <div class="col-md-10">
       <InfoPanelSX :title="msgFieldOfStudy" :msgDescribe="msgDescribeFieldOfStudy" :icon="iconFieldOfStudy" :styleIcon="styleCSSIconMessage" :offerUniversity="msgInfoFieldOfStudy" :key="offerUniversity.id" class="bgRedFieldOfStudy"></InfoPanelSX>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-1">
       <CircleIcon class="circleIconFieldOfStudy" :icon="iconFieldOfStudy" :styleIcon="styleCSSIcon"></CircleIcon>
     </div>
+    <div class="col-md-1"></div>
   </div>
 
 </template>
