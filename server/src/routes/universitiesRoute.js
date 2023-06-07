@@ -9,5 +9,9 @@ router.route('/universities')
 router.route('/universitydetail:id')
     .get((req, res) => universitiesController.university_detail(req, res));
 
+router.route('/addoffer')
+    .post((req, res) => universitiesController.add_offer(req, res)
+    )
+
 
 module.exports = router;

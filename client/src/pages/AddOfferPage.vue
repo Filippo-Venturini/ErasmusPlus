@@ -5,30 +5,25 @@
 
   <div class="row d-flex justify-content-center">
     <div class="mb-3 col-5">
-      <input class="form-control" type="text" placeholder="Nome dell'università">
+      <input class="form-control" type="text" v-model="nameUniversity" placeholder="Nome dell'università">
     </div>
   </div>
 
   <div class="row d-flex justify-content-center">
     <div class="mb-3 col-5">
-      <GMapAutocomplete
-          placeholder="This is a placeholder"
-          @place_changed="setPlace"
-      >
-      </GMapAutocomplete>
-      <!--<input class="form-control" type="text" placeholder="Città">-->
+      <input class="form-control" type="text" v-model="city" placeholder="Città">
     </div>
   </div>
 
   <div class="row d-flex justify-content-center">
     <div class="mb-3 col-5">
-      <input class="form-control" type="text" placeholder="Stato">
+      <input class="form-control" type="text" v-model="country" placeholder="Stato">
     </div>
   </div>
 
   <div class="row d-flex justify-content-center">
     <div class="mb-3 col-5">
-      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Descrizione"></textarea>
+      <textarea class="form-control" v-model="plot" id="exampleFormControlTextarea1" rows="3" placeholder="Descrizione"></textarea>
     </div>
   </div>
 
@@ -36,11 +31,11 @@
     <div class="mb-3 col-5">
       <label>Periodo: </label>
       <div class="form-check form-check-inline m-lg-3">
-        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+        <input class="form-check-input" v-model="period" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
         <label class="form-check-label" for="inlineRadio1">6 mesi</label>
       </div>
       <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+        <input class="form-check-input" v-model="period" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
         <label class="form-check-label" for="inlineRadio2">12 mesi</label>
       </div>
     </div>
@@ -49,21 +44,21 @@
   <div class="row d-flex justify-content-center">
     <div class="mb-3 col-5">
       <label for="formFile" class="form-label">Logo:</label>
-      <input class="form-control" type="file" id="wallpaperFile" @change="onIconChange">
+      <input class="form-control"  type="file" id="wallpaperFile" @change="onIconChange">
     </div>
   </div>
 
   <div class="row d-flex justify-content-center">
     <div class="mb-3 col-5">
       <label for="formFile" class="form-label">Immagine di copertina:</label>
-      <input class="form-control" type="file" id="iconFile" @change="onWallpaperChange">
+      <input class="form-control"  type="file" id="iconFile" @change="onWallpaperChange">
     </div>
   </div>
 
   <div class="row d-flex justify-content-center">
     <div class="mb-3 col-5 form-group">
       <label for="exampleFormControlSelect1">Ambito di studi:</label>
-      <select class="form-control" id="exampleFormControlSelect1">
+      <select class="form-control" v-model="field" id="exampleFormControlSelect1">
         <option>1</option>
         <option>2</option>
         <option>3</option>
@@ -72,19 +67,34 @@
       </select>
     </div>
   </div>
+  <button @click="this.addOffer()">Aggiungi</button>
 </template>
 
 <script>
 import {defineComponent} from "vue";
 import Header from "@/components/Header.vue";
-import {GoogleMap} from "vue3-google-map";
+import axios from "axios";
+
 export default defineComponent({
   name: "AddOfferPage",
-  components: {Header, GoogleMap},
+  components: {Header},
   data(){
     return{
       wallpaperImage: "src/assets/img/placeholder.png",
-      iconImage: "src/assets/img/placeholder.png"
+      iconImage: "src/assets/img/placeholder.png",
+      nameUniversity: "",
+      city: "",
+      country: "",
+      latitude: 0,
+      longitude: 0,
+      period: "",
+      places: "",
+      field: "",
+      logo: "",
+      wallpaper: "",
+      cardImg: "",
+      plot: "",
+
     }
   },
   methods:{
@@ -113,6 +123,42 @@ export default defineComponent({
       reader.onload = e => {
         this.iconImage = e.target.result;
       };
+    },
+    addOffer(){
+      const json = {name:this.nameUniversity,
+        city:this.city,
+        country:this.country,
+        latitude:this.latitude,
+        longitude:this.longitude,
+        period:this.period,
+        places:this.places,
+        field:this.field,
+        plot:this.plot };
+      const res = axios.post('http://localhost:3000/addoffer', json, {
+        headers: {
+          // Overwrite Axios's automatically set Content-Type
+          'Content-Type': 'application/json'
+        }
+      });
+
+
+      /*axios.post('http://localhost:3000/addoffer', {
+        name:this.nameUniversity,
+        city:this.city,
+        country:this.country,
+        latitude:this.latitude,
+        longitude:this.longitude,
+        period:this.period,
+        places:this.places,
+        field:this.field,
+        plot:this.plot,
+      }).then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });*/
+
     }
   }
 });
