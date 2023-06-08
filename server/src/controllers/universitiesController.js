@@ -1,5 +1,4 @@
 const universitiesModel = require('../models/universitiesModel');
-const addOfferModel = require("../models/universitiesModel");
 
 exports.all_universities = async(req, res) => {
     try{
@@ -31,9 +30,7 @@ exports.add_offer = async (req, res)=> {
         res.header('Access-Control-Allow-Origin', '*');
     }
 
-    const offer = new addOfferModel(req.body);
-    console.log(req.body.name);
-    console.log(offer)
+    const offer = new universitiesModel(req.body);
 
     try{
         res.json(await offer.save());

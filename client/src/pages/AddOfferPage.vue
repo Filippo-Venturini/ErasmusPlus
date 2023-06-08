@@ -44,14 +44,14 @@
   <div class="row d-flex justify-content-center">
     <div class="mb-3 col-5">
       <label for="formFile" class="form-label">Logo:</label>
-      <input class="form-control"  type="file" id="wallpaperFile" @change="onIconChange">
+      <input class="form-control"  type="file" id="iconFile" @change="onIconChange">
     </div>
   </div>
 
   <div class="row d-flex justify-content-center">
     <div class="mb-3 col-5">
       <label for="formFile" class="form-label">Immagine di copertina:</label>
-      <input class="form-control"  type="file" id="iconFile" @change="onWallpaperChange">
+      <input class="form-control"  type="file" id="wallpaperFile" @change="onWallpaperChange">
     </div>
   </div>
 
@@ -67,7 +67,14 @@
       </select>
     </div>
   </div>
-  <button @click="this.addOffer()">Aggiungi</button>
+
+  <div class="row d-flex justify-content-center">
+    <div class="mb-3 col-5">
+      <label for="formFile" class="form-label">Posti disponibili:</label>
+      <input class="form-control"  type="number"  id="placesValue" v-model="places">
+    </div>
+  </div>
+  <button class="mb-5" @click="this.addOffer()">Aggiungi</button>
 </template>
 
 <script>
@@ -110,6 +117,9 @@ export default defineComponent({
       reader.onload = e => {
         this.wallpaperImage = e.target.result;
       };
+
+      const myArray = document.getElementById("wallpaperFile").value.split("\\");
+      this.wallpaper = "./../../assets/img/universityWallpapers/" + myArray[2];
     },
     onIconChange(e){
       if (! e.target.files.length) return;
@@ -123,6 +133,10 @@ export default defineComponent({
       reader.onload = e => {
         this.iconImage = e.target.result;
       };
+
+      const myArray = document.getElementById("iconFile").value.split("\\");
+      this.logo = "./../../assets/img/universityLogos/" + myArray[2];
+
     },
     addOffer(){
       const json = {name:this.nameUniversity,
@@ -130,34 +144,22 @@ export default defineComponent({
         country:this.country,
         latitude:this.latitude,
         longitude:this.longitude,
-        period:this.period,
-        places:this.places,
-        field:this.field,
-        plot:this.plot };
-      const res = axios.post('http://localhost:3000/addoffer', json, {
+        offer:{
+          period:this.period,
+          places:document.getElementById("placesValue").value,
+          field:this.field
+        },
+        logo: this.logo,
+        wallpaper:this.wallpaper,
+        cardImg:this.cardImg,
+        plot:this.plot
+      };
+      axios.post('http://localhost:3000/addoffer', json, {
         headers: {
           // Overwrite Axios's automatically set Content-Type
           'Content-Type': 'application/json'
         }
       });
-
-
-      /*axios.post('http://localhost:3000/addoffer', {
-        name:this.nameUniversity,
-        city:this.city,
-        country:this.country,
-        latitude:this.latitude,
-        longitude:this.longitude,
-        period:this.period,
-        places:this.places,
-        field:this.field,
-        plot:this.plot,
-      }).then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });*/
 
     }
   }
