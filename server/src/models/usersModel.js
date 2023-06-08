@@ -9,7 +9,8 @@ const userSchema = new mongoose.Schema({
     mail: String,
     cellphone: String,
     course: String,
-    immatricolationYear: String
+    immatricolationYear: String,
+    password: String
 });
 
 module.exports = mongoose.model('users', userSchema);

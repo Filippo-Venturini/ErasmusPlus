@@ -1,7 +1,7 @@
 <template>
   <div class="infopanel">
     <div class="row">
-      <div class="col-1">
+      <div class="col-1" style="margin-left: 15px">
         <i v-if="title === 'Contatti'" class="bi-envelope d-flex justify-content-center" ></i>
         <i v-else class="bi-person-lines-fill d-flex justify-content-center"></i>
       </div>

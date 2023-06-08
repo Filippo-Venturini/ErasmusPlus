@@ -84,8 +84,8 @@ export default defineComponent ({
     }
   },
   methods:{
-    getUser(id){
-      axios.get('http://localhost:3000/users'+"647da7ad6c95774219e08c2b").then(response =>{
+    getUser(){
+      axios.get('http://localhost:3000/userdetail'+"647da7ad6c95774219e08c2b").then(response =>{
             console.log(response.data);
             this.user = response.data;
       }).catch(err => {
@@ -95,7 +95,7 @@ export default defineComponent ({
   },
   mounted() {
     //console.log("MOUNTED");
-    this.getUser(this.id);
+    this.getUser();
   }
 })
 </script>
