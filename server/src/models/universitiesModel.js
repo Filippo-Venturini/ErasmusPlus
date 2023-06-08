@@ -16,6 +16,7 @@ const universitySchema = new mongoose.Schema({
     wallpaper: String,
     cardImg: String,
     plot: String,
+    reviews: Array,
 
 });
 

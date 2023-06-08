@@ -1,7 +1,5 @@
 const universitiesModel = require('../models/universitiesModel');
-const universityDetailModel = require("../models/universitiesModel");
 const addOfferModel = require("../models/universitiesModel");
-
 
 exports.all_universities = async(req, res) => {
     try{
@@ -15,7 +13,7 @@ exports.all_universities = async(req, res) => {
 exports.university_detail = async(req, res) => {
     try {
         res.header("Access-Control-Allow-Origin", "*");
-        res.json(await universityDetailModel.findById(req.params.id));
+        res.json(await universitiesModel.findById(req.params.id));
 
     } catch (e) {
         res.json(e);
@@ -34,13 +32,30 @@ exports.add_offer = async (req, res)=> {
     }
 
     const offer = new addOfferModel(req.body);
-    console.log(req.body);
+    console.log(req.body.name);
     console.log(offer)
-
 
     try{
         res.json(await offer.save());
     }catch (e) {
         res.json(e);
     }
+};
+
+exports.add_review = async (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header('Access-Control-Allow-Methods', 'GET,PUT, POST,DELETE');
+    res.header("Access-Control-Allow-Headers", "Content-type,Accept,X-Custom-Header");
+
+    if (req.method === "OPTIONS") {
+        res.header('Access-Control-Allow-Origin', req.headers.origin);
+    } else {
+        res.header('Access-Control-Allow-Origin', '*');
+    }
+
+    await universitiesModel.updateOne(
+        {_id: req.body.university_id},
+        { $addToSet: { reviews: req.body.review}}
+    );
+
 };

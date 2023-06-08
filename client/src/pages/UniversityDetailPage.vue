@@ -124,6 +124,7 @@ export default defineComponent({
             this.msgInfoFieldOfStudy = this.offerUniversity.offer.field;
             this.srcImgWallpaper = this.offerUniversity.wallpaper;
             this.srcImgUniversityLogo = this.offerUniversity.logo;
+            console.log(this.offerUniversity.reviews[1][2]);
           }
       ).catch(err => {
         console.log(err);

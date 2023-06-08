@@ -13,5 +13,9 @@ router.route('/addoffer')
     .post((req, res) => universitiesController.add_offer(req, res)
     )
 
+router.route('/addReview')
+    .post((req, res) => universitiesController.add_review(req, res)
+    )
+
 
 module.exports = router;
