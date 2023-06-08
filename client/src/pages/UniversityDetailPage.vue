@@ -54,6 +54,10 @@
     <div class="col-md-1"></div>
   </div>
 
+  <div>
+    <apexchart width="500" type="bar" :options="options" :series="series"></apexchart>
+  </div>
+
 </template>
 
 <script>
@@ -97,6 +101,18 @@ export default defineComponent({
       srcImgWallpaper: "",
       srcImgUniversityLogo: "",
       id: "",
+      options: {
+        chart: {
+          id: 'vuechart-example'
+        },
+        xaxis: {
+          categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998]
+        }
+      },
+      series: [{
+        name: 'series-1',
+        data: [30, 40, 45, 50, 49, 60, 70, 91]
+      }]
     }
   },
   methods:{
@@ -108,6 +124,7 @@ export default defineComponent({
             this.msgInfoFieldOfStudy = this.offerUniversity.offer.field;
             this.srcImgWallpaper = this.offerUniversity.wallpaper;
             this.srcImgUniversityLogo = this.offerUniversity.logo;
+            console.log(this.offerUniversity.reviews[1][2]);
           }
       ).catch(err => {
         console.log(err);

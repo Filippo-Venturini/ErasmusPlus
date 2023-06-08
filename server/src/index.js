@@ -5,14 +5,17 @@ const usersRouter = require('./routes/usersRoute');
 const applicationsRouter = require('./routes/applicationsRoute');
 
 const app = express();
+var cors = require('cors');
 
+app.options('*', cors()); // include before other routes
+app.use(express.json());
 app.use(universitiesRouter);
 app.use(usersRouter);
 app.use(applicationsRouter);
-app.use(express.json());
 
-//mongoose.connect('mongodb://127.0.0.1:27017/erasmusPlusDB').then(() => {
-mongoose.connect('mongodb://127.0.0.1:27018/erasmusPlusDB').then(() => {
+
+mongoose.connect('mongodb://127.0.0.1:27017/erasmusPlusDB').then(() => {
+//mongoose.connect('mongodb://127.0.0.1:27018/erasmusPlusDB').then(() => {
     console.log('Connected to DB');
 }).catch(err => {
     console.log(err);

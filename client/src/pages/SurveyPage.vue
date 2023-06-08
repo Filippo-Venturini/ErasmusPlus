@@ -41,6 +41,7 @@
 import {defineComponent} from "vue";
 import Header from "@/components/Header.vue";
 import SurveyPanel from "@/components/survey/SurveyPanel.vue";
+import axios from "axios";
 
 export default defineComponent({
 
@@ -63,7 +64,8 @@ export default defineComponent({
       costoAlloggi:3,
       alloggiDisponibili: 3,
       qualitaAlloggi: 3,
-      vicinanza: 3
+      vicinanza: 3,
+      review: []
     }
   },
   methods:{
@@ -116,10 +118,34 @@ export default defineComponent({
       this.vicinanza = value;
     },
     submitSurvey(){
-      console.log(this.servizi);
-      console.log(this.aule);
-      console.log(this.laboratori);
-      console.log(this.spaziAperti);
+      this.review.push(Number(this.servizi));
+      this.review.push(Number(this.aule));
+      this.review.push(Number(this.laboratori));
+      this.review.push(Number(this.spaziAperti));
+      this.review.push(Number(this.clima));
+      this.review.push(Number(this.costoVita));
+      this.review.push(Number(this.svago));
+      this.review.push(Number(this.mezzi));
+      this.review.push(Number(this.corsi));
+      this.review.push(Number(this.orari));
+      this.review.push(Number(this.tutor));
+      this.review.push(Number(this.docenti));
+      this.review.push(Number(this.costoAlloggi));
+      this.review.push(Number(this.alloggiDisponibili));
+      this.review.push(Number(this.qualitaAlloggi));
+      this.review.push(Number(this.vicinanza));
+
+      const json = {
+        university_id: "6481dc37d22deb3a4094c538",
+        review: this.review
+      };
+
+      const res = axios.post('http://localhost:3000/addReview', json,{
+        headers: {
+          // Overwrite Axios's automatically set Content-Type
+          'Content-Type': 'application/json'
+        }
+      });
     }
   }
 })
