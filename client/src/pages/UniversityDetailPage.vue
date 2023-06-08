@@ -54,9 +54,7 @@
     <div class="col-md-1"></div>
   </div>
 
-  <div>
-    <apexchart width="500" type="bar" :options="options" :series="series"></apexchart>
-  </div>
+  <Histogram :data="this.campusStatistics" v-if="this.statisticsComputed"></Histogram>
 
 </template>
 
@@ -69,11 +67,12 @@ import CircleIcon from "../components/offer/CircleIcon.vue";
 import Wallpaper from "../components/offer/Wallpaper.vue";
 import UniversityLogo from "../components/offer/UniversityLogo.vue";
 import InfoPanelDX from "../components/offer/InfoPanelDX.vue";
+import Histogram from "@/components/offer/Histogram.vue";
 
 export default defineComponent({
   name: "UniversityDetailPage",
   props:['id'],
-  components: {InfoPanelDX, UniversityLogo, Wallpaper, CircleIcon, Header, InfoPanelSX},
+  components: {Histogram, InfoPanelDX, UniversityLogo, Wallpaper, CircleIcon, Header, InfoPanelSX},
   data(){
     return{
       offerUniversity: [],
@@ -101,21 +100,22 @@ export default defineComponent({
       srcImgWallpaper: "",
       srcImgUniversityLogo: "",
       id: "",
-      options: {
-        chart: {
-          id: 'vuechart-example'
-        },
-        xaxis: {
-          categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998]
-        }
-      },
-      series: [{
-        name: 'series-1',
-        data: [30, 40, 45, 50, 49, 60, 70, 91]
-      }]
+      campusStatistics: [0,0,0,0],
+      statisticsComputed: false,
     }
   },
   methods:{
+    computeStatistics(){
+      for(let i = 0; i < this.offerUniversity.reviews.length; i++){
+        for (let j = 0; j < 4; j++){
+          this.campusStatistics[j] += this.offerUniversity.reviews[i][j]; //Sum all the reviews in every field
+        }
+      }
+
+      for(let k = 0; k < this.campusStatistics.length; k++){
+        this.campusStatistics[k] = this.campusStatistics[k] / this.offerUniversity.reviews.length; //Compute the average
+      }
+    },
     getUniversityDetail(id){
       axios.get('http://localhost:3000/universitydetail' + id).then(response =>{
             this.offerUniversity = response.data;
@@ -124,12 +124,12 @@ export default defineComponent({
             this.msgInfoFieldOfStudy = this.offerUniversity.offer.field;
             this.srcImgWallpaper = this.offerUniversity.wallpaper;
             this.srcImgUniversityLogo = this.offerUniversity.logo;
-            console.log(this.offerUniversity.reviews[1][2]);
+            this.computeStatistics();
+            this.statisticsComputed = true;
           }
       ).catch(err => {
         console.log(err);
       })
-
     }
   },
   mounted() {
