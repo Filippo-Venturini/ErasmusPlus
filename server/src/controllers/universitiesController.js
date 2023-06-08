@@ -34,7 +34,7 @@ exports.add_offer = async (req, res)=> {
     }
 
     const offer = new addOfferModel(req.body);
-    console.log(req.body);
+    //console.log(req.body);
     console.log(offer)
 
 
