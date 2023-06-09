@@ -1,27 +1,34 @@
 <template>
-  <div class="infopanel">
+  <div v-if="title === 'Contatti'" class="infopanelSx">
     <div class="row">
       <div class="col-1" style="margin-left: 15px">
-        <i v-if="title === 'Contatti'" class="bi-envelope d-flex justify-content-center" ></i>
-        <i v-else class="bi-person-lines-fill d-flex justify-content-center"></i>
+        <i class="bi-envelope d-flex justify-content-center" ></i>
       </div>
-      <div class="col-3 panel-heading" style="margin: 10px">{{title}}</div>
+      <div class="col-3 panel-heading" style="margin-top: 20px">{{title}}</div>
     </div>
     <div class="row">
-      <div class="row" v-if="title === 'Contatti'">
         <div class="col-1"></div>
         <div class="col-11 panel-body">{{user.mail}}</div>
         <div class="col-1"></div>
         <div class="col-11 panel-body">{{user.cellphone}}</div>
-      </div>
-      <div class="row" v-else>
-        <div class="col-1"></div>
-        <div class="col-md-11">{{user.immatricolationYear}}</div>
-        <div class="col-1"></div>
-        <div class="col-md-11">{{ user.course }}</div>
-      </div>
-
     </div>
+  </div>
+
+  <div v-else class="infopanelDx">
+    <div class="row">
+      <div class="col-10 panel-heading" style="margin-top: 20px">{{title}}</div>
+      <div class="col-1" style="margin-left: 15px">
+        <i class="bi-person-lines-fill d-flex justify-content-center"></i>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-1"></div>
+      <div class="col-md-10">Corso di Studio: {{ user.course }}</div>
+      <div class="col-1"></div>
+      <div class="col-1"></div>
+      <div class="col-md-10">Immatricolazione nell'a.a: {{user.immatriculationYear}}</div>
+    </div>
+
   </div>
 </template>
 
@@ -44,7 +51,14 @@ i{
 
 }
 
-.infopanel{
+.infopanelSx{
   font-size: 1.5rem;
 }
+
+.infopanelDx{
+  font-size: 1.5rem;
+  text-align: right;
+
+}
+
 </style>
