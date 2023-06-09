@@ -1,14 +1,28 @@
 <template>
   <header class="erasmus-header">
-    <RouterLink class="nav-link logo" :to="{path: '/'}" style="width: 300px">
-      <img class="header-logo" src="../assets/img/logoErasmusPlus.png">
-    </RouterLink>
-    <i class="bi bi-bell bell" id="bellId" @click="this.showNotificationsBox()"></i>
 
-    <div class="box" id="boxId">
-      <template v-for="notification in notifications">
-        <p class="textNotification"><i class="bi bi-envelope-fill"></i>&ensp;&ensp;&ensp;&ensp;  {{notification.text}} </p>
-      </template>
+    <div class="row">
+      <div class="col-md-3">
+        <RouterLink class="nav-link logo" :to="{path: '/'}" style="width: 300px">
+          <img class="header-logo" src="../assets/img/logoErasmusPlus.png">
+        </RouterLink>
+      </div>
+      <div class="col-md">
+        <div class="row">
+          <div class="col-md">
+            <i class="bi bi-bell bell" id="bellId" @click="this.showNotificationsBox()"></i>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md">
+            <div class="box" id="boxId">
+              <template v-for="notification in notifications">
+                <p class="textNotification" @click="this.clickNotification(notification)"><i class="bi bi-envelope-fill"></i>&ensp;&ensp;&ensp;&ensp;  {{notification.text}} </p>
+              </template>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
   </header>
@@ -22,7 +36,8 @@ export default defineComponent({
   name: "Header",
   data(){
     return{
-      notifications: []
+      notifications: [],
+      user: []
     }
   },
   methods:{
@@ -39,13 +54,52 @@ export default defineComponent({
 
     },
     showNotifications(){
-      axios.get('http://localhost:3000/' + "6482d300caf00aadbeb8b077").then(response => {
-            this.notifications = response.data.notification;
-            console.log(this.notifications);
+      axios.get('http://localhost:3000/' + "6483298fcaf00aadbeb8b087").then(response => {
+        let allNotifications = response.data.notification;
+        this.user = response.data;
+        let tmp = [];
+        allNotifications.forEach(function(not) {
+          if (not.read === "false"){
+            tmp.push(not);
           }
-      ).catch(err => {
+        });
+        this.notifications = tmp;
+      }).catch(err => {
         console.log(err);
       })
+
+    },
+    clickNotification(notification){
+      for(let i = 0; i < this.notifications.length; i++){
+        if (this.notifications[i].idNotification === notification.idNotification){
+          this.notifications[i].read = "true";
+          this.user.notification = this.notifications;
+        }
+      }
+      axios.put('http://localhost:3000/' + "648313f8caf00aadbeb8b085", this.user, {
+        headers: {
+          // Overwrite Axios's automatically set Content-Type
+          'Content-Type': 'application/json'
+        }
+      });
+      /*
+      switch (notification.kind){
+        case "USUB":
+          window.location.replace("/userdetail");
+          break;
+        case "UACC":
+          window.location.replace("/");
+          break;
+        case "UADD":
+          window.location.replace("/");
+          break;
+        case "AGET":
+          window.location.replace("/applications");
+          break;
+        case "ASUR":
+          window.location.replace("/addReview");
+          break;
+      }*/
 
     }
   },
@@ -74,21 +128,25 @@ export default defineComponent({
   font-size: 30px;
   color: white;
   cursor: pointer;
-  margin-top: 30px;
+  margin-top: 35px;
   margin-right: 100px;
+
 
 }
 
 .box{
-  position: absolute;
+  position: relative;
+  float: right;
   box-shadow: 0 0 100px rgba(0,0,0,0.8);
   background-color: #FFFFFF;
   padding: 30px;
   visibility: hidden;
   width: 500px;
-  z-index:10;
-  margin-left: 70%;
-  margin-top: 100px;
+  z-index:999;
+  margin-top: 20px;
+  margin-right: 70px;
+  border-radius:10px;
+
 
 }
 .box:before{
@@ -98,8 +156,7 @@ export default defineComponent({
   left: 65%;
   border: 15px solid transparent;
   border-bottom-color: white;
-
-  z-index:1;
+  z-index:999;
 }
 
 .textNotification{
