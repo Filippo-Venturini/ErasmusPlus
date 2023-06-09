@@ -18,6 +18,9 @@ export default defineComponent({
         },
         xaxis: {
           categories: ["Servizi offerti", "Aule", "Laboratori", "Spazi aperti"]
+        },
+        yaxis: {
+          max: 5
         }
       },
       series: [{

@@ -54,7 +54,35 @@
     <div class="col-md-1"></div>
   </div>
 
-  <Histogram :data="this.campusStatistics" v-if="this.statisticsComputed"></Histogram>
+  <div class="d-flex justify-content-end">
+    <h1>Campus</h1>
+  </div>
+  <div class="d-flex justify-content-end">
+    <Histogram :data="this.campusStatistics" v-if="this.statisticsComputed"></Histogram>
+  </div>
+
+  <div class="d-flex justify-content-center">
+    <h1>Soddisfazione Complessiva</h1>
+  </div>
+  <div class="d-flex justify-content-center">
+    <PieChart :series="this.satisfaction" v-if="this.statisticsComputed"></PieChart>
+  </div>
+
+  <div class="d-flex justify-content-start">
+    <h1>Città</h1>
+  </div>
+  <div class="d-flex justify-content-start">
+    <BarChart :data="this.cityStatistics" v-if="this.statisticsComputed"></BarChart>
+  </div>
+
+  <div class="d-flex justify-content-center">
+    <h1>Didattica</h1>
+  </div>
+  <div class="d-flex justify-content-center">
+    <Histogram :data="this.teachingStatistics" v-if="this.statisticsComputed"></Histogram>
+  </div>
+
+
 
 </template>
 
@@ -68,11 +96,12 @@ import Wallpaper from "../components/offer/Wallpaper.vue";
 import UniversityLogo from "../components/offer/UniversityLogo.vue";
 import InfoPanelDX from "../components/offer/InfoPanelDX.vue";
 import Histogram from "@/components/offer/Histogram.vue";
+import PieChart from "@/components/offer/PieChart.vue";
+import BarChart from "@/components/offer/BarChart.vue";
 
 export default defineComponent({
   name: "UniversityDetailPage",
-  props:['id'],
-  components: {Histogram, InfoPanelDX, UniversityLogo, Wallpaper, CircleIcon, Header, InfoPanelSX},
+  components: {BarChart, PieChart, Histogram, InfoPanelDX, UniversityLogo, Wallpaper, CircleIcon, Header, InfoPanelSX},
   data(){
     return{
       offerUniversity: [],
@@ -101,19 +130,59 @@ export default defineComponent({
       srcImgUniversityLogo: "",
       id: "",
       campusStatistics: [0,0,0,0],
+      cityStatistics: [0,0,0,0],
+      teachingStatistics: [0,0,0,0],
+      apartmentsStatistics: [0,0,0,0],
+      satisfaction: [0,0,0,0],
       statisticsComputed: false,
     }
   },
   methods:{
     computeStatistics(){
       for(let i = 0; i < this.offerUniversity.reviews.length; i++){
-        for (let j = 0; j < 4; j++){
-          this.campusStatistics[j] += this.offerUniversity.reviews[i][j]; //Sum all the reviews in every field
+        let k = 0; //Index for inserting in the final arrays
+        let sum = 0; //For calculating the satisfaction
+        for (let j = 0; j < this.offerUniversity.reviews[i].length; j++){
+          sum += this.offerUniversity.reviews[i][j];
+          if(j < 4){
+            this.campusStatistics[k] += this.offerUniversity.reviews[i][j]; //Sum of the statistics of the campus
+          }else if(j >= 4 && j < 8){
+            if(j === 4){
+              k = 0;
+            }
+            this.cityStatistics[k] += this.offerUniversity.reviews[i][j]; //Sum of the statistics of the city
+          }else if(j >= 8 && j < 12){
+            if(j === 8){
+              k = 0;
+            }
+            this.teachingStatistics[k] += this.offerUniversity.reviews[i][j]; //Sum of the statistics of the teaching
+          }else{
+            if(j === 12){
+              k = 0;
+            }
+            this.apartmentsStatistics[k] += this.offerUniversity.reviews[i][j]; //Sum of the statistics of the apartments
+          }
+          k++;
+        }
+
+        let satisfaction = sum / 16;
+        if(satisfaction <= 2){
+          this.satisfaction[0]++;
+        }else if(satisfaction > 2 && satisfaction <= 3){
+          this.satisfaction[1]++;
+        }else if(satisfaction > 3 && satisfaction <= 4){
+          this.satisfaction[2]++;
+        }else if(satisfaction > 4) {
+          this.satisfaction[3]++;
         }
       }
 
+      //Compute the average
       for(let k = 0; k < this.campusStatistics.length; k++){
-        this.campusStatistics[k] = this.campusStatistics[k] / this.offerUniversity.reviews.length; //Compute the average
+        this.campusStatistics[k] = Math.round((this.campusStatistics[k] / this.offerUniversity.reviews.length)*10)/10;
+        this.cityStatistics[k] = Math.round((this.cityStatistics[k] / this.offerUniversity.reviews.length)*10)/10;
+        this.teachingStatistics[k] = Math.round((this.teachingStatistics[k] / this.offerUniversity.reviews.length)*10)/10;
+        this.apartmentsStatistics[k] = Math.round((this.apartmentsStatistics[k] / this.offerUniversity.reviews.length)*10)/10;
       }
     },
     getUniversityDetail(id){
@@ -133,7 +202,6 @@ export default defineComponent({
     }
   },
   mounted() {
-    //console.log("ID:"+this.$route.params.id);
     this.id = this.$route.params.id;
     this.getUniversityDetail(this.id);
   }
