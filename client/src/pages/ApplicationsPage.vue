@@ -12,13 +12,15 @@ import {defineComponent} from "vue";
 import Header from "@/components/Header.vue";
 import UniversityApplicationPanel from "@/components/applications/UniversityApplicationPanel.vue";
 import axios from "axios";
+import io from 'socket.io-client';
 export default defineComponent({
   name: "ApplicationsPage",
   components: {UniversityApplicationPanel, Header},
   data(){
     return{
       universities: [],
-      applications: []
+      applications: [],
+      socket: io('localhost:3000')
     }
   },
   methods:{
@@ -32,7 +34,8 @@ export default defineComponent({
     },
     getAllApplications(){
       axios.get('http://localhost:3000/applications').then(response =>{
-            this.applications = response.data;
+          this.applications = response.data;
+          console.log(this.applications[0]);
           }
       ).catch(err => {
         console.log(err);
@@ -42,6 +45,9 @@ export default defineComponent({
   mounted() {
     this.getAllApplications();
     this.getAllUniversities();
+    this.socket.on('APPLICATIONS', (data) => {
+      this.applications = JSON.parse(data);
+    })
   }
 });
 </script>

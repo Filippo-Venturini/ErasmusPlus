@@ -27,11 +27,11 @@
             <td>{{application.student}}</td>
             <td>{{application.date}}</td>
             <td>
-              <div class="d-flex justify-content-end">
-                <button class="btn-circle-yes btn-xl d-flex justify-content-center align-items-center">
+              <div class="d-flex justify-content-end" v-if="application.state === 'Attesa'">
+                <button class="btn-circle-yes btn-xl d-flex justify-content-center align-items-center" @click="onAccept(application._id)">
                   <i class="bi bi-check-lg accept-icon"></i>
                 </button>
-                <button class="btn-circle-no btn-xl d-flex justify-content-center align-items-center">
+                <button class="btn-circle-no btn-xl d-flex justify-content-center align-items-center" @click="onReject(application._id)">
                   <i class="bi bi-x-lg reject-icon"></i></button>
               </div>
             </td>
@@ -45,6 +45,7 @@
 
 <script>
 import {defineComponent} from "vue";
+import axios from "axios";
 export default defineComponent({
   name: "UniversityApplicationPanel",
   props: ["universityName", "universityPlaces", "applications"],
@@ -60,6 +61,30 @@ export default defineComponent({
           this.applicationPresent = true;
         }
       })
+    },
+    onAccept(id){
+      const json = {
+        state: "Accettata"
+      };
+
+      const res = axios.post('http://localhost:3000/modifyApplicationState'+id, json,{
+        headers: {
+          // Overwrite Axios's automatically set Content-Type
+          'Content-Type': 'application/json'
+        }
+      });
+    },
+    onReject(id){
+      const json = {
+        state: "Rifiutata"
+      };
+
+      const res = axios.post('http://localhost:3000/modifyApplicationState' + id, json,{
+        headers: {
+          // Overwrite Axios's automatically set Content-Type
+          'Content-Type': 'application/json'
+        }
+      });
     }
   },
   mounted() {
