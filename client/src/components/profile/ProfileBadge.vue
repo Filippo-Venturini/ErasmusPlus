@@ -1,6 +1,6 @@
 <template>
   <img :src="getImageUrl()" class="rounded-circle circleIcon mx-auto d-block h" alt="...">
-  <h1 class="text-center">{{ user.name }}</h1>
+  <h1 class="text-center">{{ user.name }}  {{user.surname}}</h1>
   <h2 class="text-center">{{ user.role }}</h2>
 </template>
 

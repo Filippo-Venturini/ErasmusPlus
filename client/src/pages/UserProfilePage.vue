@@ -36,7 +36,18 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
+
+        <template v-for="(application, index) in this.applications">
+          <tr>
+            <th scope="row">{{index+1}}</th>
+            <td>{{application.university}}</td>
+            <td>{{application.city}}</td>
+            <td>{{application.date}}</td>
+            <td>{{application.state}}</td>
+          </tr>
+        </template>
+
+        <!--<tr>
           <th scope="row">1</th>
           <td>Universitat Politecnica</td>
           <td>Barcelona</td>
@@ -57,6 +68,7 @@
           <td>12/03/2022</td>
           <td style="color: #D91A1A">Rifiutata</td>
         </tr>
+        -->
         </tbody>
       </table>
     </div>
@@ -79,6 +91,7 @@ export default defineComponent ({
   data(){
     return{
       user: [],
+      applications: [],
       msgContacts: "Contatti",
       msgPersonalInfo: "Informazioni Personali"
     }
@@ -91,11 +104,26 @@ export default defineComponent ({
       }).catch(err => {
         console.log(err);
       })
+    },
+    getApplication(){
+      axios.get('http://localhost:3000/applications').then(response =>{
+        let allApplications;
+        allApplications = response.data;
+        allApplications.forEach(application => {
+            if(application.student === (this.user.name+" "+this.user.surname)) {
+              this.applications.push(application);
+              console.log(application);
+            }
+        })
+      }).catch(err => {
+        console.log(err);
+      })
     }
   },
   mounted() {
     //console.log("MOUNTED");
     this.getUser();
+    this.getApplication();
   }
 })
 </script>
