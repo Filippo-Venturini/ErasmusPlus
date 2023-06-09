@@ -12,8 +12,10 @@ const userSchema = new mongoose.Schema({
     immatriculationYear: String,
     password: String,
     notification: [{
+        idNotification: String,
         text: String,
-        read: String
+        read: String,
+        kind: String
     }]
 });
 
