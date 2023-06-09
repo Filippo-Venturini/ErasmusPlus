@@ -21,7 +21,5 @@ export default defineComponent({
 .logo-css{
   width: 200px;
   height: 200px;
-  margin-top: -100px;
-  margin-left: 100px;
 }
 </style>

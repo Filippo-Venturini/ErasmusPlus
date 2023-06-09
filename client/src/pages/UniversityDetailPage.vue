@@ -2,10 +2,19 @@
   <Header></Header>
 
   <Wallpaper :srcImg="srcImgWallpaper"></Wallpaper>
-  <UniversityLogo :srcImg="srcImgUniversityLogo"></UniversityLogo>
 
   <div class="row me-5">
-    <div class="col-md-3"></div>
+    <div class="col-md-1"></div>
+    <div class="col-md-2 text-center" style="margin-top: -100px">
+      <UniversityLogo :srcImg="srcImgUniversityLogo"></UniversityLogo>
+    </div>
+  </div>
+  <div class="row me-5">
+    <div class="col-md-1"></div>
+    <div class="col-md-2 mt-4 text-center">
+      <button v-if="this.user.role === 'Studente'" class="btn btn-outline-success">Candidati ora!</button>
+      <button v-else-if="this.user.role === 'Admin'" class="btn btn-outline-danger">Elimina</button>
+    </div>
     <div class="col-md-9 ">
       <div class="title">{{this.offerUniversity.name}}</div>
     </div>
@@ -135,6 +144,7 @@ export default defineComponent({
       apartmentsStatistics: [0,0,0,0],
       satisfaction: [0,0,0,0],
       statisticsComputed: false,
+      user: []
     }
   },
   methods:{
@@ -185,8 +195,8 @@ export default defineComponent({
         this.apartmentsStatistics[k] = Math.round((this.apartmentsStatistics[k] / this.offerUniversity.reviews.length)*10)/10;
       }
     },
-    getUniversityDetail(id){
-      axios.get('http://localhost:3000/universitydetail' + id).then(response =>{
+    getUniversityDetail(id) {
+      axios.get('http://localhost:3000/universitydetail' + id).then(response => {
             this.offerUniversity = response.data;
             this.msgInfoApplicationsAvailable = this.offerUniversity.offer.places;
             this.msgInfoExchangePeriod = this.offerUniversity.offer.period;
@@ -199,11 +209,20 @@ export default defineComponent({
       ).catch(err => {
         console.log(err);
       })
+    },
+    getUser(){
+      axios.get('http://localhost:3000/userdetail'+ sessionStorage.getItem("mail")).then(response =>{
+        console.log(response.data);
+        this.user = response.data;
+      }).catch(err => {
+        console.log(err);
+      })
     }
   },
   mounted() {
     this.id = this.$route.params.id;
     this.getUniversityDetail(this.id);
+    this.getUser();
   }
 })
 </script>

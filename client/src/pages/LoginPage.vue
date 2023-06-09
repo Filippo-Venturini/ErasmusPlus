@@ -1,6 +1,6 @@
 <template>
-  <div class="background-image">
-    <div class="form-signin w-100 m-auto">
+  <div class="background-image" >
+    <div class="form-signin m-auto">
       <img class="mb-2 mt-lg-5" src="../assets/img/logoErasmusPlusLogin.png" alt="" height="107">
       <h1 class="h3 mb-3 fw-normal text-center">Please sign in</h1>
 
@@ -12,7 +12,7 @@
         <input type="password" class="form-control" v-model="password" id="floatingPassword" placeholder="Password">
         <label for="floatingPassword">Password</label>
       </div>
-      <button class="w-100 btn btn-lg btn-primary" @click="login()">Sign in</button>
+      <button class="w-100 btn btn-lg" style="background: #BB2E29; color: white" @click="login()">Sign in</button>
     </div>
   </div>
 </template>
@@ -62,10 +62,6 @@ export default defineComponent ({
   padding: 15px;
 }
 
-.form-signin .form-floating:focus-within {
-  z-index: 2;
-}
-
 .form-signin input[type="email"] {
   margin-bottom: -1px;
   border-bottom-right-radius: 0;
@@ -80,12 +76,13 @@ export default defineComponent ({
 
 .background-image {
   background-image: url('../assets/img/wallpaperLogin.png');
+
+  /* Center and scale the image nicely */
+  background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center center;
-  height: 100%;
-  margin: 0;
-  padding: 0;
 }
+
+
 
 </style>
