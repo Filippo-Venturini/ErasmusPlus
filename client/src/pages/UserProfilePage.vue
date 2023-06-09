@@ -1,7 +1,6 @@
 <template>
   <Header></Header>
   <ProfileBadge :user="user" :key="user.id"></ProfileBadge>
-  <p>{{logged}}</p>
   <div class="row" style="margin-top: 100px">
     <div class="col-6">
       <ProfileInfoPanel :title="msgContacts" :user="user" class="bgGrayContacts"></ProfileInfoPanel>
@@ -47,29 +46,6 @@
             <td>{{application.state}}</td>
           </tr>
         </template>
-
-        <!--<tr>
-          <th scope="row">1</th>
-          <td>Universitat Politecnica</td>
-          <td>Barcelona</td>
-          <td>12/03/2022</td>
-          <td style="color: #D91A1A">Rifiutata</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Universitat Politecnica</td>
-          <td>Barcelona</td>
-          <td>12/03/2022</td>
-          <td style="color: springgreen">Accettata</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>Universitat Politecnica</td>
-          <td>Barcelona</td>
-          <td>12/03/2022</td>
-          <td style="color: #D91A1A">Rifiutata</td>
-        </tr>
-        -->
         </tbody>
       </table>
     </div>
@@ -123,7 +99,6 @@ export default defineComponent ({
     }
   },
   mounted() {
-    //console.log("MOUNTED");
     this.getUser();
     this.getApplication();
     this.logged = sessionStorage.getItem("mail");
