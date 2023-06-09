@@ -17,5 +17,4 @@ router.route('/addReview')
     .post((req, res) => universitiesController.add_review(req, res)
     )
 
-
 module.exports = router;
