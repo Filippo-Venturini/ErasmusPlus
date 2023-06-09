@@ -1,7 +1,7 @@
 <template>
-  <body>
+  <div class="background-image">
     <div class="form-signin w-100 m-auto">
-      <img class="mb-4" src="../assets/img/logoErasmusPlus.png" alt="" height="107">
+      <img class="mb-2 mt-lg-5" src="../assets/img/logoErasmusPlusLogin.png" alt="" height="107">
       <h1 class="h3 mb-3 fw-normal text-center">Please sign in</h1>
 
       <div class="form-floating">
@@ -14,7 +14,7 @@
       </div>
       <button class="w-100 btn btn-lg btn-primary" @click="login()">Sign in</button>
     </div>
-  </body>
+  </div>
 </template>
 
 <script>
@@ -29,9 +29,10 @@ export default defineComponent ({
         console.log(response.data);
         this.users = response.data;
         this.users.forEach(user => {
-          if(user.mail == this.mail && user.password == this.password) {
-            console.log("login riuscito")
-            this.$router.push('/')
+          if(user.mail === this.mail && user.password === this.password) {
+            console.log("login riuscito");
+            sessionStorage.setItem('mail',user.mail);    //sessionStorage.setItem(key,value);
+            this.$router.push('/');
           }
         })
       }).catch(err => {
@@ -75,6 +76,16 @@ export default defineComponent ({
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+
+.background-image {
+  background-image: url('../assets/img/wallpaperLogin.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 </style>

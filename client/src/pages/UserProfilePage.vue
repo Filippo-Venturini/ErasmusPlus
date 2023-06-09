@@ -1,6 +1,7 @@
 <template>
   <Header></Header>
   <ProfileBadge :user="user" :key="user.id"></ProfileBadge>
+  <p>{{logged}}</p>
   <div class="row" style="margin-top: 100px">
     <div class="col-6">
       <ProfileInfoPanel :title="msgContacts" :user="user" class="bgGrayContacts"></ProfileInfoPanel>
@@ -92,13 +93,14 @@ export default defineComponent ({
     return{
       user: [],
       applications: [],
+      logged: [],
       msgContacts: "Contatti",
       msgPersonalInfo: "Informazioni Personali"
     }
   },
   methods:{
     getUser(){
-      axios.get('http://localhost:3000/userdetail'+"647da7ad6c95774219e08c2b").then(response =>{
+      axios.get('http://localhost:3000/userdetail'+ sessionStorage.getItem("mail")).then(response =>{
             console.log(response.data);
             this.user = response.data;
       }).catch(err => {
@@ -124,6 +126,7 @@ export default defineComponent ({
     //console.log("MOUNTED");
     this.getUser();
     this.getApplication();
+    this.logged = sessionStorage.getItem("mail");
   }
 })
 </script>
