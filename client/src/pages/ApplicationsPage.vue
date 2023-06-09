@@ -3,7 +3,7 @@
   <div class="d-flex justify-content-center fw-bold">
     <h1>Gestione candidature</h1>
   </div>
-  <UniversityApplicationPanel v-for="university in universities" :university-name="university.name" :university-places="university.offer.places" :applications="applications" :key="applications.id"></UniversityApplicationPanel>
+  <UniversityApplicationPanel v-for="university in universities" :university="university" :applications="applications" :key="applications.id"></UniversityApplicationPanel>
 
 </template>
 
@@ -35,7 +35,6 @@ export default defineComponent({
     getAllApplications(){
       axios.get('http://localhost:3000/applications').then(response =>{
           this.applications = response.data;
-          console.log(this.applications[0]);
           }
       ).catch(err => {
         console.log(err);

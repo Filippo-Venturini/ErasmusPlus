@@ -10,6 +10,7 @@ const universitySchema = new mongoose.Schema({
     offer: {
         period: String,
         places: String,
+        accepted: String,
         field: String,
     },
     logo: String,

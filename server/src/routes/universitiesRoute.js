@@ -9,6 +9,9 @@ router.route('/universities')
 router.route('/universitydetail:id')
     .get((req, res) => universitiesController.university_detail(req, res));
 
+router.route('/updateUniversityOffer:id')
+    .post((req, res) => universitiesController.update_university_offer(req, res));
+
 router.route('/addoffer')
     .post((req, res) => universitiesController.add_offer(req, res)
     )

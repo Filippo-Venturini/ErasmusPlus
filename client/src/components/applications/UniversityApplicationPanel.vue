@@ -1,9 +1,9 @@
 <template>
   <div class="row d-flex justify-content-center">
     <div class="col-5">
-      <h2>{{ universityName }}</h2>
+      <h2>{{ university.name }}</h2>
       <div class="m-lg-3">
-        <p>Posti disponibili: {{universityPlaces}}</p>
+        <p>Posti disponibili: {{university.offer.places}}</p>
       </div>
     </div>
   </div>
@@ -21,18 +21,24 @@
         </thead>
         <tbody>
         <template v-for="application in this.applications">
-          <tr v-if="universityName === application.university">
+          <tr v-if="university.name === application.university">
             <th scope="row">1</th>
             <td>{{application.university}}</td>
             <td>{{application.student}}</td>
             <td>{{application.date}}</td>
             <td>
               <div class="d-flex justify-content-end" v-if="application.state === 'Attesa'">
-                <button class="btn-circle-yes btn-xl d-flex justify-content-center align-items-center" @click="onAccept(application._id)">
+                <button class="btn-circle-yes btn-xl d-flex justify-content-center align-items-center" @click="onAccept(application)">
                   <i class="bi bi-check-lg accept-icon"></i>
                 </button>
-                <button class="btn-circle-no btn-xl d-flex justify-content-center align-items-center" @click="onReject(application._id)">
+                <button class="btn-circle-no btn-xl d-flex justify-content-center align-items-center" @click="onReject(application)">
                   <i class="bi bi-x-lg reject-icon"></i></button>
+              </div>
+              <div v-if="application.state === 'Accettata'">
+                <p style="color: springgreen">Accettata</p>
+              </div>
+              <div v-if="application.state === 'Rifiutata'">
+                <p style="color: #D91A1A">Rifiutata</p>
               </div>
             </td>
           </tr>
@@ -48,7 +54,7 @@ import {defineComponent} from "vue";
 import axios from "axios";
 export default defineComponent({
   name: "UniversityApplicationPanel",
-  props: ["universityName", "universityPlaces", "applications"],
+  props: ["university", "applications"],
   data(){
     return{
       applicationPresent: false
@@ -57,29 +63,46 @@ export default defineComponent({
   methods:{
     isApplicationPresent(){
       this.applications.forEach(a => {
-        if(a.university === this.universityName){
+        if(a.university === this.university.name){
           this.applicationPresent = true;
         }
       })
     },
-    onAccept(id){
-      const json = {
-        state: "Accettata"
-      };
+    onAccept(applicationToModify){
 
-      const res = axios.post('http://localhost:3000/modifyApplicationState'+id, json,{
+      const res1 = axios.post('http://localhost:3000/modifyApplicationState'+applicationToModify._id, {state:"Accettata"},{
         headers: {
           // Overwrite Axios's automatically set Content-Type
           'Content-Type': 'application/json'
         }
       });
+
+      const newAccepted = (Number(this.university.accepted) + 1).toString();
+      console.log(this.universities.accepted);
+      const res2 = axios.post('http://localhost:3000/updateUniversityOffer'+this.university._id, {accepted:newAccepted},{
+        headers: {
+          // Overwrite Axios's automatically set Content-Type
+          'Content-Type': 'application/json'
+        }
+      });
+
+      for(let i = 0; i < this.applications.length; i++){
+        if(this.applications[i].id_student === applicationToModify.id_student && this.applications[i]._id !== applicationToModify._id){
+          const res = axios.post('http://localhost:3000/modifyApplicationState'+this.applications[i]._id, {state:"Rifiutata"},{
+            headers: {
+              // Overwrite Axios's automatically set Content-Type
+              'Content-Type': 'application/json'
+            }
+          });
+        }
+      }
     },
-    onReject(id){
+    onReject(applicationToModify){
       const json = {
         state: "Rifiutata"
       };
 
-      const res = axios.post('http://localhost:3000/modifyApplicationState' + id, json,{
+      const res = axios.post('http://localhost:3000/modifyApplicationState' + applicationToModify._id, json,{
         headers: {
           // Overwrite Axios's automatically set Content-Type
           'Content-Type': 'application/json'

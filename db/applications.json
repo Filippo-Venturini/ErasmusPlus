@@ -1,10 +1,10 @@
-{"university":"Universitat Politecnica de Catalunya", "city":"Barcellona", "country":"Spagna", "student": "Alberto Di Girolamo", "date":"16/05/2023", "state": "Attesa"}
-{"university":"Universitat Politecnica de Catalunya", "city":"Barcellona", "country":"Spagna", "student": "Pietro Lelli", "date":"16/03/2023", "state": "Attesa"}
-{"university":"Vrije Universitet Amsterdam", "city":"Amsterdam", "country":"Olanda", "student": "Alberto Di Girolamo", "date":"13/05/2023", "state": "Attesa"}
-{"university":"Warsaw University of Technology", "city":"Barcellona", "country":"Spagna", "student": "Filippo Venturini", "date":"20/05/2023", "state": "Attesa"}
-{"university":"Cambridge University", "city":"Londra", "country":"Regno Unito", "student": "Filippo Venturini", "date":"21/04/2023", "state": "Attesa"}
-{"university":"Humboldt University", "city":"Berlino", "country":"Germania", "student": "Alberto Di Girolamo", "date":"05/05/2023", "state": "Attesa"}
+{"university":"Universitat Politecnica de Catalunya", "city":"Barcellona", "country":"Spagna", "student": "Alberto Di Girolamo", "id_student": "0347120087", "date":"16/05/2023", "state": "Attesa"}
+{"university":"Universitat Politecnica de Catalunya", "city":"Barcellona", "country":"Spagna", "student": "Pietro Lelli", "id_student": "0003170987", "date":"16/03/2023", "state": "Attesa"}
+{"university":"Vrije Universitet Amsterdam", "city":"Amsterdam", "country":"Olanda", "student": "Alberto Di Girolamo","id_student": "0347120087", "date":"13/05/2023", "state": "Attesa"}
+{"university":"Warsaw University of Technology", "city":"Barcellona", "country":"Spagna", "student": "Filippo Venturini", "id_student": "0109130287", "date":"20/05/2023", "state": "Attesa"}
+{"university":"Cambridge University", "city":"Londra", "country":"Regno Unito", "student": "Filippo Venturini","id_student": "0109130287", "date":"21/04/2023", "state": "Attesa"}
+{"university":"Humboldt University", "city":"Berlino", "country":"Germania", "student": "Alberto Di Girolamo", "id_student": "0347120087", "date":"05/05/2023", "state": "Attesa"}
 {"university":"KTH Royal Institute of Technology University", "city":"Stoccolma", "country":"Svezia", "student": "Pietro Lelli", "date":"09/02/2023", "state": "Attesa"}
-{"university":"University of Oulu", "city":"Oulu", "country":"Finlandia", "student": "Pietro Lelli", "date":"10/01/2023", "state": "Attesa"}
-{"university":"University of P.Porto", "city":"Porto", "country":"Portogallo", "student": "Alberto Di Girolamo", "date":"17/03/2023", "state": "Attesa"}
-{"university":"University of P.Porto", "city":"Porto", "country":"Portogallo", "student": "Filippo Venturini", "date":"19/05/2023", "state": "Attesa"}
+{"university":"University of Oulu", "city":"Oulu", "country":"Finlandia", "student": "Pietro Lelli","id_student": "0003170987", "date":"10/01/2023", "state": "Attesa"}
+{"university":"University of P.Porto", "city":"Porto", "country":"Portogallo", "student": "Alberto Di Girolamo","id_student": "0347120087", "date":"17/03/2023", "state": "Attesa"}
+{"university":"University of P.Porto", "city":"Porto", "country":"Portogallo", "student": "Filippo Venturini", "id_student": "0109130287", "date":"19/05/2023", "state": "Attesa"}
