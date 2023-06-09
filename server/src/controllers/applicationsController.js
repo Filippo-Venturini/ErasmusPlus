@@ -1,4 +1,5 @@
 const applicationsModel = require('../models/applicationsModel');
+const index = require('../../src/index');
 
 exports.all_applications = async(req, res) => {
     try{
@@ -20,7 +21,8 @@ exports.modify_application_state = async (req, res) => {
         res.header('Access-Control-Allow-Origin', '*');
     }
 
-    console.log(req.body);
-    await applicationsModel.findOneAndUpdate({_id: req.params.id}, {state: req.body.state})
+    await applicationsModel.findOneAndUpdate({_id: req.params.id}, {state: req.body.state});
+    const updatedApplications = await applicationsModel.find()
+    index.sendUpdatedApplications(updatedApplications);
 
 }

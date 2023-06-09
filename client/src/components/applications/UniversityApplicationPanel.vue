@@ -27,7 +27,7 @@
             <td>{{application.student}}</td>
             <td>{{application.date}}</td>
             <td>
-              <div class="d-flex justify-content-end">
+              <div class="d-flex justify-content-end" v-if="application.state === 'Attesa'">
                 <button class="btn-circle-yes btn-xl d-flex justify-content-center align-items-center" @click="onAccept(application._id)">
                   <i class="bi bi-check-lg accept-icon"></i>
                 </button>

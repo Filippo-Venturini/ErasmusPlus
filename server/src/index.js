@@ -21,6 +21,19 @@ mongoose.connect('mongodb://127.0.0.1:27017/erasmusPlusDB').then(() => {
     console.log(err);
 });
 
-app.listen(3000, () => {
+const server = app.listen(3000, () => {
     console.log('listening on http://localhost:3000');
 });
+
+const io = require('socket.io')(server, {
+    cors: {
+        origin: "*",
+        methods: ["GET", "POST"],
+        allowedHeaders: ["Content-type,Accept,X-Custom-Header"],
+        credentials: true
+    }
+});
+
+exports.sendUpdatedApplications = (data) =>{
+    io.emit('APPLICATIONS', data);
+}
