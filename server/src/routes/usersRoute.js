@@ -6,7 +6,7 @@ router.route('/users')
     .get((req, res) => usersController.all_users(req, res));
 router.route('/userdetail:mail')
     .get((req, res) => usersController.user_details(req, res));
-router.route('/:id')
+router.route('/:mail')
     .get((req, res) => usersController.get_new_notification(req, res))
     .put((req, res) => usersController.read_notification(req, res));
 

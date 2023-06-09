@@ -17,7 +17,7 @@
           <div class="col-md">
             <div class="box" id="boxId">
               <template v-for="notification in notifications">
-                <p class="textNotification" @click="this.clickNotification(notification)"><i class="bi bi-envelope-fill"></i>&ensp;&ensp;&ensp;&ensp;  {{notification.text}} </p>
+                  <p class="textNotification" id="textNotificationID" @click="this.clickNotification(notification)"><i class="bi bi-envelope-fill"></i>&ensp;&ensp;&ensp;&ensp;  {{notification.text}} </p>
               </template>
             </div>
           </div>
@@ -37,7 +37,8 @@ export default defineComponent({
   data(){
     return{
       notifications: [],
-      user: []
+      user: [],
+      newNotifications: true,
     }
   },
   methods:{
@@ -48,13 +49,10 @@ export default defineComponent({
       } else {
         x.style.visibility = "hidden";
       }
-
       this.showNotifications();
-
-
     },
     showNotifications(){
-      axios.get('http://localhost:3000/' + "6483298fcaf00aadbeb8b087").then(response => {
+      axios.get('http://localhost:3000/' + "pietro.lelli@studio.unibo.it").then(response => {
         let allNotifications = response.data.notification;
         this.user = response.data;
         let tmp = [];
@@ -63,7 +61,14 @@ export default defineComponent({
             tmp.push(not);
           }
         });
-        this.notifications = tmp;
+
+        if(tmp.length === 0){
+          document.getElementById("textNotificationID").innerHTML = "New text!";
+        }else{
+          this.newNotifications = true;
+          this.notifications = tmp;
+        }
+
       }).catch(err => {
         console.log(err);
       })
@@ -76,13 +81,13 @@ export default defineComponent({
           this.user.notification = this.notifications;
         }
       }
-      axios.put('http://localhost:3000/' + "648313f8caf00aadbeb8b085", this.user, {
+      axios.put('http://localhost:3000/' + "pietro.lelli@studio.unibo.it", this.user, {
         headers: {
           // Overwrite Axios's automatically set Content-Type
           'Content-Type': 'application/json'
         }
       });
-      /*
+
       switch (notification.kind){
         case "USUB":
           window.location.replace("/userdetail");
@@ -99,7 +104,7 @@ export default defineComponent({
         case "ASUR":
           window.location.replace("/addReview");
           break;
-      }*/
+      }
 
     }
   },
