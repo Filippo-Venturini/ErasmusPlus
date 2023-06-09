@@ -14,8 +14,8 @@ app.use(usersRouter);
 app.use(applicationsRouter);
 
 
-mongoose.connect('mongodb://127.0.0.1:27017/erasmusPlusDB').then(() => {
-//mongoose.connect('mongodb://127.0.0.1:27018/erasmusPlusDB').then(() => {
+//mongoose.connect('mongodb://127.0.0.1:27017/erasmusPlusDB').then(() => {
+mongoose.connect('mongodb://127.0.0.1:27018/erasmusPlusDB').then(() => {
     console.log('Connected to DB');
 }).catch(err => {
     console.log(err);

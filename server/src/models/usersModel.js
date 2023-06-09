@@ -9,8 +9,12 @@ const userSchema = new mongoose.Schema({
     mail: String,
     cellphone: String,
     course: String,
-    immatricolationYear: String,
-    password: String
+    immatriculationYear: String,
+    password: String,
+    notification: [{
+        text: String,
+        read: String
+    }]
 });
 
 module.exports = mongoose.model('users', userSchema);
