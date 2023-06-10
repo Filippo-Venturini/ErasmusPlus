@@ -48,7 +48,8 @@
   <div class="row me-5">
     <div class="col-md-1"></div>
     <div class="col-md-2 mt-4 text-center">
-      <button v-if="this.user.role === 'Studente'"  data-bs-toggle="modal" data-bs-target="#applicationModal" class="btn btn-outline-success">Candidati ora!</button>
+      <button v-if="checkIsApplied() === true" class="btn btn-success" disabled>Candidato</button>
+      <button v-else-if="this.user.role === 'Studente'"  data-bs-toggle="modal" data-bs-target="#applicationModal" class="btn btn-outline-success">Candidati ora!</button>
       <button v-else-if="this.user.role === 'Admin'" data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-outline-danger">Elimina</button>
     </div>
     <div class="col-md-9 ">
@@ -181,14 +182,12 @@ export default defineComponent({
       apartmentsStatistics: [0,0,0,0],
       satisfaction: [0,0,0,0],
       statisticsComputed: false,
-      user: []
+      user: [],
+      isApplied: false
     }
   },
   methods:{
-    openModal(){
-      const modal = document.getElementById("exampleModal");
-      modal.show();
-    },
+
     getApplication(){
       axios.get('http://localhost:3000/applications').then(response =>{
         let allApplications;
@@ -297,6 +296,16 @@ export default defineComponent({
           }
         });
       }
+      this.checkIsApplied();
+    },
+    checkIsApplied(){
+      for(let i=0; i<this.applications.length; i++) {
+        if(this.applications[i].university === this.offerUniversity.name) {
+          this.getApplication();
+          return true;
+        }
+      }
+      return false;
     }
   },
   mounted() {
@@ -304,6 +313,7 @@ export default defineComponent({
     this.getUniversityDetail(this.id);
     this.getUser();
     this.getApplication();
+    this.checkIsApplied();
   }
 })
 </script>
