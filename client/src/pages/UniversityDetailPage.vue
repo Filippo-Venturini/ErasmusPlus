@@ -3,6 +3,42 @@
 
   <Wallpaper :srcImg="srcImgWallpaper"></Wallpaper>
 
+  <!-- Modal -->
+  <div class="modal fade" id="applicationModal" tabindex="-1" aria-labelledby="myModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Conferma candidatura</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Confermi la tua candidatura per l'università {{this.offerUniversity.name}}?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" @click="applyToUniversity()" data-bs-dismiss="modal" >Conferma</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="myModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Elimina offerta</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Confermi di voler eliminare l'offerta per l'università {{this.offerUniversity.name}}?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" @click="deleteUniversity();" data-bs-dismiss="modal" >Elimina</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="row me-5">
     <div class="col-md-1"></div>
     <div class="col-md-2 text-center" style="margin-top: -100px">
@@ -12,8 +48,8 @@
   <div class="row me-5">
     <div class="col-md-1"></div>
     <div class="col-md-2 mt-4 text-center">
-      <button v-if="this.user.role === 'Studente'" @click="applyToUniversity()" class="btn btn-outline-success">Candidati ora!</button>
-      <button v-else-if="this.user.role === 'Admin'" @click="deleteUniversity()"  class="btn btn-outline-danger">Elimina</button>
+      <button v-if="this.user.role === 'Studente'"  data-bs-toggle="modal" data-bs-target="#applicationModal" class="btn btn-outline-success">Candidati ora!</button>
+      <button v-else-if="this.user.role === 'Admin'" data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-outline-danger">Elimina</button>
     </div>
     <div class="col-md-9 ">
       <div class="title">{{this.offerUniversity.name}}</div>
@@ -149,6 +185,10 @@ export default defineComponent({
     }
   },
   methods:{
+    openModal(){
+      const modal = document.getElementById("exampleModal");
+      modal.show();
+    },
     getApplication(){
       axios.get('http://localhost:3000/applications').then(response =>{
         let allApplications;
