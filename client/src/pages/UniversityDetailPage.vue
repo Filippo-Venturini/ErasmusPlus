@@ -219,7 +219,7 @@ export default defineComponent({
       })
     },
     deleteUniversity(){
-
+      axios.delete('http://localhost:3000/deleteOffer'+this.offerUniversity.name).then(this.$router.push('/'));
     },
     applyToUniversity(){
       const timeElapsed = Date.now();

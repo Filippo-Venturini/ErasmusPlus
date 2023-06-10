@@ -44,7 +44,8 @@
             <td>{{application.city}}</td>
             <td>{{application.date}}</td>
             <td v-if="application.state === 'Accettata'" style="color: limegreen">{{application.state}}</td>
-            <td v-if="application.state === 'Rifiutata'" style="color: red">{{application.state}}</td>
+            <td v-else-if="application.state === 'Rifiutata'" style="color: red">{{application.state}}</td>
+            <td v-else>{{application.state}}</td>
           </tr>
         </template>
         </tbody>
