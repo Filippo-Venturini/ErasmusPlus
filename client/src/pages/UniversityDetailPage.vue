@@ -113,6 +113,7 @@ export default defineComponent({
   components: {BarChart, PieChart, Histogram, InfoPanelDX, UniversityLogo, Wallpaper, CircleIcon, Header, InfoPanelSX},
   data(){
     return{
+      applications: [],
       offerUniversity: [],
       title: [],
       msgApplicationsAvailable: "Posti disponibili: ",
@@ -148,6 +149,20 @@ export default defineComponent({
     }
   },
   methods:{
+    getApplication(){
+      axios.get('http://localhost:3000/applications').then(response =>{
+        let allApplications;
+        allApplications = response.data;
+        allApplications.forEach(application => {
+          if(application.student === (this.user.name+" "+this.user.surname)) {
+            this.applications.push(application);
+            console.log(application);
+          }
+        })
+      }).catch(err => {
+        console.log(err);
+      })
+    },
     computeStatistics(){
       for(let i = 0; i < this.offerUniversity.reviews.length; i++){
         let k = 0; //Index for inserting in the final arrays
@@ -222,29 +237,33 @@ export default defineComponent({
       axios.delete('http://localhost:3000/deleteOffer'+this.offerUniversity.name).then(this.$router.push('/'));
     },
     applyToUniversity(){
-      const timeElapsed = Date.now();
-      const today = new Date(timeElapsed);
-      const json = {
-        university:this.offerUniversity.name,
-        city:this.offerUniversity.city,
-        country:this.offerUniversity.country,
-        student: this.user.name+ " " + this.user.surname,
-        id_student: this.user.identificationNumber,
-        date: today.toLocaleDateString(),
-        state: "Attesa"
-      };
-      axios.post('http://localhost:3000/addApplication', json, {
-        headers: {
-          // Overwrite Axios's automatically set Content-Type
-          'Content-Type': 'application/json'
-        }
-      });
+      this.getApplication();
+      if(this.applications.at(2) == null) {
+        const timeElapsed = Date.now();
+        const today = new Date(timeElapsed);
+        const json = {
+          university:this.offerUniversity.name,
+          city:this.offerUniversity.city,
+          country:this.offerUniversity.country,
+          student: this.user.name+ " " + this.user.surname,
+          id_student: this.user.identificationNumber,
+          date: today.toLocaleDateString(),
+          state: "Attesa"
+        };
+        axios.post('http://localhost:3000/addApplication', json, {
+          headers: {
+            // Overwrite Axios's automatically set Content-Type
+            'Content-Type': 'application/json'
+          }
+        });
+      }
     }
   },
   mounted() {
     this.id = this.$route.params.id;
     this.getUniversityDetail(this.id);
     this.getUser();
+    this.getApplication();
   }
 })
 </script>
