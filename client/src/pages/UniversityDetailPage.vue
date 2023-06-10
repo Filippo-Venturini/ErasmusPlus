@@ -12,8 +12,8 @@
   <div class="row me-5">
     <div class="col-md-1"></div>
     <div class="col-md-2 mt-4 text-center">
-      <button v-if="this.user.role === 'Studente'" @click="applyToApplication()" class="btn btn-outline-success">Candidati ora!</button>
-      <button v-else-if="this.user.role === 'Admin'" @click="deleteApplication()"  class="btn btn-outline-danger">Elimina</button>
+      <button v-if="this.user.role === 'Studente'" @click="applyToUniversity()" class="btn btn-outline-success">Candidati ora!</button>
+      <button v-else-if="this.user.role === 'Admin'" @click="deleteUniversity()"  class="btn btn-outline-danger">Elimina</button>
     </div>
     <div class="col-md-9 ">
       <div class="title">{{this.offerUniversity.name}}</div>
@@ -218,10 +218,10 @@ export default defineComponent({
         console.log(err);
       })
     },
-    deleteApplication(){
+    deleteUniversity(){
 
     },
-    applyToApplication(){
+    applyToUniversity(){
       const timeElapsed = Date.now();
       const today = new Date(timeElapsed);
       const json = {
