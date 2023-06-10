@@ -35,9 +35,6 @@ exports.read_notification = async(req, res) => {
         res.header('Access-Control-Allow-Origin', '*');
     }
     try{
-        console.log(req.body);
-        console.log(req.params.mail);
-
         res.json(await usersModel.findOneAndReplace({mail: req.params.mail}, req.body, {returnNewDocument: false}).then(replacedDocument => {
             if(replacedDocument) {
                 console.log(`Successfully replaced the following document: ${replacedDocument}.`)

@@ -10,21 +10,32 @@
       <div class="col-md">
         <div class="row">
           <div class="col-md">
+            <i class="bi bi-list menu" id="menuId" @click="this.showMenuBox()"></i>
             <i class="bi bi-bell bell" id="bellId" @click="this.showNotificationsBox()"></i>
           </div>
+
         </div>
         <div class="row">
           <div class="col-md">
-            <div class="box" id="boxId">
-              <template v-for="notification in notifications">
-                  <p class="textNotification" id="textNotificationID" @click="this.clickNotification(notification)"><i class="bi bi-envelope-fill"></i>&ensp;&ensp;&ensp;&ensp;  {{notification.text}} </p>
-              </template>
+            <div class="boxNotifications" id="boxNotificationsId" v-if="boxMenuIsOpen === false">
+              <div v-if="newNotifications">
+                <template v-for="notification in notifications">
+                    <p class="textNotification" id="textNotificationID" @click="this.clickNotification(notification)"><i class="bi bi-envelope-fill"></i>&ensp;&ensp;&ensp;&ensp;  {{notification.text}} </p>
+                </template>
+              </div>
+              <div v-else class="textNotification" style="text-align: center">Hai letto tutte le notifiche!</div>
+            </div>
+
+            <div class="boxMenu"  id="boxMenuId" v-if="boxNotificationsIsOpen === false">
+              <div class="menuItems mt-3" onclick="location.href = '/';">Tutte le offerte</div>
+              <div class="menuItems mt-3" @click="this.checkForGoToProfile()">Profilo</div>
+              <div class="menuItems mt-3" @click="this.checkForGoToFavorites()">Preferiti</div>
+              <div class="menuItems mt-3" onclick="location.href = '/login';" @click="this.logout()">Logout</div>
             </div>
           </div>
         </div>
       </div>
     </div>
-
   </header>
 </template>
 
@@ -39,20 +50,53 @@ export default defineComponent({
       notifications: [],
       user: [],
       newNotifications: true,
+      boxMenuIsOpen: false,
+      boxNotificationsIsOpen: false
     }
   },
   methods:{
-    showNotificationsBox(){
-      const x = document.getElementById("boxId");
+    checkForGoToFavorites(){
+      if(sessionStorage.getItem('mail') === null){
+        window.location.replace("/login");
+      }else{
+        window.location.replace("/");
+      }
+    },
+    checkForGoToProfile(){
+      if(sessionStorage.getItem('mail') === null){
+        window.location.replace("/login");
+      }else{
+        window.location.replace("/userdetail");
+      }
+    },
+    logout(){
+      sessionStorage.clear();
+    },
+    showMenuBox(){
+      const x = document.getElementById("boxMenuId");
+
       if (x.style.visibility === "hidden" || x.style.visibility === "") {
+
         x.style.visibility = "visible";
+        this.boxMenuIsOpen = true;
       } else {
         x.style.visibility = "hidden";
+        this.boxMenuIsOpen = false;
+      }
+    },
+    showNotificationsBox(){
+      const x = document.getElementById("boxNotificationsId");
+      if (x.style.visibility === "hidden" || x.style.visibility === "") {
+        x.style.visibility = "visible";
+        this.boxNotificationsIsOpen = true;
+      } else {
+        x.style.visibility = "hidden";
+        this.boxNotificationsIsOpen = false;
       }
       this.showNotifications();
     },
     showNotifications(){
-      axios.get('http://localhost:3000/' + "pietro.lelli@studio.unibo.it").then(response => {
+      axios.get('http://localhost:3000/' + sessionStorage.getItem("mail")).then(response => {
         let allNotifications = response.data.notification;
         this.user = response.data;
         let tmp = [];
@@ -63,7 +107,8 @@ export default defineComponent({
         });
 
         if(tmp.length === 0){
-          document.getElementById("textNotificationID").innerHTML = "New text!";
+          this.newNotifications = false;
+
         }else{
           this.newNotifications = true;
           this.notifications = tmp;
@@ -81,7 +126,7 @@ export default defineComponent({
           this.user.notification = this.notifications;
         }
       }
-      axios.put('http://localhost:3000/' + "pietro.lelli@studio.unibo.it", this.user, {
+      axios.put('http://localhost:3000/' + sessionStorage.getItem("mail"), this.user, {
         headers: {
           // Overwrite Axios's automatically set Content-Type
           'Content-Type': 'application/json'
@@ -134,12 +179,43 @@ export default defineComponent({
   color: white;
   cursor: pointer;
   margin-top: 35px;
-  margin-right: 100px;
-
-
+  margin-right: 50px;
 }
 
-.box{
+.menu{
+  float: right;
+  font-size: 30px;
+  color: white;
+  cursor: pointer;
+  margin-top: 35px;
+  margin-right: 60px;
+}
+
+.boxMenu{
+  position: relative;
+  float: right;
+  box-shadow: 0 0 100px rgba(0,0,0,0.8);
+  background-color: #FFFFFF;
+  padding: 30px;
+  visibility: hidden;
+  width: 300px;
+  z-index:999;
+  margin-top: 20px;
+  margin-right: 30px;
+  border-radius:10px;
+}
+
+.boxMenu:before{
+  content: "";
+  float: right;
+  margin-top: -60px;
+  left: 65%;
+  border: 15px solid transparent;
+  border-bottom-color: white;
+  z-index:999;
+}
+
+.boxNotifications{
   position: relative;
   float: right;
   box-shadow: 0 0 100px rgba(0,0,0,0.8);
@@ -149,12 +225,10 @@ export default defineComponent({
   width: 500px;
   z-index:999;
   margin-top: 20px;
-  margin-right: 70px;
+  margin-right: 110px;
   border-radius:10px;
-
-
 }
-.box:before{
+.boxNotifications:before{
   content: "";
   float: right;
   margin-top: -60px;
@@ -170,6 +244,25 @@ export default defineComponent({
   border-radius:10px;
   padding:10px 10px 10px 36px;
   cursor: pointer;
+}
+
+.textNotification:hover{
+  font-weight: bold;
+}
+
+
+.menuItems{
+  border:1px solid #8ed9f6;
+  border-radius:10px;
+  padding:10px 10px 10px 0px;
+  cursor: pointer;
+  text-align: center;
+
+}
+
+.menuItems:hover{
+  background:#e3f7fc  no-repeat 10px 50%;
+  font-weight: bold;
 }
 
 </style>
