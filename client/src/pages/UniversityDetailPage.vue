@@ -12,8 +12,8 @@
   <div class="row me-5">
     <div class="col-md-1"></div>
     <div class="col-md-2 mt-4 text-center">
-      <button v-if="this.user.role === 'Studente'" class="btn btn-outline-success">Candidati ora!</button>
-      <button v-else-if="this.user.role === 'Admin'" class="btn btn-outline-danger">Elimina</button>
+      <button v-if="this.user.role === 'Studente'" @click="applyToUniversity()" class="btn btn-outline-success">Candidati ora!</button>
+      <button v-else-if="this.user.role === 'Admin'" @click="deleteUniversity()"  class="btn btn-outline-danger">Elimina</button>
     </div>
     <div class="col-md-9 ">
       <div class="title">{{this.offerUniversity.name}}</div>
@@ -217,6 +217,28 @@ export default defineComponent({
       }).catch(err => {
         console.log(err);
       })
+    },
+    deleteUniversity(){
+      axios.delete('http://localhost:3000/deleteOffer'+this.offerUniversity.name).then(this.$router.push('/'));
+    },
+    applyToUniversity(){
+      const timeElapsed = Date.now();
+      const today = new Date(timeElapsed);
+      const json = {
+        university:this.offerUniversity.name,
+        city:this.offerUniversity.city,
+        country:this.offerUniversity.country,
+        student: this.user.name+ " " + this.user.surname,
+        id_student: this.user.identificationNumber,
+        date: today.toLocaleDateString(),
+        state: "Attesa"
+      };
+      axios.post('http://localhost:3000/addApplication', json, {
+        headers: {
+          // Overwrite Axios's automatically set Content-Type
+          'Content-Type': 'application/json'
+        }
+      });
     }
   },
   mounted() {

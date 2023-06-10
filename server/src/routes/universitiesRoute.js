@@ -19,5 +19,7 @@ router.route('/addoffer')
 router.route('/addReview')
     .post((req, res) => universitiesController.add_review(req, res)
     )
-
+router.route('/deleteOffer:name')
+    .delete((req, res) => universitiesController.delete_offer(req, res)
+    )
 module.exports = router;

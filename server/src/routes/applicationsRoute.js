@@ -9,4 +9,7 @@ router.route('/modifyApplicationState:id')
     .post((req, res) => applicationsController.modify_application_state(req, res)
     )
 
+router.route('/addApplication')
+    .post((req, res) => applicationsController.add_application(req, res))
+
 module.exports = router;
