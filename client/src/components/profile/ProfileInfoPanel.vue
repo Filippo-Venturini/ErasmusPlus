@@ -21,7 +21,7 @@
         <i class="bi-person-lines-fill d-flex justify-content-center"></i>
       </div>
     </div>
-    <div class="row">
+    <div v-if="this.user.role === 'Studente'" class="row">
       <div class="col-1"></div>
       <div class="col-md-10">Corso di Studio: {{ user.course }}</div>
       <div class="col-1"></div>

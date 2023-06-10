@@ -19,39 +19,41 @@
       <ProfileInfoPanel  :title="msgPersonalInfo" :user="user" class="bgRedPersonalInfo"></ProfileInfoPanel>
     </div>
   </div>
-
-  <div class="row d-flex text-center" style="margin-top: 120px">
-    <h2>Le mie candidature</h2>
-  </div>
-  <div class="row d-flex justify-content-center">
-    <div class="col-5 m-3">
-      <table class="table table-bordered">
-        <thead>
-        <tr>
-          <th scope="col"></th>
-          <th scope="col">Università</th>
-          <th scope="col">Città</th>
-          <th scope="col">Data candidatura</th>
-          <th scope="col">Stato</th>
-        </tr>
-        </thead>
-        <tbody>
-
-        <template v-for="(application, index) in this.applications">
+  <div v-if="this.user.role === 'Studente'">
+    <div class="row d-flex text-center" style="margin-top: 120px">
+      <h2>Le mie candidature</h2>
+    </div>
+    <div class="row d-flex justify-content-center">
+      <div class="col-5 m-3">
+        <table class="table table-bordered">
+          <thead>
           <tr>
-            <th scope="row">{{index+1}}</th>
-            <td>{{application.university}}</td>
-            <td>{{application.city}}</td>
-            <td>{{application.date}}</td>
-            <td v-if="application.state === 'Accettata'" style="color: limegreen">{{application.state}}</td>
-            <td v-else-if="application.state === 'Rifiutata'" style="color: red">{{application.state}}</td>
-            <td v-else>{{application.state}}</td>
+            <th scope="col"></th>
+            <th scope="col">Università</th>
+            <th scope="col">Città</th>
+            <th scope="col">Data candidatura</th>
+            <th scope="col">Stato</th>
           </tr>
-        </template>
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+
+          <template v-for="(application, index) in this.applications">
+            <tr>
+              <th scope="row">{{index+1}}</th>
+              <td>{{application.university}}</td>
+              <td>{{application.city}}</td>
+              <td>{{application.date}}</td>
+              <td v-if="application.state === 'Accettata'" style="color: limegreen">{{application.state}}</td>
+              <td v-else-if="application.state === 'Rifiutata'" style="color: red">{{application.state}}</td>
+              <td v-else>{{application.state}}</td>
+            </tr>
+          </template>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
+
 
 </template>
 
