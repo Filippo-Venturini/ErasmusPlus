@@ -3,7 +3,7 @@
   <div class="row mt-4">
     <template v-for="university in universities">
       {{this.checkUniversity(university)}}
-      <div class ="col-3 mt-5 d-flex justify-content-center" v-if="universityIsOk">
+      <div class ="col-md-4 mt-5 d-flex justify-content-center" v-if="universityIsOk">
         <UniversityCard :university="university" :key="university.id"></UniversityCard>
       </div>
     </template>
