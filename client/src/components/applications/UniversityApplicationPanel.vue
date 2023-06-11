@@ -70,23 +70,23 @@ export default defineComponent({
     },
     onAccept(applicationToModify){
 
-      const res1 = axios.post('http://localhost:3000/modifyApplicationState'+applicationToModify._id, {state:"Accettata"},{
+      const res1 = axios.post('http://localhost:3000/modifyApplicationState'+applicationToModify._id, {state:"Accettata", id_student: applicationToModify.id_student},{
         headers: {
           // Overwrite Axios's automatically set Content-Type
           'Content-Type': 'application/json'
         }
       });
 
-      const newAccepted = (Number(this.university.accepted) + 1).toString();
+      /*const newAccepted = (Number(this.university.accepted) + 1).toString();
       console.log(this.universities.accepted);
       const res2 = axios.post('http://localhost:3000/updateUniversityOffer'+this.university._id, {accepted:newAccepted},{
         headers: {
           // Overwrite Axios's automatically set Content-Type
           'Content-Type': 'application/json'
         }
-      });
+      });*/
 
-      for(let i = 0; i < this.applications.length; i++){
+      /*for(let i = 0; i < this.applications.length; i++){
         if(this.applications[i].id_student === applicationToModify.id_student && this.applications[i]._id !== applicationToModify._id){
           const res = axios.post('http://localhost:3000/modifyApplicationState'+this.applications[i]._id, {state:"Rifiutata"},{
             headers: {
@@ -95,7 +95,7 @@ export default defineComponent({
             }
           });
         }
-      }
+      }*/
     },
     onReject(applicationToModify){
       const json = {

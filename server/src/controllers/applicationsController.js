@@ -23,7 +23,13 @@ exports.modify_application_state = async (req, res) => {
         res.header('Access-Control-Allow-Origin', '*');
     }
 
-    await applicationsModel.findOneAndUpdate({_id: req.params.id}, {state: req.body.state});
+    if(req.body.state === "Rifiutata"){
+        await applicationsModel.findOneAndUpdate({_id: req.params.id}, {state: "Rifiutata"});
+    }else if (req.body.state === "Accettata"){
+        await applicationsModel.updateMany({id_student: req.body.id_student}, {state: "Rifiutata"});
+        await applicationsModel.findOneAndUpdate({_id: req.params.id}, {state: "Accettata"});
+    }
+
     const updatedApplications = await applicationsModel.find()
     index.sendUpdatedApplications(updatedApplications);
 
