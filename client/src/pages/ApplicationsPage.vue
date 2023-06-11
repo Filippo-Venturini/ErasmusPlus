@@ -45,7 +45,10 @@ export default defineComponent({
     this.getAllApplications();
     this.getAllUniversities();
     this.socket.on('APPLICATIONS', (data) => {
-      this.applications = JSON.parse(data);
+      this.applications = data;//JSON.parse(data);
+    })
+    this.socket.on('UNIVERSITIES', (data) => {
+      this.universities = data;//JSON.parse(data);
     })
   }
 });
