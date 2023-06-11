@@ -7,11 +7,13 @@ import "bootstrap/dist/js/bootstrap"
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import './assets/sass/style.scss'
 import Vue3Storage from "vue3-storage";
+import crypto from "crypto-js";
 
 const app = createApp(App);
 
 app.use(router);
 app.use(VueApexCharts);
 app.use(Vue3Storage);
+app.use(crypto);
 app.mount('#app');
 
