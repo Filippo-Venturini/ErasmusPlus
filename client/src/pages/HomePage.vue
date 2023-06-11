@@ -18,7 +18,7 @@ export default defineComponent({
   components: {MapContainer, OffersContainer, Header},
   data(){
     return{
-      toMap: false,
+      toMap: true,
       universities: []
     }
   },

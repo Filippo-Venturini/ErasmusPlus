@@ -255,7 +255,7 @@ export default defineComponent({
             this.msgInfoApplicationsAvailable = this.offerUniversity.offer.places;
             this.msgInfoExchangePeriod = this.offerUniversity.offer.period;
             this.msgInfoFieldOfStudy = this.offerUniversity.offer.field;
-            this.srcImgWallpaper = this.offerUniversity.wallpaper;
+            this.srcImgWallpaper = this.offerUniversity.cardImg;
             this.srcImgUniversityLogo = this.offerUniversity.logo;
             this.computeStatistics();
             this.statisticsComputed = true;
