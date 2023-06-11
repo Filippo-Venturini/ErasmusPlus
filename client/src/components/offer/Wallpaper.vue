@@ -1,5 +1,5 @@
 <template>
-  <img class="wallpaper-css" :src="getImageUrl()">
+  <img class="wallpaper-css" :src="getImageUrl()" style="object-fit: cover;">
 </template>
 <script>
 import {defineComponent} from "vue";
