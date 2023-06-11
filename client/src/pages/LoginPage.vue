@@ -20,25 +20,26 @@
 <script>
 import {defineComponent} from "vue";
 import axios from "axios";
+import sha256 from 'crypto-js/sha256';
 
 export default defineComponent ({
   name: "LoginPage",
   methods:{
     login(){
       axios.get('http://localhost:3000/users').then(response =>{
-        console.log(response.data);
         this.users = response.data;
+        console.log(sha256("Admin").toString());
         this.users.forEach(user => {
-          if(user.mail === this.mail && user.password === this.password) {
+          if(user.mail == this.mail && user.password == sha256(this.password)) {
             console.log("login riuscito");
-            sessionStorage.setItem('mail',user.mail);    //sessionStorage.setItem(key,value);
+            sessionStorage.setItem('mail',user.mail);
             this.$router.push('/');
           }
         })
       }).catch(err => {
         console.log(err);
       })
-    }
+    },
   },
   data(){
     return{

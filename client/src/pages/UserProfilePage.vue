@@ -1,24 +1,6 @@
 <template>
   <Header></Header>
   <ProfileBadge :user="user" :key="user.id"></ProfileBadge>
-  <div class="row" style="margin-top: 100px">
-    <div class="col-6">
-      <ProfileInfoPanel :title="msgContacts" :user="user" class="bgGrayContacts"></ProfileInfoPanel>
-    </div>
-    <div class="col-3"></div>
-    <div class="col-3 circleIconCol" style="margin-top: 50px">
-      <UserProfileCircleIcon :title="msgContacts" class="circleIconContacts"></UserProfileCircleIcon>
-    </div>
-  </div>
-  <div class="row" style="margin-top: 100px">
-    <div class="col-3 circleIconCol">
-      <UserProfileCircleIcon :title="msgPersonalInfo" class="circleIconPersonalInfo"></UserProfileCircleIcon>
-    </div>
-    <div class="col-3"></div>
-    <div class="col-6">
-      <ProfileInfoPanel  :title="msgPersonalInfo" :user="user" class="bgRedPersonalInfo"></ProfileInfoPanel>
-    </div>
-  </div>
   <div v-if="this.user.role === 'Studente'">
     <div class="row d-flex text-center" style="margin-top: 120px">
       <h2>Le mie candidature</h2>
@@ -53,6 +35,25 @@
       </div>
     </div>
   </div>
+  <div class="row" style="margin-top: 100px">
+    <div class="col-6">
+      <ProfileInfoPanel :title="msgContacts" :user="user" class="bgGrayContacts"></ProfileInfoPanel>
+    </div>
+    <div class="col-3"></div>
+    <div class="col-3 circleIconCol" style="margin-top: 50px">
+      <UserProfileCircleIcon :title="msgContacts" class="circleIconContacts"></UserProfileCircleIcon>
+    </div>
+  </div>
+  <div class="row" style="margin-top: 100px">
+    <div class="col-3 circleIconCol">
+      <UserProfileCircleIcon :title="msgPersonalInfo" class="circleIconPersonalInfo"></UserProfileCircleIcon>
+    </div>
+    <div class="col-3"></div>
+    <div class="col-6">
+      <ProfileInfoPanel  :title="msgPersonalInfo" :user="user" class="bgRedPersonalInfo"></ProfileInfoPanel>
+    </div>
+  </div>
+
 
 
 </template>
