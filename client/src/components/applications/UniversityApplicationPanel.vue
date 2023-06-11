@@ -57,7 +57,8 @@ export default defineComponent({
   props: ["university", "applications"],
   data(){
     return{
-      applicationPresent: false
+      applicationPresent: false,
+      accepted: Number(this.university.offer.accepted),
     }
   },
   methods:{
@@ -70,32 +71,27 @@ export default defineComponent({
     },
     onAccept(applicationToModify){
 
-      const res1 = axios.post('http://localhost:3000/modifyApplicationState'+applicationToModify._id, {state:"Accettata"},{
+      const res1 = axios.post('http://localhost:3000/modifyApplicationState'+applicationToModify._id, {state:"Accettata", id_student: applicationToModify.id_student},{
         headers: {
           // Overwrite Axios's automatically set Content-Type
           'Content-Type': 'application/json'
         }
       });
 
-      const newAccepted = (Number(this.university.accepted) + 1).toString();
-      console.log(this.universities.accepted);
-      const res2 = axios.post('http://localhost:3000/updateUniversityOffer'+this.university._id, {accepted:newAccepted},{
-        headers: {
-          // Overwrite Axios's automatically set Content-Type
-          'Content-Type': 'application/json'
-        }
-      });
+      this.accepted = this.accepted+1
 
-      for(let i = 0; i < this.applications.length; i++){
-        if(this.applications[i].id_student === applicationToModify.id_student && this.applications[i]._id !== applicationToModify._id){
-          const res = axios.post('http://localhost:3000/modifyApplicationState'+this.applications[i]._id, {state:"Rifiutata"},{
-            headers: {
-              // Overwrite Axios's automatically set Content-Type
-              'Content-Type': 'application/json'
-            }
-          });
-        }
+      const newOffer = {
+        period: this.university.offer.period,
+        places: this.university.offer.places,
+        accepted: this.accepted.toString(),
+        field: this.university.offer.field,
       }
+      const res2 = axios.post('http://localhost:3000/updateUniversityOffer'+this.university._id, newOffer,{
+        headers: {
+          // Overwrite Axios's automatically set Content-Type
+          'Content-Type': 'application/json'
+        }
+      });
     },
     onReject(applicationToModify){
       const json = {

@@ -12,6 +12,7 @@
         <input type="password" class="form-control" v-model="password" id="floatingPassword" placeholder="Password">
         <label for="floatingPassword">Password</label>
       </div>
+      <label id="passwordErrorLabel" style="display: none; color: #D91A1A; font-weight: bold;">Password o email sbagliata!</label>
       <button class="w-100 btn btn-lg" style="background: #BB2E29; color: white" @click="login()">Sign in</button>
     </div>
   </div>
@@ -20,25 +21,28 @@
 <script>
 import {defineComponent} from "vue";
 import axios from "axios";
+import sha256 from 'crypto-js/sha256';
 
 export default defineComponent ({
   name: "LoginPage",
   methods:{
     login(){
       axios.get('http://localhost:3000/users').then(response =>{
-        console.log(response.data);
         this.users = response.data;
+        //console.log(sha256("Admin").toString());
         this.users.forEach(user => {
-          if(user.mail === this.mail && user.password === this.password) {
+          if(user.mail == this.mail && user.password == sha256(this.password)) {
             console.log("login riuscito");
-            sessionStorage.setItem('mail',user.mail);    //sessionStorage.setItem(key,value);
+            sessionStorage.setItem('mail',user.mail);
             this.$router.push('/');
           }
         })
+        console.log("sbagliata");
+        document.getElementById("passwordErrorLabel").style.display = "block";
       }).catch(err => {
         console.log(err);
       })
-    }
+    },
   },
   data(){
     return{
