@@ -47,6 +47,9 @@ export default defineComponent({
     this.socket.on('APPLICATIONS', (data) => {
       this.applications = data;//JSON.parse(data);
     })
+    this.socket.on('UNIVERSITIES', (data) => {
+      this.universities = data;//JSON.parse(data);
+    })
   }
 });
 </script>

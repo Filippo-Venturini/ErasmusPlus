@@ -37,3 +37,7 @@ const io = require('socket.io')(server, {
 exports.sendUpdatedApplications = (data) =>{
     io.emit('APPLICATIONS', data);
 }
+
+exports.sendUpdatedUniversities = (data) =>{
+    io.emit('UNIVERSITIES', data);
+}
