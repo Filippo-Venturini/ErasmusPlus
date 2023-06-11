@@ -10,8 +10,8 @@
       <div class="col-md">
         <div class="row">
           <div class="col-md">
-            <i class="bi bi-list menu" id="menuId" @click="this.showMenuBox()"></i>
-            <i class="bi bi-bell bell" id="bellId" @click="this.showNotificationsBox()"></i>
+            <i class="bi bi-list menu btn" id="menuId" @click="this.showMenuBox()"></i>
+            <i class="bi bi-bell bell btn" id="bellId" @click="this.showNotificationsBox()"></i>
           </div>
 
         </div>
@@ -28,8 +28,8 @@
 
             <div class="boxMenu"  id="boxMenuId" v-if="boxNotificationsIsOpen === false">
               <div class="menuItems mt-3" onclick="location.href = '/';">Tutte le offerte</div>
-              <div class="menuItems mt-3" @click="this.checkForGoToProfile()">Profilo</div>
-              <div class="menuItems mt-3" @click="this.checkForGoToFavorites()">Preferiti</div>
+              <div class="menuItems mt-3" onclick="location.href = '/userdetail';">Profilo</div>
+              <div class="menuItems mt-3" onclick="location.href = '/';">Preferiti</div>
               <div class="menuItems mt-3" onclick="location.href = '/login';" @click="this.logout()">Logout</div>
             </div>
           </div>
@@ -51,49 +51,37 @@ export default defineComponent({
       user: [],
       newNotifications: true,
       boxMenuIsOpen: false,
-      boxNotificationsIsOpen: false
+      boxNotificationsIsOpen: false,
     }
   },
   methods:{
-    checkForGoToFavorites(){
-      if(sessionStorage.getItem('mail') === null){
-        window.location.replace("/login");
-      }else{
-        window.location.replace("/");
-      }
-    },
-    checkForGoToProfile(){
-      if(sessionStorage.getItem('mail') === null){
-        window.location.replace("/login");
-      }else{
-        window.location.replace("/userdetail");
-      }
-    },
     logout(){
       sessionStorage.clear();
     },
     showMenuBox(){
-      const x = document.getElementById("boxMenuId");
-
-      if (x.style.visibility === "hidden" || x.style.visibility === "") {
-
-        x.style.visibility = "visible";
-        this.boxMenuIsOpen = true;
-      } else {
-        x.style.visibility = "hidden";
-        this.boxMenuIsOpen = false;
+      if(!this.boxNotificationsIsOpen) {
+        const x = document.getElementById("boxMenuId");
+        if (x.style.visibility === "hidden" || x.style.visibility === "") {
+          x.style.visibility = "visible";
+          this.boxMenuIsOpen = true;
+        } else {
+          x.style.visibility = "hidden";
+          this.boxMenuIsOpen = false;
+        }
       }
     },
     showNotificationsBox(){
-      const x = document.getElementById("boxNotificationsId");
-      if (x.style.visibility === "hidden" || x.style.visibility === "") {
-        x.style.visibility = "visible";
-        this.boxNotificationsIsOpen = true;
-      } else {
-        x.style.visibility = "hidden";
-        this.boxNotificationsIsOpen = false;
+      if(!this.boxMenuIsOpen) {
+        const x = document.getElementById("boxNotificationsId");
+        if (x.style.visibility === "hidden" || x.style.visibility === "") {
+          x.style.visibility = "visible";
+          this.boxNotificationsIsOpen = true;
+        } else {
+          x.style.visibility = "hidden";
+          this.boxNotificationsIsOpen = false;
+        }
+        this.showNotifications();
       }
-      this.showNotifications();
     },
     showNotifications(){
       axios.get('http://localhost:3000/' + sessionStorage.getItem("mail")).then(response => {
@@ -113,11 +101,9 @@ export default defineComponent({
           this.newNotifications = true;
           this.notifications = tmp;
         }
-
       }).catch(err => {
         console.log(err);
       })
-
     },
     clickNotification(notification){
       for(let i = 0; i < this.notifications.length; i++){
@@ -150,11 +136,13 @@ export default defineComponent({
           window.location.replace("/addReview");
           break;
       }
-
     }
   },
   mounted() {
     this.showNotifications();
+    if(sessionStorage.getItem('mail') === null){
+      //window.location.replace("/login");
+    }
   }
 });
 </script>
@@ -168,10 +156,10 @@ export default defineComponent({
 .header-logo{
   height: 120px;
 }
+
 .logo{
   float: left;
 }
-
 
 .bell{
   float: right;
@@ -179,7 +167,7 @@ export default defineComponent({
   color: white;
   cursor: pointer;
   margin-top: 35px;
-  margin-right: 50px;
+  margin-right: 30px;
 }
 
 .menu{
@@ -201,7 +189,7 @@ export default defineComponent({
   width: 300px;
   z-index:999;
   margin-top: 20px;
-  margin-right: 30px;
+  margin-right: 40px;
   border-radius:10px;
 }
 
@@ -225,9 +213,10 @@ export default defineComponent({
   width: 500px;
   z-index:999;
   margin-top: 20px;
-  margin-right: 110px;
+  margin-right: 130px;
   border-radius:10px;
 }
+
 .boxNotifications:before{
   content: "";
   float: right;
@@ -249,7 +238,6 @@ export default defineComponent({
 .textNotification:hover{
   font-weight: bold;
 }
-
 
 .menuItems{
   border:1px solid #8ed9f6;
