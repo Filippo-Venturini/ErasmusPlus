@@ -100,36 +100,35 @@
     <div class="col-md-1"></div>
   </div>
 
-  <div class="d-flex justify-content-end">
-    <h1>Campus</h1>
-  </div>
-  <div class="d-flex justify-content-end">
-    <Histogram :data="this.campusStatistics" v-if="this.statisticsComputed"></Histogram>
-  </div>
+  <div class="row">
+    <div class="col-12 text-center" style="margin-top: 40px; margin-bottom: 40px">
+      <h1>Statistiche</h1>
+    </div>
+    <div class="col-1"></div>
+    <div class="col-4">
+      <h2>Campus</h2>
+      <Histogram :data="this.campusStatistics" v-if="this.statisticsComputed"></Histogram>
+    </div>
 
-  <div class="d-flex justify-content-center">
-    <h1>Soddisfazione Complessiva</h1>
+    <div class="col-2"></div>
+    <div class="col-4">
+      <h2>Didattica</h2>
+      <Histogram :data="this.teachingStatistics" v-if="this.statisticsComputed"></Histogram>
+    </div>
   </div>
-  <div class="d-flex justify-content-center">
-    <PieChart :series="this.satisfaction" v-if="this.statisticsComputed"></PieChart>
-  </div>
+  <div class="row" style="margin-top: 60px">
+    <div class="col-1"></div>
+    <div class="col-4">
+      <h2>Città</h2>
+      <BarChart :data="this.cityStatistics" v-if="this.statisticsComputed"></BarChart>
+    </div>
 
-  <div class="d-flex justify-content-start">
-    <h1>Città</h1>
+    <div class="col-2"></div>
+    <div class="col-4">
+      <h2>Soddisfazione Complessiva</h2>
+      <PieChart :series="this.satisfaction" v-if="this.statisticsComputed"></PieChart>
+    </div>
   </div>
-  <div class="d-flex justify-content-start">
-    <BarChart :data="this.cityStatistics" v-if="this.statisticsComputed"></BarChart>
-  </div>
-
-  <div class="d-flex justify-content-center">
-    <h1>Didattica</h1>
-  </div>
-  <div class="d-flex justify-content-center">
-    <Histogram :data="this.teachingStatistics" v-if="this.statisticsComputed"></Histogram>
-  </div>
-
-
-
 </template>
 
 <script>
