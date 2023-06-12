@@ -33,7 +33,6 @@ export default defineComponent({
     },
     getLoggedUser(){
       axios.get('http://localhost:3000/userdetail'+ sessionStorage.getItem("mail")).then(response =>{
-        console.log(response.data);
         this.loggedUser = response.data;
       }).catch(err => {
         console.log(err);
@@ -41,13 +40,13 @@ export default defineComponent({
     },
     filterClicked(filter){
       if(filter === "half") {
-        this.halfFilter = true;
+        this.halfFilter = !this.halfFilter;
         this.fullFilter = false;
       } else if(filter === "full"){
-        this.fullFilter = true;
+        this.fullFilter = !this.fullFilter;
         this.halfFilter = false;
       }else if(filter === "study"){
-        this.studyFilter = true;
+        this.studyFilter = !this.studyFilter;
       }
     },
     checkUniversity(university){
@@ -57,7 +56,6 @@ export default defineComponent({
       if(this.fullFilter && university.offer.period !== "12"){
         return false;
       }
-      console.log(university.offer.field)
       if(this.studyFilter && this.loggedUser.course !== university.offer.field){
         return false;
       }
