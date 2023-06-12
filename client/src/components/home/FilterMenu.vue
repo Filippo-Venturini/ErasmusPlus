@@ -29,7 +29,7 @@ import {defineComponent} from "vue";
 
 export default defineComponent({
   name: "FilterMenu",
-  emits: ["toMap", "toList"],
+  emits: ["toMap", "toList", "filterClicked"],
   data(){
     return{
       savedClicked: false,
@@ -50,6 +50,7 @@ export default defineComponent({
     },
     onStudyClicked(){
       this.studyClicked = !this.studyClicked;
+      this.$emit("filterClicked", "study");
     },
     onHalfClicked(){
       this.halfClicked = !this.halfClicked;
