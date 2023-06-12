@@ -51,6 +51,7 @@
       <button v-if="checkIsApplied() === true" class="btn btn-success" disabled>Candidato</button>
       <button v-else-if="this.user.role === 'Studente'"  data-bs-toggle="modal" data-bs-target="#applicationModal" class="btn btn-outline-success">Candidati ora!</button>
       <button v-else-if="this.user.role === 'Admin'" data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-outline-danger">Elimina</button>
+      <button v-if="this.user.role === 'Admin'"  class="btn btn-outline-warning" style="margin-left: 50px" @click="modifyOffer()">Modifica</button>
     </div>
     <div class="col-8"></div>
     <div class="col-1 text-center" style="margin-top: -50px">
@@ -327,6 +328,9 @@ export default defineComponent({
       document.getElementById("heart").style.visibility = "hidden";
       document.getElementById("heart-fill").style.visibility = "visible";
 
+    },
+    modifyOffer(){
+      window.location.replace("/updateOffer/" + this.id);
     }
   },
   mounted() {

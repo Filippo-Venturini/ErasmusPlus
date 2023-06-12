@@ -34,10 +34,9 @@
                 <div class="menuItems mt-3" onclick="location.href = '/login';" @click="this.logout()">Logout</div>
               </div>
               <div v-else-if="role === 'Admin'">
-                <div class="menuItems mt-3" onclick="location.href = '/';">Tutte le offerte</div>
-                <div class="menuItems mt-3" onclick="location.href = '/userdetail';">Profilo</div>
                 <div class="menuItems mt-3" onclick="location.href = '/addoffer';">Aggiungi nuova offerta</div>
-                <div class="menuItems mt-3" onclick="location.href = '/applications';">Candidature</div>
+                <div class="menuItems mt-3" onclick="location.href = '/applications';">Gestione candidature</div>
+                <div class="menuItems mt-3" onclick="location.href = '/';">Tutte le offerte</div>
                 <div class="menuItems mt-3" onclick="location.href = '/login';" @click="this.logout()">Logout</div>
               </div>
             </div>

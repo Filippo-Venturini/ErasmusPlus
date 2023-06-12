@@ -6,6 +6,7 @@ import ApplicationsPage from "@/pages/ApplicationsPage.vue";
 import AddOfferPage from "@/pages/AddOfferPage.vue";
 import SurveyPage from "@/pages/SurveyPage.vue";
 import LoginPage from "@/pages/LoginPage.vue";
+import UpdateOfferPage from "@/pages/UpdateOfferPage.vue";
 
 const routes = [
     { path: '/', name: 'Home', component: HomePage },
@@ -14,7 +15,8 @@ const routes = [
     { path: '/applications', name: 'ApplicationsPage', component: ApplicationsPage },
     { path: '/addoffer', name: 'AddOfferPage', component: AddOfferPage },
     { path: '/survey', name: 'SurveyPage', component: SurveyPage },
-    { path: '/login', name: 'LoginPage', component: LoginPage }
+    { path: '/login', name: 'LoginPage', component: LoginPage },
+    { path: '/updateOffer/:id', name: 'UpdateOffer', component: UpdateOfferPage}
 
 ]
 
