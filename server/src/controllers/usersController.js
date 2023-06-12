@@ -62,8 +62,26 @@ exports.add_favourites = async (req, res) => {
     }
 
     await usersModel.updateOne(
-        {mail: req.body.mail},
-        { $addToSet: { favourites: req.body.universityName}}
+        {mail: req.params.mail},
+        { $addToSet: { favourites: req.body}}
     );
-
 };
+
+exports.remove_favourite = async (req,res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header('Access-Control-Allow-Methods', 'GET,PUT, POST,DELETE');
+    res.header("Access-Control-Allow-Headers", "Content-type,Accept,X-Custom-Header");
+
+    if (req.method === "OPTIONS") {
+        res.header('Access-Control-Allow-Origin', req.headers.origin);
+    } else {
+        res.header('Access-Control-Allow-Origin', '*');
+    }
+
+    console.log(req.params.mail);
+    console.log(req.body.universityName);
+    await usersModel.deleteOne(
+         {mail: req.params.mail},
+            {$pull: {favourites: req.body.universityName}}
+         );
+}

@@ -10,7 +10,10 @@ router.route('/:mail')
     .get((req, res) => usersController.get_new_notification(req, res))
     .put((req, res) => usersController.read_notification(req, res));
 
-router.route('/addFavourite')
+router.route('/addFavourite:mail')
     .post((req, res) => usersController.add_favourites(req, res));
+
+router.route('/removeFavourite')
+    .put((req, res) => usersController.remove_favourite(req, res));
 
 module.exports = router;
