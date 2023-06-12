@@ -84,7 +84,6 @@
       <CircleIcon class="circleIconApplicationsAvailable" :icon="iconApplicationsAvailable" :styleIcon="styleCSSIcon"></CircleIcon>
     </div>
     <div class="col-md-1"></div>
-
   </div>
 
   <div class="row" style="margin-top: 300px">
@@ -108,32 +107,24 @@
   </div>
 
   <div class="row">
-    <div class="col-12 text-center" style="margin-top: 40px; margin-bottom: 40px">
+    <div class="col-12 text-center mt-5 mb-5 pt-5 pb-5">
       <h1>Statistiche</h1>
     </div>
     <div class="col-1"></div>
-    <div class="col-4">
-      <h2>Campus</h2>
-      <Histogram :data="this.campusStatistics" color="#798897" v-if="this.statisticsComputed"></Histogram>
+    <div class="col-4 me-4">
+      <PieChart :series="this.satisfaction" title="Soddisfazione Complessiva" width="500" v-if="this.statisticsComputed"></PieChart>
     </div>
-
-    <div class="col-2"></div>
-    <div class="col-4">
-      <h2>Didattica</h2>
-      <Histogram :data="this.teachingStatistics" color="#BB2E29" v-if="this.statisticsComputed"></Histogram>
+    <div class="col-6 ms-3">
+      <Histogram :data="this.teachingStatistics" color="#BB2E29" title="Didattica" width="700" v-if="this.statisticsComputed"></Histogram>
     </div>
   </div>
-  <div class="row" style="margin-top: 60px">
+  <div class="row mt-5 mb-5 pb-5">
     <div class="col-1"></div>
-    <div class="col-4">
-      <h2>Città</h2>
-      <BarChart :data="this.cityStatistics" v-if="this.statisticsComputed"></BarChart>
+    <div class="col-6 me-4">
+      <BarChart :data="this.cityStatistics" title="Città" width="700" v-if="this.statisticsComputed"></BarChart>
     </div>
-
-    <div class="col-2"></div>
-    <div class="col-4">
-      <h2>Soddisfazione Complessiva</h2>
-      <PieChart :series="this.satisfaction" v-if="this.statisticsComputed"></PieChart>
+    <div class="col-4 ms-3">
+      <Histogram :data="this.campusStatistics" color="#798897" title="Campus" v-if="this.statisticsComputed"></Histogram>
     </div>
   </div>
 </template>

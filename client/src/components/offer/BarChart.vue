@@ -1,6 +1,11 @@
 <template>
-  <div id="chart">
-    <apexchart type="bar" height="350" width="500" :options="chartOptions" :series="series"></apexchart>
+  <div id="chart" class="row chart">
+    <div class="row">
+      <h4>{{this.title}}</h4>
+    </div>
+    <div class="row">
+      <apexchart type="bar" height="287" :width="this.width" :options="chartOptions" :series="series"></apexchart>
+    </div>
   </div>
 </template>
 
@@ -8,7 +13,7 @@
 import {defineComponent} from "vue";
 export default defineComponent({
   name: "BarChart",
-  props: ['data'],
+  props: ['data', 'title', 'width'],
   data(){
     return{
       series: [{
@@ -43,5 +48,7 @@ export default defineComponent({
 </script>
 
 <style scoped>
-
+.chart{
+  box-shadow: 0 5px 10px rgba(0,0,0,.2);
+}
 </style>
