@@ -58,7 +58,7 @@ exports.add_review = async (req, res) => {
 
 };
 
-exports.update_university_offer = async (req, res) => {
+exports.update_offer_accepted = async (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header('Access-Control-Allow-Methods', 'GET,PUT, POST,DELETE');
     res.header("Access-Control-Allow-Headers", "Content-type,Accept,X-Custom-Header");

@@ -23,6 +23,7 @@ exports.modify_application_state = async (req, res) => {
         res.header('Access-Control-Allow-Origin', '*');
     }
 
+    console.log(req.body)
     if(req.body.state === "Rifiutata"){
         await applicationsModel.findOneAndUpdate({_id: req.params.id}, {state: "Rifiutata"});
     }else if (req.body.state === "Accettata"){

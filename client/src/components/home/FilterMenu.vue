@@ -57,7 +57,6 @@ export default defineComponent({
       axios.get('http://localhost:3000/userdetail'+ sessionStorage.getItem("mail")).then(response =>{
         this.loggedUser = response.data;
         this.userAuthenticated = true;
-        console.log("CIAO")
       }).catch(err => {
         console.log(err);
       })

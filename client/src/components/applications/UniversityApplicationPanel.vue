@@ -1,10 +1,15 @@
 <template>
-  <div class="row d-flex justify-content-center">
+  <div class="row d-flex justify-content-center mt-5">
     <div class="col-5">
       <h2>{{ university.name }}</h2>
       <div class="m-lg-3">
         <p>Posti disponibili: {{university.offer.places}}</p>
       </div>
+    </div>
+  </div>
+  <div v-if="!this.applicationPresent" class="d-flex justify-content-center">
+    <div class="no-applications align-items-center p-3">
+      <p>Non sono presenti candidature per questa università</p>
     </div>
   </div>
   <div class="row d-flex justify-content-center">
@@ -86,7 +91,7 @@ export default defineComponent({
         accepted: this.accepted.toString(),
         field: this.university.offer.field,
       }
-      const res2 = axios.post('http://localhost:3000/updateUniversityOffer'+this.university._id, newOffer,{
+      const res2 = axios.post('http://localhost:3000/updateOfferAccepted'+this.university._id, newOffer,{
         headers: {
           // Overwrite Axios's automatically set Content-Type
           'Content-Type': 'application/json'
@@ -141,5 +146,11 @@ export default defineComponent({
 
 .reject-icon{
   color: #ffffff;
+}
+
+.no-applications{
+  background:#e3f7fc  no-repeat 10px 50%;
+  border:1px solid #8ed9f6;
+  border-radius:10px;
 }
 </style>
