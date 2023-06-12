@@ -56,14 +56,20 @@
   </div>
 
   <div class="row d-flex justify-content-center">
+    <div class="mb-3 col-5">
+      <label for="formFile" class="form-label">Immagine per la miniatura:</label>
+      <input class="form-control"  type="file" id="universityCardFile" @change="onCardImageChange">
+    </div>
+  </div>
+
+  <div class="row d-flex justify-content-center">
     <div class="mb-3 col-5 form-group">
       <label for="exampleFormControlSelect1">Ambito di studi:</label>
       <select class="form-control" v-model="field" id="exampleFormControlSelect1">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
+        <option value="Ingegneria Informatica">Ingegneria Informatica</option>
+        <option value="Artificial Intelligence">Artificial Intelligence</option>
+        <option value="Data Science">Data Science</option>
+        <option value="Sistemi Embedded">Sistemi Embedded</option>
       </select>
     </div>
   </div>
@@ -74,7 +80,41 @@
       <input class="form-control"  type="number"  id="placesValue" v-model="places">
     </div>
   </div>
-  <button class="mb-5" @click="this.addOffer()">Aggiungi</button>
+  <div class="row">
+    <button class="mb-5 btn btn-success btnAdd" data-bs-toggle="modal" data-bs-target="#addOfferModal">Aggiungi</button>
+  </div>
+  <div class="modal fade" id="addOfferModal" tabindex="-1" aria-labelledby="myModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Conferma aggiunta offerta</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Confermi l'aggiunta dell'università?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" @click="this.addOffer()" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#offerAddedModal" >Conferma</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="offerAddedModal" tabindex="-1" aria-labelledby="myModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Conferma aggiunta offerta</h1>
+        </div>
+        <div class="modal-body">
+          L'offerta è stata aggiunta correttamente
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-bs-dismiss="modal" @click="this.redirect()">Ok</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </template>
 
 <script>
@@ -105,6 +145,18 @@ export default defineComponent({
     }
   },
   methods:{
+    onCardImageChange(e){
+      if (! e.target.files.length) return;
+
+      let file = e.target.files[0];
+
+      let reader = new FileReader();
+
+      reader.readAsDataURL(file);
+
+      const myArray = document.getElementById("universityCardFile").value.split("\\");
+      this.cardImg = "./../../assets/img/universityImgCards/" + myArray[2];
+    },
     onWallpaperChange(e){
       if (! e.target.files.length) return;
 
@@ -125,11 +177,9 @@ export default defineComponent({
       if (! e.target.files.length) return;
 
       let file = e.target.files[0];
-
       let reader = new FileReader();
 
       reader.readAsDataURL(file);
-
       reader.onload = e => {
         this.iconImage = e.target.result;
       };
@@ -147,20 +197,23 @@ export default defineComponent({
         offer:{
           period:this.period,
           places:document.getElementById("placesValue").value,
-          field:this.field
+          field:this.field,
         },
         logo: this.logo,
         wallpaper:this.wallpaper,
         cardImg:this.cardImg,
         plot:this.plot
       };
+      console.log(json);
       axios.post('http://localhost:3000/addoffer', json, {
         headers: {
           // Overwrite Axios's automatically set Content-Type
           'Content-Type': 'application/json'
         }
       });
-
+    },
+    redirect() {
+      //window.location.replace("/");}
     }
   }
 });
@@ -178,5 +231,10 @@ export default defineComponent({
   margin-top: -100px;
   margin-left: 100px;
   border: 1px solid #000000;
+}
+.btnAdd{
+  display: block;
+  margin: 50px auto;
+  width: 100px;
 }
 </style>

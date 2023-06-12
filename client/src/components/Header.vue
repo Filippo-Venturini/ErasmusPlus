@@ -27,10 +27,18 @@
             </div>
 
             <div class="boxMenu"  id="boxMenuId" v-if="boxNotificationsIsOpen === false">
-              <div class="menuItems mt-3" onclick="location.href = '/';">Tutte le offerte</div>
-              <div class="menuItems mt-3" onclick="location.href = '/userdetail';">Profilo</div>
-              <div class="menuItems mt-3" onclick="location.href = '/';">Preferiti</div>
-              <div class="menuItems mt-3" onclick="location.href = '/login';" @click="this.logout()">Logout</div>
+              <div v-if="role === 'Studente'">
+                <div class="menuItems mt-3" onclick="location.href = '/';">Tutte le offerte</div>
+                <div class="menuItems mt-3" onclick="location.href = '/userdetail';">Profilo</div>
+                <div class="menuItems mt-3" onclick="location.href = '/';">Preferiti</div>
+                <div class="menuItems mt-3" onclick="location.href = '/login';" @click="this.logout()">Logout</div>
+              </div>
+              <div v-else-if="role === 'Admin'">
+                <div class="menuItems mt-3" onclick="location.href = '/';">Tutte le offerte</div>
+                <div class="menuItems mt-3" onclick="location.href = '/userdetail';">Profilo</div>
+                <div class="menuItems mt-3" onclick="location.href = '/addoffer';">Aggiungi nuova offerta</div>
+                <div class="menuItems mt-3" onclick="location.href = '/login';" @click="this.logout()">Logout</div>
+              </div>
             </div>
           </div>
         </div>
@@ -52,6 +60,7 @@ export default defineComponent({
       newNotifications: true,
       boxMenuIsOpen: false,
       boxNotificationsIsOpen: false,
+      role: "",
     }
   },
   methods:{
@@ -143,6 +152,7 @@ export default defineComponent({
     if(sessionStorage.getItem('mail') === null){
       //window.location.replace("/login");
     }
+    this.role = sessionStorage.getItem('role');
   }
 });
 </script>
