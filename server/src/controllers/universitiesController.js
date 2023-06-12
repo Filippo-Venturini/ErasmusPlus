@@ -1,5 +1,6 @@
 const universitiesModel = require('../models/universitiesModel');
 const index = require('../../src/index');
+const usersModel = require("../models/usersModel");
 
 exports.all_universities = async(req, res) => {
     try{
@@ -40,6 +41,30 @@ exports.add_offer = async (req, res)=> {
     }
 };
 
+exports.update_offer = async (req, res)=> {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header('Access-Control-Allow-Methods', 'GET,PUT, POST,DELETE');
+    res.header("Access-Control-Allow-Headers", "Content-type,Accept,X-Custom-Header");
+    if (req.method === "OPTIONS") {
+        res.header('Access-Control-Allow-Origin', req.headers.origin);
+    } else {
+        res.header('Access-Control-Allow-Origin', '*');
+    }
+    try{
+        res.json(await universitiesModel.findOneAndReplace({_id: req.params.id}, req.body, {returnNewDocument: false}).then(replacedDocument => {
+            if(replacedDocument) {
+                console.log(`Successfully replaced the following document: ${replacedDocument}.`)
+            } else {
+                console.log("No document matches the provided query.")
+            }
+            return replacedDocument
+        }).catch(err => console.error(`Failed to find and replace document: ${err}`)));
+
+    }catch (e) {
+        res.json(e);
+    }
+}
+
 exports.add_review = async (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header('Access-Control-Allow-Methods', 'GET,PUT, POST,DELETE');
@@ -58,7 +83,7 @@ exports.add_review = async (req, res) => {
 
 };
 
-exports.update_university_offer = async (req, res) => {
+exports.update_offer_accepted = async (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header('Access-Control-Allow-Methods', 'GET,PUT, POST,DELETE');
     res.header("Access-Control-Allow-Headers", "Content-type,Accept,X-Custom-Header");

@@ -5,25 +5,25 @@
 
   <div class="row d-flex justify-content-center">
     <div class="mb-3 col-5">
-      <input class="form-control" type="text" v-model="nameUniversity" placeholder="Nome dell'università">
+      <input class="form-control" type="text" v-model="nameUniversity" :placeholder="nameUniversity">
     </div>
   </div>
 
   <div class="row d-flex justify-content-center">
     <div class="mb-3 col-5">
-      <input class="form-control" type="text" v-model="city" placeholder="Città">
+      <input class="form-control" type="text" v-model="city" :placeholder="city">
     </div>
   </div>
 
   <div class="row d-flex justify-content-center">
     <div class="mb-3 col-5">
-      <input class="form-control" type="text" v-model="country" placeholder="Stato">
+      <input class="form-control" type="text" v-model="country" :placeholder="country">
     </div>
   </div>
 
   <div class="row d-flex justify-content-center">
     <div class="mb-3 col-5">
-      <textarea class="form-control" v-model="plot" id="exampleFormControlTextarea1" rows="3" placeholder="Descrizione"></textarea>
+      <textarea class="form-control" v-model="plot" id="exampleFormControlTextarea1" rows="3" :placeholder="plot"></textarea>
     </div>
   </div>
 
@@ -87,14 +87,14 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Conferma aggiunta offerta</h1>
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Conferma modifica offerta</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          Confermi l'aggiunta dell'università?
+          Confermi la modifica dell'offerta?
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-success" @click="this.addOffer()" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#offerAddedModal" >Conferma</button>
+          <button type="button" class="btn btn-success" @click="this.modifyOffer()" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#offerAddedModal" >Conferma</button>
         </div>
       </div>
     </div>
@@ -103,10 +103,10 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Conferma aggiunta offerta</h1>
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Conferma modifica offerta</h1>
         </div>
         <div class="modal-body">
-          L'offerta è stata aggiunta correttamente
+          L'offerta è stata modificata correttamente
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-success" data-bs-dismiss="modal" @click="this.redirect()">Ok</button>
@@ -123,7 +123,7 @@ import Header from "@/components/Header.vue";
 import axios from "axios";
 
 export default defineComponent({
-  name: "AddOfferPage",
+  name: "UpdateOfferPage",
   components: {Header},
   data(){
     return{
@@ -141,7 +141,7 @@ export default defineComponent({
       wallpaper: "",
       cardImg: "",
       plot: "",
-
+      originalOffer: [],
     }
   },
   methods:{
@@ -188,7 +188,7 @@ export default defineComponent({
       this.logo = "./../../assets/img/universityLogos/" + myArray[2];
 
     },
-    addOffer(){
+    modifyOffer(){
       const json = {name:this.nameUniversity,
         city:this.city,
         country:this.country,
@@ -204,7 +204,7 @@ export default defineComponent({
         cardImg:this.cardImg,
         plot:this.plot
       };
-      axios.post('http://localhost:3000/addoffer', json, {
+      axios.put('http://localhost:3000/updateOffer' + this.id, json, {
         headers: {
           // Overwrite Axios's automatically set Content-Type
           'Content-Type': 'application/json'
@@ -212,8 +212,30 @@ export default defineComponent({
       });
     },
     redirect() {
+      window.location.replace("/universitydetail/" + this.id);
+    },
+    getOriginalOffer(id){
+      axios.get('http://localhost:3000/universitydetail' + id).then(response => {
+            this.originalOffer = response.data;
+            this.nameUniversity = this.originalOffer.name;
+            this.country = this.originalOffer.country;
+            this.places = this.originalOffer.offer.places;
+            this.plot = this.originalOffer.plot;
+            this.city = this.originalOffer.city;
+
+          }
+      ).catch(err => {
+        console.log(err);
+      })
+    }
+  },
+  mounted() {
+    this.id = this.$route.params.id;
+    this.getOriginalOffer(this.id);
+    if(sessionStorage.getItem('role') !== "Admin"){
       window.location.replace("/");
     }
+
   }
 });
 </script>

@@ -51,6 +51,7 @@
       <button v-if="checkIsApplied() === true" class="btn btn-success" disabled>Candidato</button>
       <button v-else-if="this.user.role === 'Studente'"  data-bs-toggle="modal" data-bs-target="#applicationModal" class="btn btn-outline-success">Candidati ora!</button>
       <button v-else-if="this.user.role === 'Admin'" data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-outline-danger">Elimina</button>
+      <button v-if="this.user.role === 'Admin'"  class="btn btn-outline-warning" style="margin-left: 50px" @click="modifyOffer()">Modifica</button>
     </div>
     <div class="col-8"></div>
     <div class="col-1 text-center" style="margin-top: -50px">
@@ -113,13 +114,13 @@
     <div class="col-1"></div>
     <div class="col-4">
       <h2>Campus</h2>
-      <Histogram :data="this.campusStatistics" v-if="this.statisticsComputed"></Histogram>
+      <Histogram :data="this.campusStatistics" color="#798897" v-if="this.statisticsComputed"></Histogram>
     </div>
 
     <div class="col-2"></div>
     <div class="col-4">
       <h2>Didattica</h2>
-      <Histogram :data="this.teachingStatistics" v-if="this.statisticsComputed"></Histogram>
+      <Histogram :data="this.teachingStatistics" color="#BB2E29" v-if="this.statisticsComputed"></Histogram>
     </div>
   </div>
   <div class="row" style="margin-top: 60px">
@@ -327,7 +328,7 @@ export default defineComponent({
       document.getElementById("heart-fill").style.visibility = "visible";
 
     },
-    removeFavourite(){
+    removeFavourite() {
       const json = {
         mail: sessionStorage.getItem("mail"),
         universityName: this.offerUniversity.name
@@ -341,6 +342,9 @@ export default defineComponent({
       });
       document.getElementById("heart").style.visibility = "visible";
       document.getElementById("heart-fill").style.visibility = "hidden";
+    },
+    modifyOffer(){
+      window.location.replace("/updateOffer/" + this.id);
     }
   },
   mounted() {

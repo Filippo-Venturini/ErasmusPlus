@@ -9,7 +9,7 @@
 import {defineComponent} from "vue";
 export default defineComponent({
   name: "Histogram",
-  props: ["data"],
+  props: ["data", "color"],
   data(){
     return{
       options: {
@@ -22,7 +22,7 @@ export default defineComponent({
         yaxis: {
           max: 5
         },
-        colors: ['#00FF00']
+        colors: [this.color]
       },
       series: [{
         data: this.data

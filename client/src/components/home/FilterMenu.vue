@@ -2,16 +2,16 @@
 <div class="filter-menu row">
   <template v-if="this.userAuthenticated && this.loggedUser.role !== 'Admin'">
     <div class="col-1 d-flex justify-content-center align-items-center">
-      <i class="bi bi-bookmark-star filter-icon" :class="{clicked: savedClicked}" @click="this.onSavedClicked()"></i>
+      <i title="Preferiti" class="bi bi-bookmark-star filter-icon" :class="{clicked: savedClicked}" @click="this.onSavedClicked()"></i>
     </div>
     <div class="col-1 d-flex justify-content-center align-items-center">
-      <i class="bi bi-book filter-icon" :class="{clicked: studyClicked}" @click="this.onStudyClicked()"></i>
+      <i title="Il mio ambito di studi" class="bi bi-book filter-icon" :class="{clicked: studyClicked}" @click="this.onStudyClicked()"></i>
     </div>
     <div class="col-1 d-flex justify-content-center align-items-center">
-      <i class="bi bi-circle-half filter-icon" :class="{clicked: halfClicked}" @click="this.onHalfClicked()"></i>
+      <i title="6 mesi" class="bi bi-circle-half filter-icon" :class="{clicked: halfClicked}" @click="this.onHalfClicked()"></i>
     </div>
     <div class="col-1 d-flex justify-content-center align-items-center">
-      <i class="bi bi-circle-fill filter-icon" :class="{clicked: fullClicked}" @click="this.onFullClicked()"></i>
+      <i title="12 mesi" class="bi bi-circle-fill filter-icon" :class="{clicked: fullClicked}" @click="this.onFullClicked()"></i>
     </div>
   </template>
   <template v-if="this.userAuthenticated && this.loggedUser.role !== 'Studente'">
@@ -21,10 +21,10 @@
   <div class="col-6">
   </div>
   <div class="col-1 d-flex justify-content-end align-items-center">
-    <i class="bi bi-globe filter-icon" @click="this.switchToMap()"></i>
+    <i title="Mappa" class="bi bi-globe filter-icon" @click="this.switchToMap()"></i>
   </div>
   <div class="col-1 d-flex justify-content-start align-items-center">
-    <i class="bi bi-card-list filter-icon" @click="this.switchToList()"></i>
+    <i title="Lista" class="bi bi-card-list filter-icon" @click="this.switchToList()"></i>
   </div>
 </div>
 </template>
@@ -57,7 +57,6 @@ export default defineComponent({
       axios.get('http://localhost:3000/userdetail'+ sessionStorage.getItem("mail")).then(response =>{
         this.loggedUser = response.data;
         this.userAuthenticated = true;
-        console.log("CIAO")
       }).catch(err => {
         console.log(err);
       })

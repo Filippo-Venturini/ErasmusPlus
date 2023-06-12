@@ -1,6 +1,6 @@
 <template>
 <Header></Header>
-  <div class="d-flex justify-content-center fw-bold">
+  <div class="d-flex justify-content-center fw-bold mt-5">
     <h1>Gestione candidature</h1>
   </div>
   <UniversityApplicationPanel v-for="university in universities" :university="university" :applications="applications" :key="applications.id"></UniversityApplicationPanel>
