@@ -52,6 +52,12 @@
       <button v-else-if="this.user.role === 'Studente'"  data-bs-toggle="modal" data-bs-target="#applicationModal" class="btn btn-outline-success">Candidati ora!</button>
       <button v-else-if="this.user.role === 'Admin'" data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-outline-danger">Elimina</button>
     </div>
+    <div class="col-8"></div>
+    <div class="col-1 text-center" style="margin-top: -50px">
+      <i id="heart" class="bi bi-heart" style="font-size: 2rem;color: #D91A1A; visibility: visible;  position:absolute;" @click="addToFavourites()"></i>
+      <i id="heart-fill" class="bi bi-heart-fill" style="font-size: 2rem;color: #D91A1A; visibility: hidden;  position:absolute;"></i>
+    </div>
+    <div class="col-3"></div>
     <div class="col-md-9 ">
       <div class="title">{{this.offerUniversity.name}}</div>
     </div>
@@ -305,6 +311,22 @@ export default defineComponent({
         }
       }
       return false;
+    },
+    addToFavourites(){
+      const json = {
+        mail: sessionStorage.getItem("mail"),
+        universityName: this.offerUniversity.name
+      };
+
+      axios.post('http://localhost:3000/addFavourite', json,{
+        headers: {
+          // Overwrite Axios's automatically set Content-Type
+          'Content-Type': 'application/json'
+        }
+      });
+      document.getElementById("heart").style.visibility = "hidden";
+      document.getElementById("heart-fill").style.visibility = "visible";
+
     }
   },
   mounted() {

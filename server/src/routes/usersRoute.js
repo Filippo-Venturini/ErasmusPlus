@@ -10,5 +10,7 @@ router.route('/:mail')
     .get((req, res) => usersController.get_new_notification(req, res))
     .put((req, res) => usersController.read_notification(req, res));
 
+router.route('/addFavourite')
+    .post((req, res) => usersController.add_favourites(req, res));
 
 module.exports = router;

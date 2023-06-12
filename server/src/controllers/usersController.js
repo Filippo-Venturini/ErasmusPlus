@@ -1,4 +1,5 @@
 const usersModel = require('../models/usersModel');
+const universitiesModel = require("../models/universitiesModel");
 
 exports.all_users = async(req, res) => {
     try{
@@ -48,3 +49,21 @@ exports.read_notification = async(req, res) => {
         res.json(e);
     }
 }
+
+exports.add_favourites = async (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header('Access-Control-Allow-Methods', 'GET,PUT, POST,DELETE');
+    res.header("Access-Control-Allow-Headers", "Content-type,Accept,X-Custom-Header");
+
+    if (req.method === "OPTIONS") {
+        res.header('Access-Control-Allow-Origin', req.headers.origin);
+    } else {
+        res.header('Access-Control-Allow-Origin', '*');
+    }
+
+    await usersModel.updateOne(
+        {mail: req.body.mail},
+        { $addToSet: { favourites: req.body.universityName}}
+    );
+
+};

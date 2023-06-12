@@ -11,6 +11,7 @@ const userSchema = new mongoose.Schema({
     course: String,
     immatriculationYear: String,
     password: String,
+    favourites: Array,
     notification: [{
         idNotification: String,
         text: String,
