@@ -55,8 +55,8 @@
     </div>
     <div class="col-8"></div>
     <div class="col-1 text-center" style="margin-top: -50px">
-      <i id="heart" class="bi bi-heart" style="font-size: 2rem;color: #D91A1A; visibility: visible;  position:absolute;" @click="addToFavourites()"></i>
-      <i id="heart-fill" class="bi bi-heart-fill" style="font-size: 2rem;color: #D91A1A; visibility: hidden;  position:absolute;" @click="removeFavourite()"></i>
+      <i id="heart" class="bi bi-heart" style="font-size: 2rem;color: #D91A1A; visibility: visible; position: absolute" @click="addToFavourites()"></i>
+      <i id="heart-fill" class="bi bi-heart-fill" style="font-size: 2rem;color: #D91A1A; visibility:hidden; position: absolute" @click="removeFavourite()"></i>
     </div>
     <div class="col-3"></div>
     <div class="col-md-9 ">
@@ -329,17 +329,17 @@ export default defineComponent({
 
     },
     removeFavourite() {
-      const json = {
-        mail: sessionStorage.getItem("mail"),
-        universityName: this.offerUniversity.name
+      try{
+        axios.post('http://localhost:3000/removeFavourite'+sessionStorage.getItem("mail"), this.offerUniversity, {
+          headers: {
+            // Overwrite Axios's automatically set Content-Type
+            'Content-Type': 'application/json'
+          }
+        });
+      } catch (e) {
+        console.log(e)
       }
 
-      axios.put('http://localhost:3000/removeFavourite', json, {
-        headers: {
-          // Overwrite Axios's automatically set Content-Type
-          'Content-Type': 'application/json'
-        }
-      });
       document.getElementById("heart").style.visibility = "visible";
       document.getElementById("heart-fill").style.visibility = "hidden";
     },

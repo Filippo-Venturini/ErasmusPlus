@@ -61,11 +61,16 @@ exports.add_favourites = async (req, res) => {
         res.header('Access-Control-Allow-Origin', '*');
     }
 
-    await usersModel.updateOne(
-        {mail: req.params.mail},
-        { $addToSet: { favourites: req.body}}
-    );
-};
+    try {
+        await usersModel.updateOne(
+            {mail: req.params.mail},
+            { $addToSet: { favourites: req.body}}
+        );
+    } catch (e) {
+        res.json(e);
+    }
+
+}
 
 exports.remove_favourite = async (req,res) => {
     res.header("Access-Control-Allow-Origin", "*");
@@ -77,11 +82,12 @@ exports.remove_favourite = async (req,res) => {
     } else {
         res.header('Access-Control-Allow-Origin', '*');
     }
+    try{
+        await usersModel.updateOne(
+            {mail: req.params.mail},
+            {$pull: {favourites: {universityName: req.body.name}}});
+    } catch (e) {
+        res.json(e);
+    }
 
-    console.log(req.params.mail);
-    console.log(req.body.universityName);
-    await usersModel.deleteOne(
-         {mail: req.params.mail},
-            {$pull: {favourites: req.body.universityName}}
-         );
 }

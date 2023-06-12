@@ -13,7 +13,7 @@ router.route('/:mail')
 router.route('/addFavourite:mail')
     .post((req, res) => usersController.add_favourites(req, res));
 
-router.route('/removeFavourite')
-    .put((req, res) => usersController.remove_favourite(req, res));
+router.route('/removeFavourite:mail')
+    .post((req, res) => usersController.remove_favourite(req, res));
 
 module.exports = router;
