@@ -114,13 +114,13 @@
     <div class="col-1"></div>
     <div class="col-4">
       <h2>Campus</h2>
-      <Histogram :data="this.campusStatistics" v-if="this.statisticsComputed"></Histogram>
+      <Histogram :data="this.campusStatistics" color="#798897" v-if="this.statisticsComputed"></Histogram>
     </div>
 
     <div class="col-2"></div>
     <div class="col-4">
       <h2>Didattica</h2>
-      <Histogram :data="this.teachingStatistics" v-if="this.statisticsComputed"></Histogram>
+      <Histogram :data="this.teachingStatistics" color="#BB2E29" v-if="this.statisticsComputed"></Histogram>
     </div>
   </div>
   <div class="row" style="margin-top: 60px">

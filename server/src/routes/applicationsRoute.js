@@ -12,4 +12,7 @@ router.route('/modifyApplicationState:id')
 router.route('/addApplication')
     .post((req, res) => applicationsController.add_application(req, res))
 
+router.route('/refuseAll')
+    .post((req, res) => applicationsController.refuse_all(req, res))
+
 module.exports = router;

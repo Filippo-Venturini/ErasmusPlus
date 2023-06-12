@@ -4,7 +4,7 @@
     <template v-for="university in this.universities">
       <CustomMarker v-if="this.checkUniversity(university)" :options="{ position: {lat: university.latitude, lng: university.longitude}, anchorPoint: 'BOTTOM_CENTER' }">
         <RouterLink class="nav-link" :to="{path: '/universitydetail/'+university._id}">
-          <div style="text-align: center">
+          <div style="text-align: center" class="marker">
             <!--<img :src="getImageUrl(university.logo)" width="50" height="50" /> -->
             <img :src="getImageUrl(university.cardImg)" width="70" height="70" style="border-radius: 10%; margin-bottom: 20px; object-fit: cover;" />
           </div>
@@ -87,5 +87,8 @@ export default defineComponent({
 .map{
   width: 100%;
   height: 800px;
+}
+.marker:hover{
+  transform: scale(1.20);
 }
 </style>
