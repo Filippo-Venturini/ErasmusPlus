@@ -31,11 +31,11 @@
     <div class="mb-3 col-5">
       <label>Periodo: </label>
       <div class="form-check form-check-inline m-lg-3">
-        <input class="form-check-input" v-model="period" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+        <input class="form-check-input" v-model="period" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="6">
         <label class="form-check-label" for="inlineRadio1">6 mesi</label>
       </div>
       <div class="form-check form-check-inline">
-        <input class="form-check-input" v-model="period" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+        <input class="form-check-input" v-model="period" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="12">
         <label class="form-check-label" for="inlineRadio2">12 mesi</label>
       </div>
     </div>
@@ -204,7 +204,6 @@ export default defineComponent({
         cardImg:this.cardImg,
         plot:this.plot
       };
-      console.log(json);
       axios.post('http://localhost:3000/addoffer', json, {
         headers: {
           // Overwrite Axios's automatically set Content-Type
@@ -213,7 +212,7 @@ export default defineComponent({
       });
     },
     redirect() {
-      //window.location.replace("/");}
+      window.location.replace("/");
     }
   }
 });
