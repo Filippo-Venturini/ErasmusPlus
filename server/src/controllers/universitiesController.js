@@ -69,14 +69,13 @@ exports.update_university_offer = async (req, res) => {
         res.header('Access-Control-Allow-Origin', '*');
     }
 
-    console.log(req.body);
     await universitiesModel.findOneAndUpdate(
         {_id: req.params.id},
         { offer: { period: req.body.period, places: req.body.places, accepted: req.body.accepted, field: req.body.field}}
     );
 
-    const updatedUniversity = await universitiesModel.findById(req.params.id)
-    index.sendUpdatedUniversities(updatedUniversity)
+    const updatedUniversities = await universitiesModel.find()
+    index.sendUpdatedUniversities(updatedUniversities)
 
 };
 

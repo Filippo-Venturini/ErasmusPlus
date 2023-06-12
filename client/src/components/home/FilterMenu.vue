@@ -59,4 +59,8 @@ export default defineComponent({
   color: #717171;
   cursor: pointer;
 }
+
+.filter-icon:hover{
+  color: #000000;
+}
 </style>

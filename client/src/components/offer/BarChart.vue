@@ -34,7 +34,8 @@ export default defineComponent({
         },
         yaxis: {
           max:5
-        }
+        },
+        colors: ['#000000']
       },
     }
   }

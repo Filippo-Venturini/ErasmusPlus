@@ -21,11 +21,12 @@ export default defineComponent({
         },
         yaxis: {
           max: 5
-        }
+        },
+        colors: ['#00FF00']
       },
       series: [{
         data: this.data
-      }]
+      }],
     }
   }
 })

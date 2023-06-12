@@ -33,7 +33,7 @@ export default defineComponent({
     }
   },
   setup() {
-    const center = { lat: 41.3850639, lng: 2.1734035};
+    const center = { lat: 45.3850639, lng: 12.1734035};
 
     return { center };
   },
