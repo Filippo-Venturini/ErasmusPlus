@@ -1,5 +1,7 @@
 <template>
-  <img class="wallpaper-css" :src="getImageUrl()" style="object-fit: cover;">
+  <div class="d-flex justify-content-center">
+    <img class="wallpaper-css mt-5 ms-3 me-3" :src="getImageUrl()">
+  </div>
 </template>
 <script>
 import {defineComponent} from "vue";
@@ -21,6 +23,8 @@ export default defineComponent({
   width: 100%;
   height: 450px;
   object-fit: cover;
+  border-radius: 2em;
+  box-shadow: 0 5px 10px rgba(0,0,0,.2);
 }
 
 </style>

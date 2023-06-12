@@ -21,5 +21,6 @@ export default defineComponent({
 .logo-css{
   width: 200px;
   height: 200px;
+  box-shadow: 0 5px 10px rgba(0,0,0,.2);
 }
 </style>
