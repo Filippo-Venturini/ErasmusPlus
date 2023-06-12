@@ -9,8 +9,8 @@ const universitySchema = new mongoose.Schema({
     longitude: Number,
     offer: {
         period: String,
-        places: String,
-        accepted: String,
+        places: Number,
+        accepted: Number,
         field: String,
     },
     logo: String,

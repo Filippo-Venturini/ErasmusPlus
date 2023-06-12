@@ -23,7 +23,6 @@ exports.modify_application_state = async (req, res) => {
         res.header('Access-Control-Allow-Origin', '*');
     }
 
-    console.log(req.body)
     if(req.body.state === "Rifiutata"){
         await applicationsModel.findOneAndUpdate({_id: req.params.id}, {state: "Rifiutata"});
     }else if (req.body.state === "Accettata"){
@@ -31,9 +30,10 @@ exports.modify_application_state = async (req, res) => {
         await applicationsModel.findOneAndUpdate({_id: req.params.id}, {state: "Accettata"});
     }
 
+    res.sendStatus(200);
+
     const updatedApplications = await applicationsModel.find()
     index.sendUpdatedApplications(updatedApplications);
-
 }
 
 exports.add_application = async (req, res) => {
@@ -48,4 +48,23 @@ exports.add_application = async (req, res) => {
     }catch (e) {
         res.json(e);
     }
+}
+
+exports.refuse_all = async (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header('Access-Control-Allow-Methods', 'GET,PUT, POST,DELETE');
+    res.header("Access-Control-Allow-Headers", "Content-type,Accept,X-Custom-Header");
+
+    if (req.method === "OPTIONS") {
+        res.header('Access-Control-Allow-Origin', req.headers.origin);
+    } else {
+        res.header('Access-Control-Allow-Origin', '*');
+    }
+
+    await applicationsModel.updateMany({university: req.body.university, state:"Attesa"}, {state: "Rifiutata"});
+
+    res.sendStatus(200);
+
+    const updatedApplications = await applicationsModel.find()
+    index.sendUpdatedApplications(updatedApplications);
 }
