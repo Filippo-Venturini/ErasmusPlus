@@ -180,7 +180,7 @@ export default defineComponent({
       satisfaction: [0,0,0,0],
       statisticsComputed: false,
       user: [],
-      isApplied: false
+      isApplied: false,
     }
   },
   methods:{
@@ -192,7 +192,6 @@ export default defineComponent({
         allApplications.forEach(application => {
           if(application.student === (this.user.name+" "+this.user.surname)) {
             this.applications.push(application);
-            console.log(application);
           }
         })
       }).catch(err => {
@@ -263,8 +262,13 @@ export default defineComponent({
     },
     getUser(){
       axios.get('http://localhost:3000/userdetail'+ sessionStorage.getItem("mail")).then(response =>{
-        console.log(response.data);
         this.user = response.data;
+        for(let i=0; i<this.user.favourites.length; i++) {
+          console.log(this.user.favourites[i].universityName == this.offerUniversity.name);
+          if(this.user.favourites[i].universityName == this.offerUniversity.name) {
+            document.getElementById("heart").style.visibility = "hidden";
+            document.getElementById("heart-fill").style.visibility = "visible";          }
+        }
       }).catch(err => {
         console.log(err);
       })
