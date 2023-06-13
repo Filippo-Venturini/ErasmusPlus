@@ -295,14 +295,13 @@ export default defineComponent({
             // Overwrite Axios's automatically set Content-Type
             'Content-Type': 'application/json'
           }
-        });
+        }).then(location.reload());
       }
       this.checkIsApplied();
     },
     checkIsApplied(){
       for(let i=0; i<this.applications.length; i++) {
         if(this.applications[i].university === this.offerUniversity.name) {
-          this.getApplication();
           return true;
         }
       }
