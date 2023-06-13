@@ -52,6 +52,7 @@
       <button v-else-if="this.user.role === 'Studente'"  data-bs-toggle="modal" data-bs-target="#applicationModal" class="btn btn-outline-success">Candidati ora!</button>
       <button v-else-if="this.user.role === 'Admin'" data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-outline-danger">Elimina</button>
       <button v-if="this.user.role === 'Admin'"  class="btn btn-outline-warning" style="margin-left: 50px" @click="modifyOffer()">Modifica</button>
+      <label id="threeOfferLabel" style="color: #D91A1A; visibility: hidden">Sei già candidato a 3 offerte!</label>
     </div>
     <div class="col-8"></div>
     <div class="col-1 text-center" style="margin-top: -50px">
@@ -296,6 +297,8 @@ export default defineComponent({
             'Content-Type': 'application/json'
           }
         }).then(location.reload());
+      } else {
+        document.getElementById("threeOfferLabel").style.visibility = "visible";
       }
       this.checkIsApplied();
     },

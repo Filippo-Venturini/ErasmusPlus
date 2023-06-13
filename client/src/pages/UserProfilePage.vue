@@ -114,7 +114,7 @@ export default defineComponent ({
 <style scoped>
 
 .bgRedPersonalInfo{
-  background-color: #D91A1A;
+  background-color: #BB2E29;
   color: #FFFFFF;
   height: 200px;
 }
