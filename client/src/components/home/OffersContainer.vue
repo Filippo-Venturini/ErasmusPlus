@@ -1,5 +1,5 @@
 <template>
-  <FilterMenu @filterClicked="filterClicked" @toMap="this.switchToMap()"></FilterMenu>
+  <FilterMenu @filterClicked="filterClicked"></FilterMenu>
   <div class="row mt-4 mb-4">
     <template v-for="university in universities">
       <div class ="col-md-4 mt-5 d-flex justify-content-center" v-if="this.checkUniversity(university)">

@@ -1,5 +1,5 @@
 <template>
-<FilterMenu @filterClicked="filterClicked" @toList="this.switchToList"></FilterMenu>
+<FilterMenu @filterClicked="filterClicked"></FilterMenu>
   <GoogleMap api-key="AIzaSyBUPW3FVdvim2r6KkMIvIYCouiBb1dPkvI" class="map" :center="center" :zoom="5">
     <template v-for="university in this.universities">
       <CustomMarker v-if="this.checkUniversity(university)" :options="{ position: {lat: university.latitude, lng: university.longitude}, anchorPoint: 'BOTTOM_CENTER' }">

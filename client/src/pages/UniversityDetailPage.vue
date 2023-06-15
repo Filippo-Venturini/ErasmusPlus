@@ -97,7 +97,7 @@
     </div>
   </div>
 
-  <div class="row mb-5" style="margin-top: 300px">
+  <div class="row mb-5 pb-5" style="margin-top: 300px">
     <div class="col-md-10">
       <InfoPanelSX :title="msgFieldOfStudy" :msgDescribe="msgDescribeFieldOfStudy" :icon="iconFieldOfStudy" :styleIcon="styleCSSIconMessage" :offerUniversity="msgInfoFieldOfStudy" :key="offerUniversity.id" class="bgRedFieldOfStudy"></InfoPanelSX>
     </div>
@@ -108,23 +108,27 @@
   </div>
 
   <div class="row">
-    <div class="col-12 text-center mt-5 mb-5 pt-5 pb-5">
-      <h1>Statistiche</h1>
-    </div>
     <div class="col-1"></div>
-    <div class="col-4 me-4">
+    <div class="col-10 text-center mt-5 mb-5 pt-5">
+      <h1 class="stats-title pt-3 pb-3 me-5 pe-5">Statistiche</h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-4 me-4">
       <PieChart :series="this.satisfaction" title="Soddisfazione Complessiva" width="500" v-if="this.statisticsComputed"></PieChart>
     </div>
-    <div class="col-6 ms-3">
+    <div class="col-md-6 ms-3">
       <Histogram :data="this.teachingStatistics" color="#BB2E29" title="Didattica" width="700" v-if="this.statisticsComputed"></Histogram>
     </div>
   </div>
   <div class="row mt-5 mb-5 pb-5">
-    <div class="col-1"></div>
-    <div class="col-6 me-4">
+    <div class="col-md-1"></div>
+    <div class="col-md-6 me-4">
       <BarChart :data="this.cityStatistics" title="Città" width="700" v-if="this.statisticsComputed"></BarChart>
     </div>
-    <div class="col-4 ms-3">
+    <div class="col-md-4 ms-3">
       <Histogram :data="this.campusStatistics" color="#798897" title="Campus" v-if="this.statisticsComputed"></Histogram>
     </div>
   </div>
@@ -400,5 +404,10 @@ export default defineComponent({
 }
 .circleIconFieldOfStudy{
   float: right;
+}
+.stats-title{
+  background-color: #FFFFFF;
+  box-shadow: 0 5px 10px rgba(0,0,0,.2);
+
 }
 </style>

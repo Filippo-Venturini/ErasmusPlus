@@ -14,18 +14,6 @@
       <i title="12 mesi" class="bi bi-circle-fill filter-icon" :class="{clicked: fullClicked}" @click="this.onFullClicked()"></i>
     </div>
   </template>
-  <template v-if="this.userAuthenticated && this.loggedUser.role !== 'Studente'">
-    <div class="col-4">
-    </div>
-  </template>
-  <div class="col-6">
-  </div>
-  <div class="col-1 d-flex justify-content-end align-items-center">
-    <i title="Mappa" class="bi bi-globe filter-icon" @click="this.switchToMap()"></i>
-  </div>
-  <div class="col-1 d-flex justify-content-start align-items-center">
-    <i title="Lista" class="bi bi-card-list filter-icon" @click="this.switchToList()"></i>
-  </div>
 </div>
 </template>
 
@@ -35,7 +23,7 @@ import axios from "axios";
 
 export default defineComponent({
   name: "FilterMenu",
-  emits: ["toMap", "toList", "filterClicked"],
+  emits: ["filterClicked"],
   data(){
     return{
       savedClicked: false,
@@ -47,12 +35,6 @@ export default defineComponent({
     }
   },
   methods:{
-    switchToMap(){
-      this.$emit('toMap', true);
-    },
-    switchToList(){
-      this.$emit('toList', false);
-    },
     getLoggedUser(){
       axios.get('http://localhost:3000/userdetail'+ sessionStorage.getItem("mail")).then(response =>{
         this.loggedUser = response.data;

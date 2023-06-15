@@ -1,7 +1,7 @@
-{"university":"Universitat Politecnica de Catalunya", "city":"Barcellona", "country":"Spagna", "student": "Alberto Di Girolamo", "id_student": "0347120087", "date":"16/05/2023", "state": "Attesa"}
-{"university":"Universitat Politecnica de Catalunya", "city":"Barcellona", "country":"Spagna", "student": "Pietro Lelli", "id_student": "0003170987", "date":"16/03/2023", "state": "Attesa"}
-{"university":"Universitat Politecnica de Catalunya", "city":"Barcellona", "country":"Spagna", "student": "Martin Marcolini", "id_student": "0006753010", "date":"11/02/2023", "state": "Attesa"}
-{"university":"Universitat Politecnica de Catalunya", "city":"Barcellona", "country":"Spagna", "student": "Nicolo Malucelli", "id_student": "0001237079", "date":"11/05/2023", "state": "Attesa"}
+{"university":"UPC Barcelona", "city":"Barcellona", "country":"Spagna", "student": "Alberto Di Girolamo", "id_student": "0347120087", "date":"16/05/2023", "state": "Attesa"}
+{"university":"UPC Barcelona", "city":"Barcellona", "country":"Spagna", "student": "Pietro Lelli", "id_student": "0003170987", "date":"16/03/2023", "state": "Attesa"}
+{"university":"UPC Barcelona", "city":"Barcellona", "country":"Spagna", "student": "Martin Marcolini", "id_student": "0006753010", "date":"11/02/2023", "state": "Attesa"}
+{"university":"UPC Barcelona", "city":"Barcellona", "country":"Spagna", "student": "Nicolo Malucelli", "id_student": "0001237079", "date":"11/05/2023", "state": "Attesa"}
 {"university":"Vrije Universitet Amsterdam", "city":"Amsterdam", "country":"Olanda", "student": "Alberto Di Girolamo","id_student": "0347120087", "date":"13/05/2023", "state": "Attesa"}
 {"university":"Vrije Universitet Amsterdam", "city":"Amsterdam", "country":"Olanda", "student": "Martin Marcolini","id_student": "0006753010", "date":"23/04/2023", "state": "Attesa"}
 {"university":"Warsaw University of Technology", "city":"Varsavia", "country":"Polonia", "student": "Filippo Venturini", "id_student": "0109130287", "date":"20/05/2023", "state": "Attesa"}
