@@ -48,8 +48,11 @@
   <div class="row me-5">
     <div class="col-md-1"></div>
     <div class="col-md-2 mt-4 text-center">
-      <button v-if="checkIsApplied() === true" class="btn btn-success" disabled>Candidato</button>
-      <button v-else-if="this.user.role === 'Studente'"  data-bs-toggle="modal" data-bs-target="#applicationModal" class="btn btn-outline-success">Candidati ora!</button>
+      <button id="btnAccettata" v-if="checkIsApplied() === 'Accettata'" class="btn btn-success" disabled>Accettata</button>
+      <button id="btnTermina" v-if="checkIsApplied() === 'Accettata'"  class="btn btn-outline-warning" style="margin-left: 60px" @click="">Termina</button>
+      <button id="btnRifiutata" v-if="checkIsApplied() === 'Rifiutata'" class="btn btn-danger" disabled>Rifiutata</button>
+      <button id="btnAttesa" v-if="checkIsApplied() === 'Attesa'" class="btn btn-warning" disabled>Candidato</button>
+      <button id="btnCandidati" v-else-if="this.user.role === 'Studente'"  data-bs-toggle="modal" data-bs-target="#applicationModal" class="btn btn-outline-success">Candidati ora!</button>
       <button v-else-if="this.user.role === 'Admin'" data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-outline-danger">Elimina</button>
       <button v-if="this.user.role === 'Admin'"  class="btn btn-outline-warning" style="margin-left: 50px" @click="modifyOffer()">Modifica</button>
       <label id="threeOfferLabel" style="color: #D91A1A; visibility: hidden">Sei già candidato a 3 offerte!</label>
@@ -269,7 +272,6 @@ export default defineComponent({
       axios.get('http://localhost:3000/userdetail'+ sessionStorage.getItem("mail")).then(response =>{
         this.user = response.data;
         for(let i=0; i<this.user.favourites.length; i++) {
-          console.log(this.user.favourites[i].universityName == this.offerUniversity.name);
           if(this.user.favourites[i].universityName == this.offerUniversity.name) {
             document.getElementById("heart").style.visibility = "hidden";
             document.getElementById("heart-fill").style.visibility = "visible";          }
@@ -309,10 +311,10 @@ export default defineComponent({
     checkIsApplied(){
       for(let i=0; i<this.applications.length; i++) {
         if(this.applications[i].university === this.offerUniversity.name) {
-          return true;
+          return this.applications[i].state;
         }
       }
-      return false;
+      return "";
     },
     addToFavourites(){
       const json = {
