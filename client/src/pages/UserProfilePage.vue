@@ -22,7 +22,7 @@
           <template v-for="(application, index) in this.applications">
             <tr>
               <th scope="row">{{index+1}}</th>
-              <td>{{application.university}}</td>
+              <td @click="goToUniversityByName(application.university)" style="cursor: pointer">{{application.university}}</td>
               <td>{{application.city}}</td>
               <td>{{application.date}}</td>
               <td v-if="application.state === 'Accettata'" style="color: limegreen">{{application.state}}</td>
@@ -82,7 +82,6 @@ export default defineComponent ({
   methods:{
     getUser(){
       axios.get('http://localhost:3000/userdetail'+ sessionStorage.getItem("mail")).then(response =>{
-            console.log(response.data);
             this.user = response.data;
       }).catch(err => {
         console.log(err);
@@ -100,6 +99,15 @@ export default defineComponent ({
         })
       }).catch(err => {
         console.log(err);
+      })
+    },
+    goToUniversityByName(name){
+      axios.get('http://localhost:3000/universityFromName'+name).then(response => {
+        this.$router.push('/universitydetail/'+response.data._id);
+        return response.data._id;
+      }).catch(err => {
+        console.log(err);
+        return "";
       })
     }
   },
