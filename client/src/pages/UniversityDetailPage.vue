@@ -56,7 +56,7 @@
 
       <button id="btnRifiutata" v-if="checkIsApplied() === 'Rifiutata'" class="btn btn-danger" disabled>Rifiutata</button>
       <button id="btnAttesa" v-if="checkIsApplied() === 'Attesa'" class="btn btn-warning" disabled>Candidato</button>
-      <button id="btnCandidati" v-else-if="this.user.role === 'Studente'"  data-bs-toggle="modal" data-bs-target="#applicationModal" class="btn btn-outline-success">Candidati ora!</button>
+      <button id="btnCandidati" v-else-if="this.user.role === 'Studente' && checkIsApplied() === '' && checkIsAccepted() == false" data-bs-toggle="modal" data-bs-target="#applicationModal" class="btn btn-outline-success">Candidati ora!</button>
       <button v-else-if="this.user.role === 'Admin'" data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-outline-danger">Elimina</button>
       <button v-if="this.user.role === 'Admin'"  class="btn btn-outline-warning" style="margin-left: 50px" @click="modifyOffer()">Modifica</button>
       <label id="threeOfferLabel" style="color: #D91A1A; visibility: hidden">Sei già candidato a 3 offerte!</label>
@@ -319,6 +319,14 @@ export default defineComponent({
         }
       }
       return "";
+    },
+    checkIsAccepted(){
+      for(let i=0; i<this.applications.length; i++) {
+        if(this.applications[i].state === "Accettata") {
+          return true
+        }
+      }
+      return false;
     },
     addToFavourites(){
       const json = {
