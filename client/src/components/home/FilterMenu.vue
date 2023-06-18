@@ -74,14 +74,22 @@ export default defineComponent({
   box-shadow: 0 4px 2px -2px gray;
 }
 
-.filter-icon{
-  font-size: 1.5rem;
-  color: #717171;
+.filter-icon {
+  font-size: 24px; /* Adjust the font size as desired */
+  color: #333; /* Change the color as desired */
   cursor: pointer;
+  transition: color 0.3s;
+  border: none; /* Initially, hide the border */
 }
 
-.filter-icon:hover{
-  color: #000000;
+.filter-icon:hover {
+  color: #ff0000; /* Change the hover color as desired */
+}
+
+.filter-icon.clicked {
+  color: #00ff00; /* Change the clicked color as desired */
+  border: 2px solid #00ff00; /* Show a 2px solid border in clicked state */
+  padding: 4px; /* Add some padding to adjust the size of the icon */
 }
 
 .clicked{

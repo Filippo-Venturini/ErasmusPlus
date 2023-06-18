@@ -49,7 +49,11 @@
     <div class="col-md-1"></div>
     <div class="col-md-2 mt-4 text-center">
       <button id="btnAccettata" v-if="checkIsApplied() === 'Accettata'" class="btn btn-success" disabled>Accettata</button>
-      <button id="btnTermina" v-if="checkIsApplied() === 'Accettata'"  class="btn btn-outline-warning" style="margin-left: 60px" @click="">Termina</button>
+
+      <RouterLink class="nav-link" :to="{path: '/survey/'+this.offerUniversity._id}">
+        <button id="btnTermina" v-if="checkIsApplied() === 'Accettata'"  class="btn btn-outline-warning" style="margin-left: 60px" @click="">Termina</button>
+      </RouterLink>
+
       <button id="btnRifiutata" v-if="checkIsApplied() === 'Rifiutata'" class="btn btn-danger" disabled>Rifiutata</button>
       <button id="btnAttesa" v-if="checkIsApplied() === 'Attesa'" class="btn btn-warning" disabled>Candidato</button>
       <button id="btnCandidati" v-else-if="this.user.role === 'Studente'"  data-bs-toggle="modal" data-bs-target="#applicationModal" class="btn btn-outline-success">Candidati ora!</button>

@@ -32,9 +32,11 @@
                fourth-row-label="Vicinanza al campus"
                @firstRow="onCostoAlloggio" @secondRow="onAlloggiDisponibili" @thirdRow="onQualitaAlloggi" @fourthRow="onVicinanza"></SurveyPanel>
 
-  <div class="d-flex justify-content-center">
-    <button class="btn btn-success" @click="submitSurvey()">Invia questionario</button>
-  </div>
+  <RouterLink class="nav-link" :to="{path: '/'}">
+    <div class="d-flex justify-content-center">
+      <button class="btn btn-success" @click="submitSurvey()">Invia questionario</button>
+    </div>
+  </RouterLink>
 </template>
 
 <script>
@@ -49,6 +51,7 @@ export default defineComponent({
   components: {SurveyPanel, Header},
   data(){
     return {
+      university_id: null,
       servizi: 3,
       aule: 3,
       laboratori: 3,
@@ -136,7 +139,7 @@ export default defineComponent({
       this.review.push(Number(this.vicinanza));
 
       const json = {
-        university_id: "6481dc37d22deb3a4094c538",
+        university_id: this.university_id,
         review: this.review
       };
 
@@ -147,6 +150,9 @@ export default defineComponent({
         }
       });
     }
+  },
+  mounted() {
+    this.university_id = this.$route.params.id;
   }
 })
 </script>
