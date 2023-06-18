@@ -36,20 +36,20 @@
     </div>
   </div>
   <div class="row" style="margin-top: 100px">
-    <div class="col-6">
+    <div class="col-7">
       <ProfileInfoPanel :title="msgContacts" :user="user" class="bgGrayContacts"></ProfileInfoPanel>
     </div>
-    <div class="col-3"></div>
-    <div class="col-3 circleIconCol" style="margin-top: 50px">
+    <div class="col-2"></div>
+    <div class="col-3 circleIconCol" style="margin-top: 50px; padding-left: 90px">
       <UserProfileCircleIcon :title="msgContacts" class="circleIconContacts"></UserProfileCircleIcon>
     </div>
   </div>
-  <div class="row" style="margin-top: 100px">
-    <div class="col-3 circleIconCol">
+  <div class="row" style="margin-top: 200px">
+    <div class="col-3 circleIconCol" style="padding-right: 90px">
       <UserProfileCircleIcon :title="msgPersonalInfo" class="circleIconPersonalInfo"></UserProfileCircleIcon>
     </div>
-    <div class="col-3"></div>
-    <div class="col-6">
+    <div class="col-2"></div>
+    <div class="col-7">
       <ProfileInfoPanel  :title="msgPersonalInfo" :user="user" class="bgRedPersonalInfo"></ProfileInfoPanel>
     </div>
   </div>
