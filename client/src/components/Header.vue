@@ -30,7 +30,6 @@
               <div v-if="role === 'Studente'">
                 <div class="menuItems mt-3" onclick="location.href = '/';">Tutte le offerte</div>
                 <div class="menuItems mt-3" onclick="location.href = '/userdetail';">Profilo</div>
-                <div class="menuItems mt-3" onclick="location.href = '/';">Preferiti</div>
                 <div class="menuItems mt-3" onclick="location.href = '/login';" @click="this.logout()">Logout</div>
               </div>
               <div v-else-if="role === 'Admin'">

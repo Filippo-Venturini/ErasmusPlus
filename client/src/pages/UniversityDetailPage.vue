@@ -63,8 +63,8 @@
     </div>
     <div class="col-8"></div>
     <div class="col-1 text-center" style="margin-top: -50px">
-      <i id="heart" class="bi bi-heart" style="font-size: 2rem;color: #D91A1A; visibility: visible; position: absolute" @click="addToFavourites()"></i>
-      <i id="heart-fill" class="bi bi-heart-fill" style="font-size: 2rem;color: #D91A1A; visibility:hidden; position: absolute" @click="removeFavourite()"></i>
+      <i id="heart" class="bi bi-heart" style="font-size: 2rem;color: #D91A1A; visibility: visible; position: absolute; cursor: pointer" @click="addToFavourites()"></i>
+      <i id="heart-fill" class="bi bi-heart-fill" style="font-size: 2rem;color: #D91A1A; visibility:hidden; position: absolute; cursor: pointer" @click="removeFavourite()"></i>
     </div>
     <div class="col-3"></div>
     <div class="col-md-9 ">

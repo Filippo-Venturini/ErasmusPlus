@@ -2,7 +2,7 @@
   <div class="background-image" >
     <div class="form-signin m-auto">
       <img class="mb-2 mt-lg-5" src="../assets/img/logoErasmusPlusLogin.png" alt="" height="107">
-      <h1 class="h3 mb-3 fw-normal text-center">Please sign in</h1>
+      <h1 class="h3 mb-3 fw-normal text-center">Accedi</h1>
 
       <div class="form-floating">
         <input type="email" class="form-control" v-model="mail" id="floatingInput" placeholder="name@example.com">
