@@ -85,7 +85,7 @@
   </div>
 
   <div class="row" style="margin-top: 200px">
-    <div class="col-md-10">
+    <div class="col-md-9">
     <InfoPanelSX :title="msgApplicationsAvailable" :msgDescribe="msgDescribeApplicationsAvailable" :icon="iconApplicationsAvailable" :styleIcon="styleCSSIconMessage" :offerUniversity="msgInfoApplicationsAvailable" :key="offerUniversity.id" class="bgRedApplicationsAvailable" ></InfoPanelSX>
     </div>
     <div class="col-md-1">
