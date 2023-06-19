@@ -15,4 +15,6 @@ router.route('/addApplication')
 router.route('/refuseAll')
     .post((req, res) => applicationsController.refuse_all(req, res))
 
+
+
 module.exports = router;

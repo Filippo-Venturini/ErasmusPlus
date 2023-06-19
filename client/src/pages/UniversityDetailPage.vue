@@ -307,6 +307,7 @@ export default defineComponent({
         document.getElementById("threeOfferLabel").style.visibility = "visible";
       }
       this.checkIsApplied();
+      this.sendNotification();
     },
     checkIsApplied(){
       for(let i=0; i<this.applications.length; i++) {
@@ -348,6 +349,23 @@ export default defineComponent({
     },
     modifyOffer(){
       window.location.replace("/updateOffer/" + this.id);
+    },
+    sendNotification(){
+      var json ={
+        text: "L'utente "+ this.user.name+ " " + this.user.surname + " con numero di matricola: " + this.user.identificationNumber+", si è candidato all'offerta relativa a "+this.offerUniversity.name,
+        read: "false",
+        kind: "AGET"
+      }
+      try{
+        axios.post('http://localhost:3000/sendNotificationNewApplication', json, {
+          headers: {
+            // Overwrite Axios's automatically set Content-Type
+            'Content-Type': 'application/json'
+          }
+        })
+      } catch (e) {
+        console.log(e)
+      }
     }
   },
   mounted() {

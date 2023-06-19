@@ -146,6 +146,25 @@ export default defineComponent({
           'Content-Type': 'application/json'
         }
       });
+
+      this.sendNotification();
+    },
+    sendNotification(){
+      var json ={
+        text: "L'utente "+ this.user.name+ " " + this.user.surname + " con numero di matricola: " + this.user.identificationNumber+", si è candidato all'offerta relativa a "+this.offerUniversity.name,
+        read: "false",
+        kind: "AGET"
+      }
+      try{
+        axios.post('http://localhost:3000/sendNotificationNewApplication', json, {
+          headers: {
+            // Overwrite Axios's automatically set Content-Type
+            'Content-Type': 'application/json'
+          }
+        })
+      } catch (e) {
+        console.log(e)
+      }
     }
   }
 })

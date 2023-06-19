@@ -1,5 +1,6 @@
 const express = require('express');
 const usersController = require('../controllers/usersController');
+const applicationsController = require("../controllers/applicationsController");
 const router = express.Router();
 
 router.route('/users')
@@ -15,5 +16,8 @@ router.route('/addFavourite:mail')
 
 router.route('/removeFavourite:mail')
     .post((req, res) => usersController.remove_favourite(req, res));
+
+router.route('/sendNotificationNewApplication')
+    .post((req, res) => usersController.add_notification_to_admin(req, res));
 
 module.exports = router;

@@ -52,11 +52,6 @@ exports.update_offer = async (req, res)=> {
     }
     try{
         res.json(await universitiesModel.findOneAndReplace({_id: req.params.id}, req.body, {returnNewDocument: false}).then(replacedDocument => {
-            if(replacedDocument) {
-                console.log(`Successfully replaced the following document: ${replacedDocument}.`)
-            } else {
-                console.log("No document matches the provided query.")
-            }
             return replacedDocument
         }).catch(err => console.error(`Failed to find and replace document: ${err}`)));
 
