@@ -56,15 +56,15 @@
 
       <button id="btnRifiutata" v-if="checkIsApplied() === 'Rifiutata'" class="btn btn-danger" disabled>Rifiutata</button>
       <button id="btnAttesa" v-if="checkIsApplied() === 'Attesa'" class="btn btn-warning" disabled>Candidato</button>
-      <button id="btnCandidati" v-else-if="this.user.role === 'Studente'"  data-bs-toggle="modal" data-bs-target="#applicationModal" class="btn btn-outline-success">Candidati ora!</button>
+      <button id="btnCandidati" v-else-if="this.user.role === 'Studente' && checkIsApplied() === '' && checkIsAccepted() == false" data-bs-toggle="modal" data-bs-target="#applicationModal" class="btn btn-outline-success">Candidati ora!</button>
       <button v-else-if="this.user.role === 'Admin'" data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-outline-danger">Elimina</button>
       <button v-if="this.user.role === 'Admin'"  class="btn btn-outline-warning" style="margin-left: 50px" @click="modifyOffer()">Modifica</button>
       <label id="threeOfferLabel" style="color: #D91A1A; visibility: hidden">Sei già candidato a 3 offerte!</label>
     </div>
     <div class="col-8"></div>
     <div class="col-1 text-center" style="margin-top: -50px">
-      <i id="heart" class="bi bi-heart" style="font-size: 2rem;color: #D91A1A; visibility: visible; position: absolute" @click="addToFavourites()"></i>
-      <i id="heart-fill" class="bi bi-heart-fill" style="font-size: 2rem;color: #D91A1A; visibility:hidden; position: absolute" @click="removeFavourite()"></i>
+      <i id="heart" class="bi bi-heart" style="font-size: 2rem;color: #D91A1A; visibility: visible; position: absolute; cursor: pointer" @click="addToFavourites()"></i>
+      <i id="heart-fill" class="bi bi-heart-fill" style="font-size: 2rem;color: #D91A1A; visibility:hidden; position: absolute; cursor: pointer" @click="removeFavourite()"></i>
     </div>
     <div class="col-3"></div>
     <div class="col-md-9 ">
@@ -311,6 +311,7 @@ export default defineComponent({
         document.getElementById("threeOfferLabel").style.visibility = "visible";
       }
       this.checkIsApplied();
+      this.sendNotification();
     },
     checkIsApplied(){
       for(let i=0; i<this.applications.length; i++) {
@@ -319,6 +320,14 @@ export default defineComponent({
         }
       }
       return "";
+    },
+    checkIsAccepted(){
+      for(let i=0; i<this.applications.length; i++) {
+        if(this.applications[i].state === "Accettata") {
+          return true
+        }
+      }
+      return false;
     },
     addToFavourites(){
       const json = {
@@ -352,6 +361,23 @@ export default defineComponent({
     },
     modifyOffer(){
       window.location.replace("/updateOffer/" + this.id);
+    },
+    sendNotification(){
+      var json ={
+        text: "L'utente "+ this.user.name+ " " + this.user.surname + " con numero di matricola: " + this.user.identificationNumber+", si è candidato all'offerta relativa a "+this.offerUniversity.name,
+        read: "false",
+        kind: "AGET"
+      }
+      try{
+        axios.post('http://localhost:3000/sendNotificationNewApplication', json, {
+          headers: {
+            // Overwrite Axios's automatically set Content-Type
+            'Content-Type': 'application/json'
+          }
+        })
+      } catch (e) {
+        console.log(e)
+      }
     }
   },
   mounted() {

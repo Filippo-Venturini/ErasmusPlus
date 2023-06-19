@@ -68,3 +68,5 @@ exports.refuse_all = async (req, res) => {
     const updatedApplications = await applicationsModel.find()
     index.sendUpdatedApplications(updatedApplications);
 }
+
+

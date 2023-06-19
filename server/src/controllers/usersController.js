@@ -1,5 +1,7 @@
 const usersModel = require('../models/usersModel');
 const universitiesModel = require("../models/universitiesModel");
+const applicationsModel = require("../models/applicationsModel");
+const index = require("../index");
 
 exports.all_users = async(req, res) => {
     try{
@@ -37,11 +39,6 @@ exports.read_notification = async(req, res) => {
     }
     try{
         res.json(await usersModel.findOneAndReplace({mail: req.params.mail}, req.body, {returnNewDocument: false}).then(replacedDocument => {
-            if(replacedDocument) {
-                console.log(`Successfully replaced the following document: ${replacedDocument}.`)
-            } else {
-                console.log("No document matches the provided query.")
-            }
             return replacedDocument
         }).catch(err => console.error(`Failed to find and replace document: ${err}`)));
 
@@ -91,3 +88,24 @@ exports.remove_favourite = async (req,res) => {
     }
 
 }
+
+exports.add_notification_to_admin = async (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header('Access-Control-Allow-Methods', 'GET,PUT, POST,DELETE');
+    res.header("Access-Control-Allow-Headers", "Content-type,Accept,X-Custom-Header");
+
+    if (req.method === "OPTIONS") {
+        res.header('Access-Control-Allow-Origin', req.headers.origin);
+    } else {
+        res.header('Access-Control-Allow-Origin', '*');
+    }
+
+    await usersModel.updateOne(
+        {role: "Admin"},
+        { $push: {notification: { text: req.body.text, read: req.body.read, kind: req.body.kind}}}
+    );
+
+    res.sendStatus(200);
+
+
+};

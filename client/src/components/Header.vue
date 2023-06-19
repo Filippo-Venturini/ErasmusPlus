@@ -30,7 +30,6 @@
               <div v-if="role === 'Studente'">
                 <div class="menuItems mt-3" onclick="location.href = '/';">Tutte le offerte</div>
                 <div class="menuItems mt-3" onclick="location.href = '/userdetail';">Profilo</div>
-                <div class="menuItems mt-3" onclick="location.href = '/';">Preferiti</div>
                 <div class="menuItems mt-3" onclick="location.href = '/login';" @click="this.logout()">Logout</div>
               </div>
               <div v-else-if="role === 'Admin'">
@@ -250,16 +249,13 @@ export default defineComponent({
 }
 
 .menuItems{
-  border:1px solid #8ed9f6;
   border-radius:10px;
   padding:10px 10px 10px 0px;
   cursor: pointer;
-  text-align: center;
-
+  font-size: 1.2rem;
 }
 
 .menuItems:hover{
-  background:#e3f7fc  no-repeat 10px 50%;
   font-weight: bold;
 }
 

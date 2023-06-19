@@ -21,6 +21,17 @@ exports.university_detail = async(req, res) => {
     }
 }
 
+exports.university_from_name = async(req, res) => {
+    try {
+        res.header("Access-Control-Allow-Origin", "*");
+        res.json(await universitiesModel.findOne({name: req.params.name}));
+
+    } catch (e) {
+        res.json(e);
+    }
+}
+
+
 exports.add_offer = async (req, res)=> {
     res.header("Access-Control-Allow-Origin", "*");
     res.header('Access-Control-Allow-Methods', 'GET,PUT, POST,DELETE');
@@ -52,11 +63,6 @@ exports.update_offer = async (req, res)=> {
     }
     try{
         res.json(await universitiesModel.findOneAndReplace({_id: req.params.id}, req.body, {returnNewDocument: false}).then(replacedDocument => {
-            if(replacedDocument) {
-                console.log(`Successfully replaced the following document: ${replacedDocument}.`)
-            } else {
-                console.log("No document matches the provided query.")
-            }
             return replacedDocument
         }).catch(err => console.error(`Failed to find and replace document: ${err}`)));
 
