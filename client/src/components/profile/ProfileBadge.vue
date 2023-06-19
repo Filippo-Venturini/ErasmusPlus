@@ -1,7 +1,7 @@
 <template>
   <img :src="getImageUrl()" class="rounded-circle circleIcon mx-auto d-block h" alt="...">
   <h1 class="text-center">{{ user.name }}  {{user.surname}}</h1>
-  <h2 class="text-center">{{ user.role }}</h2>
+  <h3 class="text-center">{{ user.identificationNumber}}</h3>
 </template>
 
 <script>
@@ -20,7 +20,7 @@ export default defineComponent({
 
 <style scoped>
 img {
-  height: 300px;
+  height: 250px;
   margin: 30px;
 }
 </style>

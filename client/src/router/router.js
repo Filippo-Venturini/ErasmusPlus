@@ -14,7 +14,7 @@ const routes = [
     { path: '/universitydetail/:id', name: 'UniversityDetailPage', component: UniversityDetailPage},
     { path: '/applications', name: 'ApplicationsPage', component: ApplicationsPage },
     { path: '/addoffer', name: 'AddOfferPage', component: AddOfferPage },
-    { path: '/survey', name: 'SurveyPage', component: SurveyPage },
+    { path: '/survey/:id', name: 'SurveyPage', component: SurveyPage },
     { path: '/login', name: 'LoginPage', component: LoginPage },
     { path: '/updateOffer/:id', name: 'UpdateOffer', component: UpdateOfferPage}
 

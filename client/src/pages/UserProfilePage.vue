@@ -22,7 +22,7 @@
           <template v-for="(application, index) in this.applications">
             <tr>
               <th scope="row">{{index+1}}</th>
-              <td>{{application.university}}</td>
+              <td @click="goToUniversityByName(application.university)" style="cursor: pointer">{{application.university}}</td>
               <td>{{application.city}}</td>
               <td>{{application.date}}</td>
               <td v-if="application.state === 'Accettata'" style="color: limegreen">{{application.state}}</td>
@@ -36,20 +36,20 @@
     </div>
   </div>
   <div class="row" style="margin-top: 100px">
-    <div class="col-6">
+    <div class="col-7">
       <ProfileInfoPanel :title="msgContacts" :user="user" class="bgGrayContacts"></ProfileInfoPanel>
     </div>
-    <div class="col-3"></div>
-    <div class="col-3 circleIconCol" style="margin-top: 50px">
+    <div class="col-2"></div>
+    <div class="col-3 circleIconCol" style="margin-top: 50px; padding-left: 90px">
       <UserProfileCircleIcon :title="msgContacts" class="circleIconContacts"></UserProfileCircleIcon>
     </div>
   </div>
-  <div class="row" style="margin-top: 100px">
-    <div class="col-3 circleIconCol">
+  <div class="row" style="margin-top: 200px">
+    <div class="col-3 circleIconCol" style="padding-right: 90px">
       <UserProfileCircleIcon :title="msgPersonalInfo" class="circleIconPersonalInfo"></UserProfileCircleIcon>
     </div>
-    <div class="col-3"></div>
-    <div class="col-6">
+    <div class="col-2"></div>
+    <div class="col-7">
       <ProfileInfoPanel  :title="msgPersonalInfo" :user="user" class="bgRedPersonalInfo"></ProfileInfoPanel>
     </div>
   </div>
@@ -82,7 +82,6 @@ export default defineComponent ({
   methods:{
     getUser(){
       axios.get('http://localhost:3000/userdetail'+ sessionStorage.getItem("mail")).then(response =>{
-            console.log(response.data);
             this.user = response.data;
       }).catch(err => {
         console.log(err);
@@ -100,6 +99,15 @@ export default defineComponent ({
         })
       }).catch(err => {
         console.log(err);
+      })
+    },
+    goToUniversityByName(name){
+      axios.get('http://localhost:3000/universityFromName'+name).then(response => {
+        this.$router.push('/universitydetail/'+response.data._id);
+        return response.data._id;
+      }).catch(err => {
+        console.log(err);
+        return "";
       })
     }
   },
