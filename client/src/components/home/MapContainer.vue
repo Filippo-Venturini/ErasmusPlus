@@ -31,7 +31,8 @@ export default defineComponent({
       universityIsOk: true,
       studyFilter: false,
       halfFilter: false,
-      fullFilter: false
+      fullFilter: false,
+      favouritesFilter: false
     }
   },
   setup() {
@@ -59,6 +60,8 @@ export default defineComponent({
         this.halfFilter = false;
       }else if(filter === "study"){
         this.studyFilter = !this.studyFilter;
+      }else if(filter === "favourites"){
+        this.favouritesFilter = !this.favouritesFilter;
       }
     },
     checkUniversity(university){
@@ -71,6 +74,16 @@ export default defineComponent({
       if(this.studyFilter && this.loggedUser.course !== university.offer.field){
         return false;
       }
+
+      if(this.favouritesFilter){
+        for(let i = 0; i < this.loggedUser.favourites.length; i++){
+          if (this.loggedUser.favourites[i].universityName === university.name){
+            return true;
+          }
+        }
+        return false;
+      }
+
       return true;
     },
     getImageUrl(srcImg){

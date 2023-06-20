@@ -45,6 +45,7 @@ export default defineComponent({
     },
     onSavedClicked(){
       this.savedClicked = !this.savedClicked;
+      this.$emit("filterClicked", "favourites");
     },
     onStudyClicked(){
       this.studyClicked = !this.studyClicked;
@@ -76,26 +77,22 @@ export default defineComponent({
 
 .filter-icon {
   font-size: 24px; /* Adjust the font size as desired */
-  color: #333; /* Change the color as desired */
   cursor: pointer;
+  color: #717171;
   transition: color 0.3s;
   border: none; /* Initially, hide the border */
 }
 
 .filter-icon:hover {
-  color: #ff0000; /* Change the hover color as desired */
+  color: #000000; /* Change the hover color as desired */
+  border: 2px solid #000000; /* Show a 2px solid border in clicked state */
+  padding: 12px; /* Add some padding to adjust the size of the icon */
 }
 
 .filter-icon.clicked {
-  color: #00ff00; /* Change the clicked color as desired */
-  border: 2px solid #00ff00; /* Show a 2px solid border in clicked state */
-  padding: 4px; /* Add some padding to adjust the size of the icon */
+  color: #000000; /* Change the clicked color as desired */
+  border: 2px solid #000000; /* Show a 2px solid border in clicked state */
+  padding: 12px; /* Add some padding to adjust the size of the icon */
 }
 
-.clicked{
-  color: #000000;
-  padding-left: 5px;
-  padding-right: 5px;
-  border: solid 2px;
-}
 </style>
