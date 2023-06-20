@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema({
         idNotification: String,
         text: String,
         read: String,
-        kind: String
+        goto: String
     }]
 });
 

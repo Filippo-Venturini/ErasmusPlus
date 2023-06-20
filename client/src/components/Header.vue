@@ -114,36 +114,23 @@ export default defineComponent({
       })
     },
     clickNotification(notification){
+
       for(let i = 0; i < this.notifications.length; i++){
-        if (this.notifications[i].idNotification === notification.idNotification){
+        if (this.notifications[i]._id === notification._id){
           this.notifications[i].read = "true";
           this.user.notification = this.notifications;
         }
       }
-      axios.put('http://localhost:3000/' + sessionStorage.getItem("mail"), this.user, {
+      var body ={
+        id: notification._id
+      }
+      axios.put('http://localhost:3000/' + sessionStorage.getItem("mail"),body , {
         headers: {
           // Overwrite Axios's automatically set Content-Type
           'Content-Type': 'application/json'
         }
       });
-
-      switch (notification.kind){
-        case "USUB":
-          window.location.replace("/userdetail");
-          break;
-        case "UACC":
-          window.location.replace("/");
-          break;
-        case "UADD":
-          window.location.replace("/");
-          break;
-        case "AGET":
-          window.location.replace("/applications");
-          break;
-        case "ASUR":
-          window.location.replace("/addReview");
-          break;
-      }
+      window.location.replace(notification.goto);
     }
   },
   mounted() {

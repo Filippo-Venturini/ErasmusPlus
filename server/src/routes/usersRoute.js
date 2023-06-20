@@ -17,7 +17,7 @@ router.route('/addFavourite:mail')
 router.route('/removeFavourite:mail')
     .post((req, res) => usersController.remove_favourite(req, res));
 
-router.route('/sendNotificationNewApplication')
+router.route('/sendNotificationToAdmin')
     .post((req, res) => usersController.add_notification_to_admin(req, res));
 
 module.exports = router;

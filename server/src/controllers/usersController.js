@@ -38,10 +38,11 @@ exports.read_notification = async(req, res) => {
         res.header('Access-Control-Allow-Origin', '*');
     }
     try{
-        res.json(await usersModel.findOneAndReplace({mail: req.params.mail}, req.body, {returnNewDocument: false}).then(replacedDocument => {
-            return replacedDocument
-        }).catch(err => console.error(`Failed to find and replace document: ${err}`)));
-
+        console.log(req.body);
+        await usersModel.updateOne(
+            {"notification._id": req.body.id},
+            {$set: {"notification.$.read": "true"}}
+        )
     }catch (e) {
         res.json(e);
     }
@@ -102,7 +103,7 @@ exports.add_notification_to_admin = async (req, res) => {
 
     await usersModel.updateOne(
         {role: "Admin"},
-        { $push: {notification: { text: req.body.text, read: req.body.read, kind: req.body.kind}}}
+        { $push: {notification: { text: req.body.text, read: req.body.read, goto: req.body.goto}}}
     );
 
     res.sendStatus(200);

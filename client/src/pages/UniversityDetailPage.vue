@@ -366,10 +366,10 @@ export default defineComponent({
       var json ={
         text: "L'utente "+ this.user.name+ " " + this.user.surname + " con numero di matricola: " + this.user.identificationNumber+", si è candidato all'offerta relativa a "+this.offerUniversity.name,
         read: "false",
-        kind: "AGET"
+        goto: "/universitydetail/" +this.offerUniversity._id
       }
       try{
-        axios.post('http://localhost:3000/sendNotificationNewApplication', json, {
+        axios.post('http://localhost:3000/sendNotificationToAdmin', json, {
           headers: {
             // Overwrite Axios's automatically set Content-Type
             'Content-Type': 'application/json'
