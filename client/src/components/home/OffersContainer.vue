@@ -24,6 +24,7 @@ export default defineComponent({
       studyFilter: false,
       halfFilter: false,
       fullFilter: false,
+      favouritesFilter: false,
       loggedUser: null
     }
   },
@@ -47,6 +48,8 @@ export default defineComponent({
         this.halfFilter = false;
       }else if(filter === "study"){
         this.studyFilter = !this.studyFilter;
+      }else if(filter === "favourites"){
+        this.favouritesFilter = !this.favouritesFilter;
       }
     },
     checkUniversity(university){
@@ -56,9 +59,19 @@ export default defineComponent({
       if(this.fullFilter && university.offer.period !== "12"){
         return false;
       }
-      if(this.studyFilter && this.loggedUser.course !== university.offer.field){
+      if(this.studyFilter && this.loggedUser.course !== university.offer.field) {
         return false;
       }
+
+      if(this.favouritesFilter) {
+        for (let i = 0; i < this.loggedUser.favourites.length; i++) {
+          if (this.loggedUser.favourites[i].universityName === university.name) {
+            return true;
+          }
+        }
+        return false;
+      }
+
       return true;
     }
   },
