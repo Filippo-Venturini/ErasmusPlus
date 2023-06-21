@@ -58,6 +58,5 @@ export default defineComponent({
   height: 45px;
   box-shadow: 0 5px 10px rgba(0,0,0,.2);
   border-radius: 2em;
-
 }
 </style>

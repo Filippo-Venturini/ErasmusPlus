@@ -1,6 +1,43 @@
 <template>
 <Header></Header>
-  <div class="d-flex justify-content-center m-5">
+
+  <div ref="surveyExplainModal" class="modal fade" id="surveyExplainModal" tabindex="-1" aria-labelledby="myModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Conferma candidatura</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Confermi la tua candidatura per l'università?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" @click="applyToUniversity()" data-bs-dismiss="modal" >Conferma</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div ref="finishedSurveyModal" class="modal fade" id="finishedSurveyModal" tabindex="-1" aria-labelledby="myModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Conferma invio del questionario</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Confermi la terminazione del questionario?
+        </div>
+        <div class="modal-footer">
+          <RouterLink class="nav-link" :to="{path: '/'}">
+            <button type="button" class="btn btn-success" @click="submitSurvey()" data-bs-dismiss="modal" >Conferma</button>
+          </RouterLink>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-center m-5" data-bs-toggle="modal" data-bs-target="#surveyExplainModal">
     <h1>Valutazione Esperienza</h1>
   </div>
 
@@ -32,11 +69,10 @@
                fourth-row-label="Vicinanza al campus"
                @firstRow="onCostoAlloggio" @secondRow="onAlloggiDisponibili" @thirdRow="onQualitaAlloggi" @fourthRow="onVicinanza"></SurveyPanel>
 
-  <RouterLink class="nav-link" :to="{path: '/'}">
+
     <div class="d-flex justify-content-center">
-      <button class="btn btn-success" @click="submitSurvey()">Invia questionario</button>
+      <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#finishedSurveyModal">Invia questionario</button>
     </div>
-  </RouterLink>
 </template>
 
 <script>
@@ -169,11 +205,14 @@ export default defineComponent({
       } catch (e) {
         console.log(e)
       }
+    },
+    showModal(){
+      /*console.log(this.$refs.surveyExplainModal)
+      this.$refs.surveyExplainModal.modal('show')*/
     }
   },
   mounted() {
     this.university_id = this.$route.params.id;
-
 
     axios.get('http://localhost:3000/universitydetail' + this.university_id).then(response => {
           this.nameUniversity = response.data.name;
@@ -181,6 +220,8 @@ export default defineComponent({
     ).catch(err => {
       console.log(err);
     })
+
+    this.showModal();
   }
 })
 </script>
