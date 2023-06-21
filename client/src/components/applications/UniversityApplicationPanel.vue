@@ -106,6 +106,8 @@ export default defineComponent({
           }
         });
       }
+
+      this.sendNotification(applicationToModify);
     },
     onReject(applicationToModify){
       const json = {
@@ -118,6 +120,32 @@ export default defineComponent({
           'Content-Type': 'application/json'
         }
       });
+    },
+    sendNotification(applicationToModify){
+      let userId;
+      console.log(applicationToModify.university);
+      axios.get('http://localhost:3000/getUserFromId'+ applicationToModify.id_student).then(response =>{
+        userId = response.data.identificationNumber;
+        let jsonNotification = {
+          id: userId,
+          text: "La tua domanda per l'università di " + applicationToModify.university + ", è stata accettata!",
+          read: "false",
+          goto: "/"
+        };
+        try{
+          axios.post('http://localhost:3000/sendNotificationToUser', jsonNotification, {
+            headers: {
+              // Overwrite Axios's automatically set Content-Type
+              'Content-Type': 'application/json'
+            }
+          })
+        } catch (e) {
+          console.log(e)
+        }
+      }).catch(err => {
+        console.log(err);
+      })
+
     }
   },
   mounted() {
