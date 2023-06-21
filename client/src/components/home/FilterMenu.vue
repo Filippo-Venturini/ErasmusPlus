@@ -85,14 +85,18 @@ export default defineComponent({
 
 .filter-icon:hover {
   color: #000000; /* Change the hover color as desired */
-  border: 2px solid #000000; /* Show a 2px solid border in clicked state */
+  border: 2px solid #474554; /* Show a 2px solid border in clicked state */
+  border-radius: 0.5em;
   padding: 12px; /* Add some padding to adjust the size of the icon */
+  background-color: #E1E1E1;
 }
 
 .filter-icon.clicked {
-  color: #000000; /* Change the clicked color as desired */
-  border: 2px solid #000000; /* Show a 2px solid border in clicked state */
+  color: #FFFFFF; /* Change the hover color as desired */
+  border: 2px solid #474554; /* Show a 2px solid border in clicked state */
+  border-radius: 0.5em;
   padding: 12px; /* Add some padding to adjust the size of the icon */
+  background-color: #474554;
 }
 
 </style>

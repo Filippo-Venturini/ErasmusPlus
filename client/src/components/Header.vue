@@ -166,6 +166,11 @@ export default defineComponent({
   margin-right: 30px;
 }
 
+.bell:hover{
+  color: #FFFFFF;
+  transform: scale(1.20);
+}
+
 .menu{
   float: right;
   font-size: 30px;
@@ -173,6 +178,11 @@ export default defineComponent({
   cursor: pointer;
   margin-top: 35px;
   margin-right: 60px;
+}
+
+.menu:hover{
+  color: #FFFFFF;
+  transform: scale(1.20);
 }
 
 .boxMenu{
