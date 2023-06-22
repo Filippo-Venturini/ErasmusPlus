@@ -1,6 +1,6 @@
 <template>
   <Header></Header>
-  <img class="wallpaper" :src="wallpaperImage">
+  <img class="wallpaper mt-5" :src="wallpaperImage">
   <img class="icon" :src="iconImage">
 
   <div class="row d-flex justify-content-center">
@@ -221,7 +221,10 @@ export default defineComponent({
 <style scoped>
 .wallpaper{
   width: 100%;
-  height: 540px;
+  height: 450px;
+  object-fit: cover;
+  border-radius: 2em;
+  box-shadow: 0 5px 10px rgba(0,0,0,.2);
   border: 1px solid #000000;
 }
 .icon{
@@ -230,6 +233,7 @@ export default defineComponent({
   margin-top: -100px;
   margin-left: 100px;
   border: 1px solid #000000;
+  box-shadow: 0 5px 10px rgba(0,0,0,.2);
 }
 .btnAdd{
   display: block;

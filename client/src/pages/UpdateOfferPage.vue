@@ -1,6 +1,6 @@
 <template>
   <Header></Header>
-  <img v-if="receivedOriginalOffer" class="wallpaper" :src="getImageUrl(wallpaperImage)">
+  <img v-if="receivedOriginalOffer" class="wallpaper mt-5" :src="getImageUrl(wallpaperImage)">
   <img v-if="receivedOriginalOffer" class="icon" :src="getImageUrl(iconImage)">
 
   <div class="row d-flex justify-content-center">
@@ -81,7 +81,7 @@
     </div>
   </div>
   <div class="row">
-    <button class="mb-5 btn btn-success btnAdd" data-bs-toggle="modal" data-bs-target="#addOfferModal">Aggiungi</button>
+    <button class="mb-5 btn btn-success btnAdd" data-bs-toggle="modal" data-bs-target="#addOfferModal">Modifica</button>
   </div>
   <div class="modal fade" id="addOfferModal" tabindex="-1" aria-labelledby="myModal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -250,7 +250,10 @@ export default defineComponent({
 <style scoped>
 .wallpaper{
   width: 100%;
-  height: 540px;
+  height: 450px;
+  object-fit: cover;
+  border-radius: 2em;
+  box-shadow: 0 5px 10px rgba(0,0,0,.2);
   border: 1px solid #000000;
 }
 .icon{
@@ -259,6 +262,7 @@ export default defineComponent({
   margin-top: -100px;
   margin-left: 100px;
   border: 1px solid #000000;
+  box-shadow: 0 5px 10px rgba(0,0,0,.2);
 }
 .btnAdd{
   display: block;
