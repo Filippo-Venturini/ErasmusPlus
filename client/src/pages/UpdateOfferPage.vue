@@ -1,7 +1,7 @@
 <template>
   <Header></Header>
-  <img class="wallpaper" :src="wallpaperImage">
-  <img class="icon" :src="iconImage">
+  <img v-if="receivedOriginalOffer" class="wallpaper" :src="getImageUrl(wallpaperImage)">
+  <img v-if="receivedOriginalOffer" class="icon" :src="getImageUrl(iconImage)">
 
   <div class="row d-flex justify-content-center">
     <div class="mb-3 col-5">
@@ -31,11 +31,11 @@
     <div class="mb-3 col-5">
       <label>Periodo: </label>
       <div class="form-check form-check-inline m-lg-3">
-        <input class="form-check-input" v-model="period" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="6">
+        <input class="form-check-input" v-model="period" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="6" :checked="this.period === '6'">
         <label class="form-check-label" for="inlineRadio1">6 mesi</label>
       </div>
       <div class="form-check form-check-inline">
-        <input class="form-check-input" v-model="period" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="12">
+        <input class="form-check-input" v-model="period" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="12" :checked="this.period === '12'">
         <label class="form-check-label" for="inlineRadio2">12 mesi</label>
       </div>
     </div>
@@ -127,8 +127,8 @@ export default defineComponent({
   components: {Header},
   data(){
     return{
-      wallpaperImage: "src/assets/img/placeholder.png",
-      iconImage: "src/assets/img/placeholder.png",
+      wallpaperImage: "",
+      iconImage: "",
       nameUniversity: "",
       city: "",
       country: "",
@@ -141,6 +141,7 @@ export default defineComponent({
       wallpaper: "",
       cardImg: "",
       plot: "",
+      receivedOriginalOffer: false,
       originalOffer: [],
     }
   },
@@ -222,11 +223,17 @@ export default defineComponent({
             this.places = this.originalOffer.offer.places;
             this.plot = this.originalOffer.plot;
             this.city = this.originalOffer.city;
-
+            this.period = this.originalOffer.offer.period;
+            this.iconImage = this.originalOffer.logo;
+            this.wallpaperImage = this.originalOffer.wallpaper;
+            this.receivedOriginalOffer = true;
           }
       ).catch(err => {
         console.log(err);
       })
+    },
+    getImageUrl(url){
+      return new URL(`${url.slice(3)}`, import.meta.url)
     }
   },
   mounted() {
