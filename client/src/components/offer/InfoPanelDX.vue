@@ -1,5 +1,5 @@
 <template>
-  <div class="w-50 p-3 mt-4 infoPanel ">
+  <div class="w-75 p-3 mt-4 infoPanel ">
     <div class="row text" style="margin-right: 20px">
       <div class="col-md-11 panel-heading pt-3 ps-4" style="font-weight: bold; font-size: 20px; margin-top: -15px">{{title}} {{offerUniversity}} mesi</div>
       <div class="col-md-1 "> <i :class="icon" :style="styleIcon"> </i> </div>

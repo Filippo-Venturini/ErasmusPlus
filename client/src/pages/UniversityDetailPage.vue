@@ -91,52 +91,54 @@
     <div class="col-md-1">
       <CircleIcon class="circleIconApplicationsAvailable" :icon="iconApplicationsAvailable" :styleIcon="styleCSSIcon"></CircleIcon>
     </div>
-    <div class="col-md-1"></div>
+    <div class="col-md-2"></div>
   </div>
 
   <div class="row" style="margin-top: 300px">
-    <div class="col-md-1"></div>
+    <div class="col-md-2"></div>
     <div class="col-md-1">
       <CircleIcon class="circleIconExchangePeriod" :icon="iconExchangePeriod" :styleIcon="styleCSSIcon"></CircleIcon>
     </div>
-    <div class="col-md-10">
+    <div class="col-md-9">
       <InfoPanelDX :title="msgExchangePeriod" :msgDescribe="msgDescribeExchangePeriod" :icon="iconExchangePeriod" :styleIcon="styleCSSIconMessage" :offerUniversity="msgInfoExchangePeriod" :key="offerUniversity.id" class="bgGray"></InfoPanelDX>
     </div>
   </div>
 
   <div class="row mb-5 pb-5" style="margin-top: 300px">
-    <div class="col-md-10">
+    <div class="col-md-9">
       <InfoPanelSX :title="msgFieldOfStudy" :msgDescribe="msgDescribeFieldOfStudy" :icon="iconFieldOfStudy" :styleIcon="styleCSSIconMessage" :offerUniversity="msgInfoFieldOfStudy" :key="offerUniversity.id" class="bgRedFieldOfStudy"></InfoPanelSX>
     </div>
     <div class="col-md-1">
       <CircleIcon class="circleIconFieldOfStudy" :icon="iconFieldOfStudy" :styleIcon="styleCSSIcon"></CircleIcon>
     </div>
-    <div class="col-md-1"></div>
+    <div class="col-md-2"></div>
   </div>
 
-  <div class="row">
-    <div class="col-1"></div>
-    <div class="col-10 text-center mt-5 mb-5 pt-5">
-      <h1 class="stats-title pt-3 pb-3 me-5 pe-5">Statistiche</h1>
+  <div v-if="this.statisticsComputed">
+    <div class="row">
+      <div class="col-1"></div>
+      <div class="col-10 text-center mt-5 pt-5">
+        <h1 class="stats-title pt-3 pb-3 me-5 pe-5">Statistiche</h1>
+      </div>
     </div>
-  </div>
 
-  <div class="row">
-    <div class="col-md-1"></div>
-    <div class="col-md-4 me-4">
-      <PieChart :series="this.satisfaction" title="Soddisfazione Complessiva" width="500" v-if="this.statisticsComputed"></PieChart>
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-4 me-4">
+        <PieChart :series="this.satisfaction" title="Soddisfazione Complessiva" width="500" v-if="this.statisticsComputed"></PieChart>
+      </div>
+      <div class="col-md-6 ms-3">
+        <Histogram :data="this.teachingStatistics" color="#BB2E29" title="Didattica" width="700" v-if="this.statisticsComputed"></Histogram>
+      </div>
     </div>
-    <div class="col-md-6 ms-3">
-      <Histogram :data="this.teachingStatistics" color="#BB2E29" title="Didattica" width="700" v-if="this.statisticsComputed"></Histogram>
-    </div>
-  </div>
-  <div class="row mt-5 mb-5 pb-5">
-    <div class="col-md-1"></div>
-    <div class="col-md-6 me-4">
-      <BarChart :data="this.cityStatistics" title="Città" width="700" v-if="this.statisticsComputed"></BarChart>
-    </div>
-    <div class="col-md-4 ms-3">
-      <Histogram :data="this.campusStatistics" color="#798897" title="Campus" v-if="this.statisticsComputed"></Histogram>
+    <div class="row mt-5 mb-5 pb-5">
+      <div class="col-md-1"></div>
+      <div class="col-md-6 me-4">
+        <BarChart :data="this.cityStatistics" title="Città" width="700" v-if="this.statisticsComputed"></BarChart>
+      </div>
+      <div class="col-md-4 ms-3">
+        <Histogram :data="this.campusStatistics" color="#798897" title="Campus" v-if="this.statisticsComputed"></Histogram>
+      </div>
     </div>
   </div>
 </template>
@@ -265,8 +267,10 @@ export default defineComponent({
             this.msgInfoFieldOfStudy = this.offerUniversity.offer.field;
             this.srcImgWallpaper = this.offerUniversity.wallpaper;
             this.srcImgUniversityLogo = this.offerUniversity.logo;
-            this.computeStatistics();
-            this.statisticsComputed = true;
+            if(this.offerUniversity.reviews.length !== 0){
+              this.computeStatistics();
+              this.statisticsComputed = true;
+            }
           }
       ).catch(err => {
         console.log(err);
@@ -406,7 +410,6 @@ export default defineComponent({
   margin-top: 100px;
 }
 
-
 .bgRedApplicationsAvailable{
   background-color: #BB2E29;
   color: white;
@@ -415,7 +418,6 @@ export default defineComponent({
 }
 .circleIconApplicationsAvailable{
   float: right;
-
 }
 
 .bgGray{
@@ -440,6 +442,5 @@ export default defineComponent({
 .stats-title{
   background-color: #FFFFFF;
   box-shadow: 0 5px 10px rgba(0,0,0,.2);
-
 }
 </style>
