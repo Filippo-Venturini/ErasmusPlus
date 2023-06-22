@@ -132,8 +132,8 @@ export default defineComponent({
       nameUniversity: "",
       city: "",
       country: "",
-      latitude: 47.36667,
-      longitude: 8.55,
+      latitude: 0,
+      longitude: 0,
       period: "",
       places: "",
       field: "",
@@ -220,6 +220,8 @@ export default defineComponent({
     getOriginalOffer(id){
       axios.get('http://localhost:3000/universitydetail' + id).then(response => {
             this.originalOffer = response.data;
+            this.latitude = this.originalOffer.latitude;
+            this.longitude = this.originalOffer.longitude;
             this.nameUniversity = this.originalOffer.name;
             this.country = this.originalOffer.country;
             this.places = this.originalOffer.offer.places;
