@@ -132,8 +132,8 @@ export default defineComponent({
       nameUniversity: "",
       city: "",
       country: "",
-      latitude: 0,
-      longitude: 0,
+      latitude: 47.36667,
+      longitude: 8.55,
       period: "",
       places: "",
       field: "",
@@ -141,6 +141,7 @@ export default defineComponent({
       wallpaper: "",
       cardImg: "",
       plot: "",
+      reviews: [],
       receivedOriginalOffer: false,
       originalOffer: [],
     }
@@ -203,7 +204,8 @@ export default defineComponent({
         logo: this.logo,
         wallpaper:this.wallpaper,
         cardImg:this.cardImg,
-        plot:this.plot
+        plot:this.plot,
+        reviews:this.reviews
       };
       axios.put('http://localhost:3000/updateOffer' + this.id, json, {
         headers: {
@@ -226,6 +228,7 @@ export default defineComponent({
             this.period = this.originalOffer.offer.period;
             this.iconImage = this.originalOffer.logo;
             this.wallpaperImage = this.originalOffer.wallpaper;
+            this.reviews = this.originalOffer.reviews;
             this.receivedOriginalOffer = true;
           }
       ).catch(err => {
