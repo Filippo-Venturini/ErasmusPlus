@@ -1,5 +1,5 @@
 <template>
-  <FilterMenu @filterClicked="filterClicked"></FilterMenu>
+  <FilterMenu v-if="this.userAuthenticated && this.loggedUser.role !== 'Admin'" @filterClicked="filterClicked"></FilterMenu>
   <div class="row mt-4 mb-4">
     <template v-for="university in universities">
       <div class ="col-md-4 mt-5 d-flex justify-content-center" v-if="this.checkUniversity(university)">
@@ -25,7 +25,8 @@ export default defineComponent({
       halfFilter: false,
       fullFilter: false,
       favouritesFilter: false,
-      loggedUser: null
+      loggedUser: null,
+      userAuthenticated: false
     }
   },
   methods:{
@@ -35,6 +36,7 @@ export default defineComponent({
     getLoggedUser(){
       axios.get('http://localhost:3000/userdetail'+ sessionStorage.getItem("mail")).then(response =>{
         this.loggedUser = response.data;
+        this.userAuthenticated = true;
       }).catch(err => {
         console.log(err);
       })
