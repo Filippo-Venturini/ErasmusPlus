@@ -209,11 +209,52 @@ export default defineComponent({
           // Overwrite Axios's automatically set Content-Type
           'Content-Type': 'application/json'
         }
-      });
+      },
+
+      ).then(this.sendNotificationAddNewOffer())
     },
     redirect() {
-      window.location.replace("/");
+      //window.location.replace("/");
+    },
+    sendNotificationAddNewOffer(){
+      /*
+      var idUniversity;
+      axios.get('http://localhost:3000/universityFromName'+this.nameUniversity).then(response => {
+        idUniversity = response.data._id;
+      }).catch(err => {
+        console.log(err);
+      })
+      axios.get('http://localhost:3000/users').then(response =>{
+        this.users = response.data;
+        const jsonNotifications = [];
+        this.users.forEach(function(user){
+          jsonNotifications.push({
+            id: user,
+            text: "Una nuova offerta per l'università di " +this.nameUniversity + ", è stata aggiunta! Visualizzala ora!",
+            read: "false",
+            goto: "/universitydetail/" + idUniversity
+          })
+        });
+        jsonNotifications.forEach(function (json){
+          try{
+            axios.post('http://localhost:3000/sendNotificationToUser', json, {
+              headers: {
+                // Overwrite Axios's automatically set Content-Type
+                'Content-Type': 'application/json'
+              }
+            })
+          } catch (e) {
+            console.log(e)
+          }
+        })
+
+      }).catch(err => {
+        console.log(err);
+      })
+      */
+       
     }
+
   }
 });
 </script>
