@@ -25,7 +25,6 @@ exports.university_from_name = async(req, res) => {
     try {
         res.header("Access-Control-Allow-Origin", "*");
         res.json(await universitiesModel.findOne({name: req.params.name}));
-
     } catch (e) {
         res.json(e);
     }
@@ -50,6 +49,7 @@ exports.add_offer = async (req, res)=> {
     }catch (e) {
         res.json(e);
     }
+
 };
 
 exports.update_offer = async (req, res)=> {

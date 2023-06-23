@@ -127,7 +127,6 @@ exports.add_notification_to_user = async (req, res) => {
     } else {
         res.header('Access-Control-Allow-Origin', '*');
     }
-
     await usersModel.updateOne(
         {identificationNumber: req.body.id},
         { $push: {notification: { text: req.body.text, read: req.body.read, goto: req.body.goto}}}

@@ -211,15 +211,15 @@ export default defineComponent({
         }
       },
 
-      ).then(this.sendNotificationAddNewOffer())
+      ).then(response => this.sendNotificationAddNewOffer())
     },
     redirect() {
-      //window.location.replace("/");
+      window.location.replace("/");
     },
     sendNotificationAddNewOffer(){
-      /*
-      var idUniversity;
-      axios.get('http://localhost:3000/universityFromName'+this.nameUniversity).then(response => {
+      let idUniversity;
+      const nameUniversity = this.nameUniversity;
+      axios.get('http://localhost:3000/universityFromName'+nameUniversity).then(response => {
         idUniversity = response.data._id;
       }).catch(err => {
         console.log(err);
@@ -228,9 +228,10 @@ export default defineComponent({
         this.users = response.data;
         const jsonNotifications = [];
         this.users.forEach(function(user){
+          console.log(idUniversity);
           jsonNotifications.push({
-            id: user,
-            text: "Una nuova offerta per l'università di " +this.nameUniversity + ", è stata aggiunta! Visualizzala ora!",
+            id: user.identificationNumber,
+            text: "Una nuova offerta per l'università di " +nameUniversity + ", è stata aggiunta! Visualizzala ora!",
             read: "false",
             goto: "/universitydetail/" + idUniversity
           })
@@ -251,8 +252,6 @@ export default defineComponent({
       }).catch(err => {
         console.log(err);
       })
-      */
-       
     }
 
   }
