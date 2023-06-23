@@ -1,5 +1,5 @@
 <template>
-<FilterMenu @filterClicked="filterClicked"></FilterMenu>
+  <FilterMenu v-if="this.userAuthenticated && this.loggedUser.role !== 'Admin'" @filterClicked="filterClicked"></FilterMenu>
   <GoogleMap api-key="AIzaSyBUPW3FVdvim2r6KkMIvIYCouiBb1dPkvI" class="map" :center="center" :zoom="5">
     <template v-for="university in this.universities">
       <CustomMarker v-if="this.checkUniversity(university)" :options="{ position: {lat: university.latitude, lng: university.longitude}, anchorPoint: 'BOTTOM_CENTER' }">
@@ -32,7 +32,8 @@ export default defineComponent({
       studyFilter: false,
       halfFilter: false,
       fullFilter: false,
-      favouritesFilter: false
+      favouritesFilter: false,
+      userAuthenticated: false
     }
   },
   setup() {
@@ -47,6 +48,7 @@ export default defineComponent({
     getLoggedUser(){
       axios.get('http://localhost:3000/userdetail'+ sessionStorage.getItem("mail")).then(response =>{
         this.loggedUser = response.data;
+        this.userAuthenticated = true;
       }).catch(err => {
         console.log(err);
       })
@@ -99,7 +101,7 @@ export default defineComponent({
 <style scoped>
 .map{
   width: 100%;
-  height: 800px;
+  height: 1000px;
 }
 .marker:hover{
   transform: scale(1.20);

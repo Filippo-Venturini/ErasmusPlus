@@ -1,19 +1,17 @@
 <template>
 <div class="filter-menu row">
-  <template v-if="this.userAuthenticated && this.loggedUser.role !== 'Admin'">
-    <div class="col-1 d-flex justify-content-center align-items-center">
-      <i title="Preferiti" class="bi bi-bookmark-star filter-icon" :class="{clicked: savedClicked}" @click="this.onSavedClicked()"></i>
-    </div>
-    <div class="col-1 d-flex justify-content-center align-items-center">
-      <i title="Il mio ambito di studi" class="bi bi-book filter-icon" :class="{clicked: studyClicked}" @click="this.onStudyClicked()"></i>
-    </div>
-    <div class="col-1 d-flex justify-content-center align-items-center">
-      <i title="6 mesi" class="bi bi-circle-half filter-icon" :class="{clicked: halfClicked}" @click="this.onHalfClicked()"></i>
-    </div>
-    <div class="col-1 d-flex justify-content-center align-items-center">
-      <i title="12 mesi" class="bi bi-circle-fill filter-icon" :class="{clicked: fullClicked}" @click="this.onFullClicked()"></i>
-    </div>
-  </template>
+  <div class="col-1 d-flex justify-content-center align-items-center">
+    <i title="Preferiti" class="bi bi-bookmark-star filter-icon" :class="{clicked: savedClicked}" @click="this.onSavedClicked()"></i>
+  </div>
+  <div class="col-1 d-flex justify-content-center align-items-center">
+    <i title="Il mio ambito di studi" class="bi bi-book filter-icon" :class="{clicked: studyClicked}" @click="this.onStudyClicked()"></i>
+  </div>
+  <div class="col-1 d-flex justify-content-center align-items-center">
+    <i title="6 mesi" class="bi bi-circle-half filter-icon" :class="{clicked: halfClicked}" @click="this.onHalfClicked()"></i>
+  </div>
+  <div class="col-1 d-flex justify-content-center align-items-center">
+    <i title="12 mesi" class="bi bi-circle-fill filter-icon" :class="{clicked: fullClicked}" @click="this.onFullClicked()"></i>
+  </div>
 </div>
 </template>
 

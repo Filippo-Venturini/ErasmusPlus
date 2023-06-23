@@ -7,6 +7,7 @@ import AddOfferPage from "@/pages/AddOfferPage.vue";
 import SurveyPage from "@/pages/SurveyPage.vue";
 import LoginPage from "@/pages/LoginPage.vue";
 import UpdateOfferPage from "@/pages/UpdateOfferPage.vue";
+import NotFound from "@/pages/NotFound.vue";
 
 const routes = [
     { path: '/', name: 'Home', component: HomePage },
@@ -16,7 +17,9 @@ const routes = [
     { path: '/addoffer', name: 'AddOfferPage', component: AddOfferPage },
     { path: '/survey/:id', name: 'SurveyPage', component: SurveyPage },
     { path: '/login', name: 'LoginPage', component: LoginPage },
-    { path: '/updateOffer/:id', name: 'UpdateOffer', component: UpdateOfferPage}
+    { path: '/updateOffer/:id', name: 'UpdateOffer', component: UpdateOfferPage},
+    {path: '/404', name: 'NotFound', component: NotFound},
+    {path: '/:catchAll(.*)', redirect: '/404'}
 
 ]
 
