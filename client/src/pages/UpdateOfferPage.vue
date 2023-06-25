@@ -191,6 +191,8 @@ export default defineComponent({
 
     },
     modifyOffer(){
+      const newNameUniversity = this.nameUniversity;
+      const idUniversity = this.id;
       const json = {name:this.nameUniversity,
         city:this.city,
         country:this.country,
@@ -213,6 +215,34 @@ export default defineComponent({
           'Content-Type': 'application/json'
         }
       });
+
+      axios.get('http://localhost:3000/users').then(response =>{
+        this.users = response.data;
+        const jsonNotifications = [];
+        this.users.forEach(function(user){
+          jsonNotifications.push({
+            id: user.identificationNumber,
+            text: "L'offerta relativa a " + newNameUniversity + " è stata modificata",
+            read: "false",
+            goto: "/universitydetail/" + idUniversity
+          })
+        });
+        jsonNotifications.forEach(function (jsonUser){
+          try{
+            axios.post('http://localhost:3000/sendNotificationToUser', jsonUser, {
+              headers: {
+                // Overwrite Axios's automatically set Content-Type
+                'Content-Type': 'application/json'
+              }
+            })
+          } catch (e) {
+            console.log(e)
+          }
+        })
+
+      }).catch(err => {
+        console.log(err);
+      })
     },
     redirect() {
       window.location.replace("/universitydetail/" + this.id);

@@ -310,7 +310,7 @@ export default defineComponent({
             // Overwrite Axios's automatically set Content-Type
             'Content-Type': 'application/json'
           }
-        }).then(location.reload());
+        }).then(() => location.reload());
       } else {
         document.getElementById("threeOfferLabel").style.visibility = "visible";
       }
@@ -347,6 +347,22 @@ export default defineComponent({
       document.getElementById("heart").style.visibility = "hidden";
       document.getElementById("heart-fill").style.visibility = "visible";
 
+      let jsonNotification = {
+        id: sessionStorage.getItem("idUser"),
+        text: "Hai aggiunto l'università di " + this.offerUniversity.name + " nei preferiti!",
+        read: "false",
+        goto: "/"
+      };
+      try{
+        axios.post('http://localhost:3000/sendNotificationToUser', jsonNotification, {
+          headers: {
+            // Overwrite Axios's automatically set Content-Type
+            'Content-Type': 'application/json'
+          }
+        })
+      } catch (e) {
+        console.log(e)
+      }
     },
     removeFavourite() {
       try{
@@ -362,6 +378,23 @@ export default defineComponent({
 
       document.getElementById("heart").style.visibility = "visible";
       document.getElementById("heart-fill").style.visibility = "hidden";
+
+      let jsonNotification = {
+        id: sessionStorage.getItem("idUser"),
+        text: "Hai rimosso l'università di " + this.offerUniversity.name + " nei preferiti!",
+        read: "false",
+        goto: "/"
+      };
+      try{
+        axios.post('http://localhost:3000/sendNotificationToUser', jsonNotification, {
+          headers: {
+            // Overwrite Axios's automatically set Content-Type
+            'Content-Type': 'application/json'
+          }
+        })
+      } catch (e) {
+        console.log(e)
+      }
     },
     modifyOffer(){
       window.location.replace("/updateOffer/" + this.id);
@@ -370,10 +403,27 @@ export default defineComponent({
       var json ={
         text: "L'utente "+ this.user.name+ " " + this.user.surname + " con numero di matricola: " + this.user.identificationNumber+", si è candidato all'offerta relativa a "+this.offerUniversity.name,
         read: "false",
-        goto: "/universitydetail/" +this.offerUniversity._id
+        goto: "/applications"
       }
       try{
         axios.post('http://localhost:3000/sendNotificationToAdmin', json, {
+          headers: {
+            // Overwrite Axios's automatically set Content-Type
+            'Content-Type': 'application/json'
+          }
+        })
+      } catch (e) {
+        console.log(e)
+      }
+
+      let jsonNotification = {
+        id: sessionStorage.getItem("idUser"),
+        text: "Ti sei candidato per l'fferta relativa a " + this.offerUniversity.name + "!",
+        read: "false",
+        goto: "/userdetail"
+      };
+      try{
+        axios.post('http://localhost:3000/sendNotificationToUser', jsonNotification, {
           headers: {
             // Overwrite Axios's automatically set Content-Type
             'Content-Type': 'application/json'

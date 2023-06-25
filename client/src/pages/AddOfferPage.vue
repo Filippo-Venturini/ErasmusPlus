@@ -228,7 +228,7 @@ export default defineComponent({
         this.users = response.data;
         const jsonNotifications = [];
         this.users.forEach(function(user){
-          console.log(idUniversity);
+
           jsonNotifications.push({
             id: user.identificationNumber,
             text: "Una nuova offerta per l'università di " +nameUniversity + ", è stata aggiunta! Visualizzala ora!",

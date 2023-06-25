@@ -131,7 +131,7 @@ export default defineComponent({
           id: userId,
           text: "La tua domanda per l'università di " + applicationToModify.university + ", è stata accettata!",
           read: "false",
-          goto: "/"//TODO DA MODIFICARE
+          goto: "/userdetail"
         };
         try{
           axios.post('http://localhost:3000/sendNotificationToUser', jsonNotification, {
@@ -156,7 +156,7 @@ export default defineComponent({
           id: userId,
           text: "La tua domanda per l'università di " + applicationToModify.university + ", è stata rifiutata!",
           read: "false",
-          goto: "/"
+          goto: "/userdetail"
         };
         try{
           axios.post('http://localhost:3000/sendNotificationToUser', jsonNotification, {

@@ -33,6 +33,7 @@ export default defineComponent ({
           if(user.mail == this.mail && user.password == sha256(this.password)) {
             sessionStorage.setItem('mail',user.mail);
             sessionStorage.setItem('role',user.role);
+            sessionStorage.setItem('idUser',user.identificationNumber);
             this.$router.push('/');
           }
         })

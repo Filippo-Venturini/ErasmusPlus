@@ -51,6 +51,7 @@ exports.read_notification = async(req, res) => {
             {"notification._id": req.body.id},
             {$set: {"notification.$.read": "true"}}
         )
+        res.sendStatus(200);
     }catch (e) {
         res.json(e);
     }

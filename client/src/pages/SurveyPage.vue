@@ -205,6 +205,23 @@ export default defineComponent({
       } catch (e) {
         console.log(e)
       }
+
+      let jsonNotification = {
+        id: sessionStorage.getItem("idUser"),
+        text: "Hai completato il questionario relativo a " + this.nameUniversity + "!",
+        read: "false",
+        goto: "/universitydetail/" + this.university_id
+      };
+      try{
+        axios.post('http://localhost:3000/sendNotificationToUser', jsonNotification, {
+          headers: {
+            // Overwrite Axios's automatically set Content-Type
+            'Content-Type': 'application/json'
+          }
+        })
+      } catch (e) {
+        console.log(e)
+      }
     },
     showModal(){
       /*console.log(this.$refs.surveyExplainModal)

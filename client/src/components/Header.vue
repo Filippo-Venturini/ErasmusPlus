@@ -124,19 +124,20 @@ export default defineComponent({
       var body ={
         id: notification._id
       }
+      console.log(sessionStorage.getItem("mail"));
       axios.put('http://localhost:3000/' + sessionStorage.getItem("mail"),body , {
         headers: {
           // Overwrite Axios's automatically set Content-Type
           'Content-Type': 'application/json'
         }
-      });
-      window.location.replace(notification.goto);
+      }).then(() =>  window.location.replace(notification.goto));
+
     }
   },
   mounted() {
     this.showNotifications();
     if(sessionStorage.getItem('mail') === null){
-      //window.location.replace("/login");
+      window.location.replace("/login");
     }
     this.role = sessionStorage.getItem('role');
   }
