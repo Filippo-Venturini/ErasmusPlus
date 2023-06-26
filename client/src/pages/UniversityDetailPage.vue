@@ -116,13 +116,13 @@
 
   <div v-if="this.statisticsComputed">
     <div class="row">
-      <div class="col-1"></div>
+      <div class="col-1 me-5"></div>
       <div class="col-10 text-center mt-5 pt-5">
         <h1 class="stats-title pt-3 pb-3 me-5 pe-5">Statistiche</h1>
       </div>
     </div>
 
-    <div class="row">
+    <div class="row mt-5">
       <div class="col-md-1"></div>
       <div class="col-md-4 me-4">
         <PieChart :series="this.satisfaction" title="Soddisfazione Complessiva" width="500" v-if="this.statisticsComputed"></PieChart>
