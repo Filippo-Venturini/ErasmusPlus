@@ -63,7 +63,7 @@
     </div>
     <div class="col-8"></div>
     <div class="col-1 text-center" style="margin-top: -50px">
-      <i id="heart" class="bi bi-heart" style="font-size: 2rem;color: #D91A1A; visibility: visible; position: absolute; cursor: pointer" @click="addToFavourites()"></i>
+      <i id="heart" class="bi bi-heart heart-icon" @click="addToFavourites()"></i>
       <i id="heart-fill" class="bi bi-heart-fill" style="font-size: 2rem;color: #D91A1A; visibility:hidden; position: absolute; cursor: pointer" @click="removeFavourite()"></i>
     </div>
     <div class="col-3"></div>
@@ -492,5 +492,13 @@ export default defineComponent({
 .stats-title{
   background-color: #FFFFFF;
   box-shadow: 0 5px 10px rgba(0,0,0,.2);
+}
+
+.heart-icon{
+  font-size: 2rem;
+  color: #D91A1A;
+  visibility: visible;
+  position: absolute;
+  cursor: pointer
 }
 </style>
