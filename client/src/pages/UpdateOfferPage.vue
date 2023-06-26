@@ -22,6 +22,15 @@
   </div>
 
   <div class="row d-flex justify-content-center">
+    <div class="mb-3 col-2">
+      <input class="form-control" type="text" v-model="latitude" placeholder="Latitudine">
+    </div>
+    <div class="mb-3 col-2">
+      <input class="form-control" type="text" v-model="longitude" placeholder="Longitudine">
+    </div>
+  </div>
+
+  <div class="row d-flex justify-content-center">
     <div class="mb-3 col-5">
       <textarea class="form-control" v-model="plot" id="exampleFormControlTextarea1" rows="3" :placeholder="plot"></textarea>
     </div>
@@ -132,8 +141,8 @@ export default defineComponent({
       nameUniversity: "",
       city: "",
       country: "",
-      latitude: 0,
-      longitude: 0,
+      latitude: "",
+      longitude: "",
       period: "",
       places: "",
       field: "",
