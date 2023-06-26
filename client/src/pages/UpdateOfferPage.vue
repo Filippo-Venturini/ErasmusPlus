@@ -74,11 +74,11 @@
   <div class="row d-flex justify-content-center">
     <div class="mb-3 col-5 form-group">
       <label for="exampleFormControlSelect1">Ambito di studi:</label>
-      <select class="form-control" v-model="field" id="exampleFormControlSelect1">
-        <option value="Ingegneria Informatica">Ingegneria Informatica</option>
-        <option value="Artificial Intelligence">Artificial Intelligence</option>
-        <option value="Data Science">Data Science</option>
-        <option value="Sistemi Embedded">Sistemi Embedded</option>
+      <select v-if="receivedOriginalOffer" class="form-control" id="exampleFormControlSelect1">
+        <option value="Ingegneria Informatica" :selected="this.fieldOfStudySelected('Ingegneria Informatica')">Ingegneria Informatica</option>
+        <option value="Artificial Intelligence" :selected="this.fieldOfStudySelected('Artificial Intelligence')">Artificial Intelligence</option>
+        <option value="Data Science" :selected="this.fieldOfStudySelected('Data Science')">Data Science</option>
+        <option value="Sistemi Embedded" :selected="this.fieldOfStudySelected('Sistemi Embedded')">Sistemi Embedded</option>
       </select>
     </div>
   </div>
@@ -264,6 +264,7 @@ export default defineComponent({
             this.nameUniversity = this.originalOffer.name;
             this.country = this.originalOffer.country;
             this.places = this.originalOffer.offer.places;
+            this.field = this.originalOffer.offer.field;
             this.plot = this.originalOffer.plot;
             this.city = this.originalOffer.city;
             this.period = this.originalOffer.offer.period;
@@ -276,6 +277,9 @@ export default defineComponent({
         console.log(err);
       })
     },
+    fieldOfStudySelected(value){
+      return this.field === value
+    },
     getImageUrl(url){
       return new URL(`${url.slice(3)}`, import.meta.url)
     }
@@ -286,7 +290,6 @@ export default defineComponent({
     if(sessionStorage.getItem('role') !== "Admin"){
       window.location.replace("/");
     }
-
   }
 });
 </script>
