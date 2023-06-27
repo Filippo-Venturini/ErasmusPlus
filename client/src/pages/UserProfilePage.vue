@@ -49,7 +49,7 @@
       <UserProfileCircleIcon :title="msgPersonalInfo" class="circleIconPersonalInfo"></UserProfileCircleIcon>
     </div>
     <div class="col-2"></div>
-    <div class="col-7">
+    <div class="col-7 mb-lg-5">
       <ProfileInfoPanel  :title="msgPersonalInfo" :user="user" class="bgRedPersonalInfo"></ProfileInfoPanel>
     </div>
   </div>
