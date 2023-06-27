@@ -57,8 +57,8 @@
       <button id="btnRifiutata" v-if="checkIsApplied() === 'Rifiutata'" class="btn btn-danger" disabled>Rifiutata</button>
       <button id="btnAttesa" v-if="checkIsApplied() === 'Attesa'" class="btn btn-warning" disabled>Candidato</button>
       <button id="btnCandidati" v-else-if="this.user.role === 'Studente' && checkIsApplied() === '' && checkIsAccepted() == false" data-bs-toggle="modal" data-bs-target="#applicationModal" class="btn btn-outline-success">Candidati ora!</button>
-      <button v-else-if="this.user.role === 'Admin'" data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-outline-danger">Elimina</button>
-      <button v-if="this.user.role === 'Admin'"  class="btn btn-outline-warning" style="margin-left: 50px" @click="modifyOffer()">Modifica</button>
+      <button v-else-if="this.user.role === 'Admin' && checkIfSomeoneIsSigned() == false" data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-outline-danger">Elimina</button>
+      <button v-if="this.user.role === 'Admin' && checkIfSomeoneIsSigned() == false" class="btn btn-outline-warning" style="margin-left: 50px" @click="modifyOffer()">Modifica</button>
       <label id="threeOfferLabel" style="color: #D91A1A; visibility: hidden">Sei già candidato a 3 offerte!</label>
     </div>
     <div class="col-8"></div>
@@ -161,6 +161,7 @@ export default defineComponent({
   components: {BarChart, PieChart, Histogram, InfoPanelDX, UniversityLogo, Wallpaper, CircleIcon, Header, InfoPanelSX},
   data(){
     return{
+      allApplications: [],
       applications: [],
       offerUniversity: [],
       title: [],
@@ -195,6 +196,7 @@ export default defineComponent({
       statisticsComputed: false,
       user: [],
       isApplied: false,
+      someoneIsSigned: false
     }
   },
   methods:{
@@ -432,6 +434,28 @@ export default defineComponent({
       } catch (e) {
         console.log(e)
       }
+    },
+    getAllApplications(){
+      axios.get('http://localhost:3000/applications').then(response =>{
+            this.allApplications = response.data;
+          }
+      ).catch(err => {
+          console.log(err);
+      })
+    },
+    checkIfSomeoneIsSigned(){
+      this.allApplications.forEach(application => {
+        if(application.university == this.offerUniversity.name) {
+          if(application.state === 'Attesa' || application.state === 'Accettata'){
+            console.log("Entrato")
+            this.someoneIsSigned = true;
+            return true;
+          }
+        }
+      });
+      if(this.someoneIsSigned == false) {
+        return false;
+      }
     }
   },
   mounted() {
@@ -439,6 +463,7 @@ export default defineComponent({
     this.getUniversityDetail(this.id);
     this.getUser();
     this.getApplication();
+    this.getAllApplications();
     this.checkIsApplied();
   }
 })
