@@ -87,7 +87,7 @@
 
   <div class="row" style="margin-top: 200px">
     <div class="col-md-9">
-    <InfoPanelSX :title="msgApplicationsAvailable" :msgDescribe="msgDescribeApplicationsAvailable" :icon="iconApplicationsAvailable" :styleIcon="styleCSSIconMessage" :offerUniversity="msgInfoApplicationsAvailable" :key="offerUniversity.id" class="bgRedApplicationsAvailable" ></InfoPanelSX>
+      <InfoPanelSX :title="msgApplicationsAvailable" :msgDescribe="msgDescribeApplicationsAvailable" :icon="iconApplicationsAvailable" :styleIcon="styleCSSIconMessage" :offerUniversity="msgInfoApplicationsAvailable" :key="offerUniversity.id" class="bgRedApplicationsAvailable" ></InfoPanelSX>
     </div>
     <div class="col-md-1">
       <CircleIcon class="circleIconApplicationsAvailable" :icon="iconApplicationsAvailable" :styleIcon="styleCSSIcon"></CircleIcon>
@@ -350,22 +350,6 @@ export default defineComponent({
       document.getElementById("heart").style.visibility = "hidden";
       document.getElementById("heart-fill").style.visibility = "visible";
 
-      let jsonNotification = {
-        id: sessionStorage.getItem("idUser"),
-        text: "Hai aggiunto l'università di " + this.offerUniversity.name + " nei preferiti!",
-        read: "false",
-        goto: "/"
-      };
-      try{
-        axios.post('http://localhost:3000/sendNotificationToUser', jsonNotification, {
-          headers: {
-            // Overwrite Axios's automatically set Content-Type
-            'Content-Type': 'application/json'
-          }
-        })
-      } catch (e) {
-        console.log(e)
-      }
     },
     removeFavourite() {
       try{
@@ -382,22 +366,6 @@ export default defineComponent({
       document.getElementById("heart").style.visibility = "visible";
       document.getElementById("heart-fill").style.visibility = "hidden";
 
-      let jsonNotification = {
-        id: sessionStorage.getItem("idUser"),
-        text: "Hai rimosso l'università di " + this.offerUniversity.name + " nei preferiti!",
-        read: "false",
-        goto: "/"
-      };
-      try{
-        axios.post('http://localhost:3000/sendNotificationToUser', jsonNotification, {
-          headers: {
-            // Overwrite Axios's automatically set Content-Type
-            'Content-Type': 'application/json'
-          }
-        })
-      } catch (e) {
-        console.log(e)
-      }
     },
     modifyOffer(){
       window.location.replace("/updateOffer/" + this.id);
@@ -441,7 +409,7 @@ export default defineComponent({
             this.allApplications = response.data;
           }
       ).catch(err => {
-          console.log(err);
+        console.log(err);
       })
     },
     checkIfSomeoneIsSigned(){

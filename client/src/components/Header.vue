@@ -10,8 +10,17 @@
       <div class="col-md">
         <div class="row">
           <div class="col-md">
-            <i class="bi bi-list menu btn" id="menuId" @click="this.showMenuBox()"></i>
-            <i class="bi bi-bell bell btn" id="bellId" @click="this.showNotificationsBox()"></i>
+            <i class="bi bi-list menu " id="menuId" @click="this.showMenuBox()"></i>
+            <div v-if="newNotifications">
+              <i class="bi bi-bell-fill bellWithNotifications" @click="this.showNotificationsBox()">
+                <span class="position-absolute translate-middle p-2  rounded-circle badgeNotification">
+                  <span class="visually-hidden">New alerts</span>
+                </span>
+              </i>
+            </div>
+            <div v-else>
+              <i class="bi bi-bell bellWithoutNotifications" @click="this.showNotificationsBox()"></i>
+            </div>
           </div>
 
         </div>
@@ -20,7 +29,7 @@
             <div class="boxNotifications" id="boxNotificationsId" v-if="boxMenuIsOpen === false">
               <div v-if="newNotifications">
                 <template v-for="notification in notifications">
-                    <p class="textNotification" id="textNotificationID" @click="this.clickNotification(notification)"><i class="bi bi-envelope-fill"></i>&ensp;&ensp;&ensp;&ensp;  {{notification.text}} </p>
+                  <p class="textNotification" id="textNotificationID" @click="this.clickNotification(notification)"><i class="bi bi-envelope-fill"></i>&ensp;&ensp;&ensp;&ensp;  {{notification.text}} </p>
                 </template>
               </div>
               <div v-else class="textNotification" style="text-align: center">Hai letto tutte le notifiche!</div>
@@ -49,14 +58,17 @@
 <script>
 import {defineComponent} from "vue";
 import axios from "axios";
+import SvgIcon from '@jamescoyle/vue-icon'
+import { mdiAccount } from '@mdi/js'
 
 export default defineComponent({
   name: "Header",
+
   data(){
     return{
       notifications: [],
       user: [],
-      newNotifications: true,
+      newNotifications: false,
       boxMenuIsOpen: false,
       boxNotificationsIsOpen: false,
       role: "",
@@ -104,10 +116,13 @@ export default defineComponent({
 
         if(tmp.length === 0){
           this.newNotifications = false;
+          sessionStorage.setItem('newNotification',"false");
 
         }else{
           this.newNotifications = true;
           this.notifications = tmp;
+          sessionStorage.setItem('newNotification',"true");
+
         }
       }).catch(err => {
         console.log(err);
@@ -158,16 +173,30 @@ export default defineComponent({
   float: left;
 }
 
-.bell{
+.bellWithNotifications{
   float: right;
   font-size: 30px;
   color: white;
   cursor: pointer;
   margin-top: 35px;
-  margin-right: 30px;
+  margin-right: 70px;
 }
 
-.bell:hover{
+.bellWithNotifications:hover{
+  color: #FFFFFF;
+  transform: scale(1.20);
+}
+
+.bellWithoutNotifications{
+  float: right;
+  font-size: 30px;
+  color: white;
+  cursor: pointer;
+  margin-top: 35px;
+  margin-right: 70px;
+}
+
+.bellWithoutNotifications:hover{
   color: #FFFFFF;
   transform: scale(1.20);
 }
@@ -255,6 +284,13 @@ export default defineComponent({
 
 .menuItems:hover{
   font-weight: bold;
+}
+
+.badgeNotification{
+  margin-top: 14px;
+  margin-left: -5px;
+  background-color: white;
+  border: 1px solid black;
 }
 
 </style>
