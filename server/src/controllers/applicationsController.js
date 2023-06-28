@@ -2,6 +2,7 @@ const applicationsModel = require('../models/applicationsModel');
 const index = require('../../src/index');
 const universitiesModel = require("../models/universitiesModel");
 const {application} = require("express");
+const usersModel = require("../models/usersModel");
 
 exports.all_applications = async(req, res) => {
     try{
@@ -69,4 +70,25 @@ exports.refuse_all = async (req, res) => {
     index.sendUpdatedApplications(updatedApplications);
 }
 
+exports.change_to_terminated = async (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header('Access-Control-Allow-Methods', 'GET,PUT, POST,DELETE');
+    res.header("Access-Control-Allow-Headers", "Content-type,Accept,X-Custom-Header");
+
+    if (req.method === "OPTIONS") {
+        res.header('Access-Control-Allow-Origin', req.headers.origin);
+    } else {
+        res.header('Access-Control-Allow-Origin', '*');
+    }
+
+    try {
+        await applicationsModel.updateOne(
+            {id_student: req.params.id, university: req.body.universityName},
+            {$set: {"state": "Terminata"}}
+        );
+    } catch (e) {
+        res.json(e);
+    }
+
+}
 

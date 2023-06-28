@@ -51,8 +51,9 @@
       <button id="btnAccettata" v-if="checkIsApplied() === 'Accettata'" class="btn btn-success" disabled>Accettata</button>
 
       <RouterLink class="nav-link" :to="{path: '/survey/'+this.offerUniversity._id}">
-        <button id="btnTermina" v-if="checkIsApplied() === 'Accettata'"  class="btn btn-outline-warning" style="margin-left: 60px" @click="">Termina</button>
+        <button id="btnTermina" v-if="checkIsApplied() === 'Accettata'"  class="btn btn-outline-warning" style="margin-left: 60px" @click="changeToTerminated()">Termina</button>
       </RouterLink>
+      <button id="btnTerminata" v-if="checkIsApplied() === 'Terminata'" class="btn success" disabled>Terminata</button>
 
       <button id="btnRifiutata" v-if="checkIsApplied() === 'Rifiutata'" class="btn btn-danger" disabled>Rifiutata</button>
       <button id="btnAttesa" v-if="checkIsApplied() === 'Attesa'" class="btn btn-warning" disabled>Candidato</button>
@@ -329,7 +330,7 @@ export default defineComponent({
     },
     checkIsAccepted(){
       for(let i=0; i<this.applications.length; i++) {
-        if(this.applications[i].state === "Accettata") {
+        if(this.applications[i].state === "Accettata" || this.applications[i].state === "Terminata") {
           return true
         }
       }
@@ -456,6 +457,20 @@ export default defineComponent({
       if(this.someoneIsSigned == false) {
         return false;
       }
+    },
+    changeToTerminated(){
+
+      console.log("click Termina");
+      const json = {
+        universityName: this.offerUniversity.name
+      };
+
+      axios.post('http://localhost:3000/changeToTerminated'+sessionStorage.getItem("idUser"), json,{
+        headers: {
+          // Overwrite Axios's automatically set Content-Type
+          'Content-Type': 'application/json'
+        }
+      });
     }
   },
   mounted() {

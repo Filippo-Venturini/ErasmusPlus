@@ -15,6 +15,8 @@ router.route('/addApplication')
 router.route('/refuseAll')
     .post((req, res) => applicationsController.refuse_all(req, res))
 
+router.route('/changeToTerminated:id')
+    .post((req, res) => applicationsController.change_to_terminated(req, res))
 
 
 module.exports = router;
