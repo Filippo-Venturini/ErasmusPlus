@@ -1,7 +1,7 @@
 <template>
   <Header></Header>
-  <img v-if="receivedOriginalOffer" class="wallpaper mt-5" :src="getImageUrl(wallpaperImage)">
-  <img v-if="receivedOriginalOffer" class="icon" :src="getImageUrl(iconImage)">
+  <img v-if="receivedOriginalOffer" class="wallpaper mt-5" :src="getImageUrl(wallpaper)">
+  <img v-if="receivedOriginalOffer" class="icon" :src="getImageUrl(logo)">
 
   <div class="row d-flex justify-content-center">
     <div class="mb-3 col-5">
@@ -136,8 +136,6 @@ export default defineComponent({
   components: {Header},
   data(){
     return{
-      wallpaperImage: "",
-      iconImage: "",
       nameUniversity: "",
       city: "",
       country: "",
@@ -268,8 +266,9 @@ export default defineComponent({
             this.plot = this.originalOffer.plot;
             this.city = this.originalOffer.city;
             this.period = this.originalOffer.offer.period;
-            this.iconImage = this.originalOffer.logo;
-            this.wallpaperImage = this.originalOffer.wallpaper;
+            this.logo = this.originalOffer.logo;
+            this.wallpaper = this.originalOffer.wallpaper;
+            this.cardImg = this.originalOffer.cardImg;
             this.reviews = this.originalOffer.reviews;
             this.receivedOriginalOffer = true;
           }
