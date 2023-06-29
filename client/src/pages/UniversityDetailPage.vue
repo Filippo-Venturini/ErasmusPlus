@@ -58,8 +58,9 @@
       <button id="btnRifiutata" v-if="checkIsApplied() === 'Rifiutata'" class="btn btn-danger" disabled>Rifiutata</button>
       <button id="btnAttesa" v-if="checkIsApplied() === 'Attesa'" class="btn btn-warning" disabled>Candidato</button>
       <button id="btnCandidati" v-else-if="this.user.role === 'Studente' && checkIsApplied() === '' && checkIsAccepted() == false" data-bs-toggle="modal" data-bs-target="#applicationModal" class="btn btn-outline-success">Candidati ora!</button>
-      <button v-else-if="this.user.role === 'Admin' && checkIfSomeoneIsSigned() == false" data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-outline-danger">Elimina</button>
-      <button v-if="this.user.role === 'Admin' && checkIfSomeoneIsSigned() == false" class="btn btn-outline-warning" style="margin-left: 50px" @click="modifyOffer()">Modifica</button>
+      <button v-else-if="this.user.role === 'Admin' && someoneIsSigned == false" data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-outline-danger">Elimina</button>
+      <button v-if="this.user.role === 'Admin' && someoneIsSigned == false" class="btn btn-outline-warning" style="margin-left: 50px" @click="modifyOffer()">Modifica</button>
+      <label v-if="this.user.role === 'Admin' && someoneIsSigned == true" style="color: #D91A1A">Non puoi modificare quest'offerta, qualcuno è già iscritto!</label>
       <label id="threeOfferLabel" style="color: #D91A1A; visibility: hidden">Sei già candidato a 3 offerte!</label>
     </div>
     <div class="col-8"></div>
@@ -212,6 +213,7 @@ export default defineComponent({
             this.applications.push(application);
           }
         })
+        this.checkIsApplied();
       }).catch(err => {
         console.log(err);
       })
@@ -411,6 +413,7 @@ export default defineComponent({
     getAllApplications(){
       axios.get('http://localhost:3000/applications').then(response =>{
             this.allApplications = response.data;
+            this.checkIfSomeoneIsSigned();
             this.applicationsLoaded = true;
       }).catch(err => {
         console.log(err);
@@ -422,13 +425,9 @@ export default defineComponent({
           if(application.state === 'Attesa' || application.state === 'Accettata'){
             console.log("Entrato")
             this.someoneIsSigned = true;
-            return true;
           }
         }
       });
-      if(this.someoneIsSigned == false) {
-        return false;
-      }
     },
     changeToTerminated(){
 
