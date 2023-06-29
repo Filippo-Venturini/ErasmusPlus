@@ -58,8 +58,6 @@
 <script>
 import {defineComponent} from "vue";
 import axios from "axios";
-import SvgIcon from '@jamescoyle/vue-icon'
-import { mdiAccount } from '@mdi/js'
 
 export default defineComponent({
   name: "Header",
