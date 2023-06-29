@@ -3,7 +3,7 @@
   <div class="d-flex justify-content-center fw-bold mt-5">
     <h1>Gestione candidature</h1>
   </div>
-  <UniversityApplicationPanel v-for="university in universities" :university="university" :applications="applications" :key="applications.id"></UniversityApplicationPanel>
+  <UniversityApplicationPanel v-if="applicationsLoaded" v-for="university in universities" :university="university" :applications="applications" :key="applications.id"></UniversityApplicationPanel>
 
 </template>
 
@@ -20,6 +20,7 @@ export default defineComponent({
     return{
       universities: [],
       applications: [],
+      applicationsLoaded: false,
       socket: io('localhost:3000')
     }
   },
@@ -35,8 +36,8 @@ export default defineComponent({
     getAllApplications(){
       axios.get('http://localhost:3000/applications').then(response =>{
           this.applications = response.data;
-          }
-      ).catch(err => {
+          this.applicationsLoaded = true;
+      }).catch(err => {
         console.log(err);
       })
     }
@@ -46,6 +47,7 @@ export default defineComponent({
     this.getAllUniversities();
     this.socket.on('APPLICATIONS', (data) => {
       this.applications = data;//JSON.parse(data);
+      this.prova = true;
     })
     this.socket.on('UNIVERSITIES', (data) => {
       this.universities = data;//JSON.parse(data);

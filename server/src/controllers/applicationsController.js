@@ -3,7 +3,6 @@ const index = require('../../src/index');
 const universitiesModel = require("../models/universitiesModel");
 const {application} = require("express");
 const usersModel = require("../models/usersModel");
-
 exports.all_applications = async(req, res) => {
     try{
         res.header("Access-Control-Allow-Origin", "*");

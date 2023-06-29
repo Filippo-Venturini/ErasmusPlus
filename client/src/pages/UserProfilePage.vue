@@ -5,7 +5,7 @@
     <div class="row d-flex text-center" style="margin-top: 120px">
       <h2>Le mie candidature</h2>
     </div>
-    <div class="row d-flex justify-content-center">
+    <div v-if="applicationsLoaded" class="row d-flex justify-content-center">
       <div class="col-5 m-3">
         <table class="table table-bordered">
           <thead>
@@ -76,7 +76,8 @@ export default defineComponent ({
       applications: [],
       logged: [],
       msgContacts: "Contatti",
-      msgPersonalInfo: "Informazioni Personali"
+      msgPersonalInfo: "Informazioni Personali",
+      applicationsLoaded: false
     }
   },
   methods:{
@@ -94,9 +95,9 @@ export default defineComponent ({
         allApplications.forEach(application => {
             if(application.student === (this.user.name+" "+this.user.surname)) {
               this.applications.push(application);
-              console.log(application);
             }
         })
+        this.applicationsLoaded = true;
       }).catch(err => {
         console.log(err);
       })

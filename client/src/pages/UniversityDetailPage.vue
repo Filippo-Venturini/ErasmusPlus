@@ -47,7 +47,7 @@
   </div>
   <div class="row me-5">
     <div class="col-md-1"></div>
-    <div class="col-md-2 mt-4 text-center">
+    <div v-if="applicationsLoaded" class="col-md-2 mt-4 text-center">
       <button id="btnAccettata" v-if="checkIsApplied() === 'Accettata'" class="btn btn-success" disabled>Accettata</button>
 
       <RouterLink class="nav-link" :to="{path: '/survey/'+this.offerUniversity._id}">
@@ -197,7 +197,8 @@ export default defineComponent({
       statisticsComputed: false,
       user: [],
       isApplied: false,
-      someoneIsSigned: false
+      someoneIsSigned: false,
+      applicationsLoaded: false,
     }
   },
   methods:{
@@ -407,6 +408,7 @@ export default defineComponent({
     getAllApplications(){
       axios.get('http://localhost:3000/applications').then(response =>{
             this.allApplications = response.data;
+            this.applicationsLoaded = true;
           }
       ).catch(err => {
         console.log(err);
