@@ -286,8 +286,11 @@ export default defineComponent({
         for(let i=0; i<this.user.favourites.length; i++) {
           if(this.user.favourites[i].universityName == this.offerUniversity.name) {
             document.getElementById("heart").style.visibility = "hidden";
-            document.getElementById("heart-fill").style.visibility = "visible";          }
+            document.getElementById("heart-fill").style.visibility = "visible";
+          }
         }
+        this.getApplication();
+
       }).catch(err => {
         console.log(err);
       })
@@ -409,8 +412,7 @@ export default defineComponent({
       axios.get('http://localhost:3000/applications').then(response =>{
             this.allApplications = response.data;
             this.applicationsLoaded = true;
-          }
-      ).catch(err => {
+      }).catch(err => {
         console.log(err);
       })
     },
@@ -447,7 +449,6 @@ export default defineComponent({
     this.id = this.$route.params.id;
     this.getUniversityDetail(this.id);
     this.getUser();
-    this.getApplication();
     this.getAllApplications();
     this.checkIsApplied();
   }

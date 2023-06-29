@@ -1,23 +1,6 @@
 <template>
 <Header></Header>
 
-  <div ref="surveyExplainModal" class="modal fade" id="surveyExplainModal" tabindex="-1" aria-labelledby="myModal" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Conferma candidatura</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          Confermi la tua candidatura per l'università?
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-success" @click="applyToUniversity()" data-bs-dismiss="modal" >Conferma</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <div ref="finishedSurveyModal" class="modal fade" id="finishedSurveyModal" tabindex="-1" aria-labelledby="myModal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
@@ -37,9 +20,16 @@
     </div>
   </div>
 
-  <div class="d-flex justify-content-center m-5" data-bs-toggle="modal" data-bs-target="#surveyExplainModal">
+  <div class="d-flex justify-content-center" style="margin-bottom: 10px; margin-top: 50px;" data-bs-toggle="modal" data-bs-target="#surveyExplainModal">
     <h1>Valutazione Esperienza</h1>
   </div>
+  <div class="row">
+    <div class="col-2"></div>
+    <div class="col-8">
+      <label class="justify-content-center text-center" style="margin-bottom: 30px;">Questa è la spiegazione di questo questionario, Ventu appena riesce scriverà un bellissimo testo che invogli a compilarlo e a non lasciarlo tutto vuoto.</label>
+    </div>
+  </div>
+
 
   <SurveyPanel title="Campus"
                first-row-label="Servizi offerti (Mensa, biblioteca ecc.)"

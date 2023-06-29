@@ -77,13 +77,14 @@ export default defineComponent ({
       logged: [],
       msgContacts: "Contatti",
       msgPersonalInfo: "Informazioni Personali",
-      applicationsLoaded: false
+      applicationsLoaded: false,
     }
   },
   methods:{
     getUser(){
       axios.get('http://localhost:3000/userdetail'+ sessionStorage.getItem("mail")).then(response =>{
             this.user = response.data;
+            this.getApplication();
       }).catch(err => {
         console.log(err);
       })
@@ -114,7 +115,6 @@ export default defineComponent ({
   },
   mounted() {
     this.getUser();
-    this.getApplication();
     this.logged = sessionStorage.getItem("mail");
   }
 })
