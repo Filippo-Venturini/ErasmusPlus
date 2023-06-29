@@ -64,7 +64,7 @@
       <label id="threeOfferLabel" style="color: #D91A1A; visibility: hidden">Sei già candidato a 3 offerte!</label>
     </div>
     <div class="col-8"></div>
-    <div class="col-1 text-center" style="margin-top: -50px">
+    <div v-if="this.user.role != 'Admin'" class="col-1 text-center" style="margin-top: -50px">
       <i id="heart" class="bi bi-heart heart-icon" @click="addToFavourites()"></i>
       <i id="heart-fill" class="bi bi-heart-fill" style="font-size: 2rem;color: #D91A1A; visibility:hidden; position: absolute; cursor: pointer" @click="removeFavourite()"></i>
     </div>
