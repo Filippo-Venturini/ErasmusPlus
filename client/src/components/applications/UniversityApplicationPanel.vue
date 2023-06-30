@@ -1,57 +1,60 @@
 <template>
-  <div class="row d-flex justify-content-center mt-5">
-    <div class="col-5">
-      <h2>{{ university.name }}</h2>
-      <div class="m-lg-3">
-        <p>Posti disponibili: {{university.offer.places}}</p>
+  <div class="mb-5 pb-5">
+    <div class="row d-flex justify-content-center mt-5">
+      <div class="col-5">
+        <h2>{{ university.name }}</h2>
+        <div class="m-lg-3">
+          <p style="font-weight: lighter; font-size: 20px">Posti disponibili: {{university.offer.places}}</p>
+        </div>
+      </div>
+    </div>
+    <div v-if="!this.applicationPresent" class="d-flex justify-content-center">
+      <div class="no-applications align-items-center p-4 mt-5">
+        <p style="font-weight: lighter; font-size: 20px">Non sono presenti candidature per questa università</p>
+      </div>
+    </div>
+    <div class="row d-flex justify-content-center mt-4">
+      <div v-if="this.applicationPresent" class="col-5">
+        <table class="table table-bordered">
+          <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Università</th>
+            <th scope="col">Studente</th>
+            <th scope="col">Data candidatura</th>
+            <th scope="col">Accettazione</th>
+          </tr>
+          </thead>
+          <tbody>
+          <template v-for="application in this.applications">
+            <tr v-if="university.name === application.university">
+              <th scope="row">1</th>
+              <td>{{application.university}}</td>
+              <td>{{application.student}}</td>
+              <td>{{application.date}}</td>
+              <td>
+                <div class="d-flex justify-content-end" v-if="application.state === 'Attesa'">
+                  <button class="btn-circle-yes btn-xl d-flex justify-content-center align-items-center" @click="onAccept(application)">
+                    <i class="bi bi-check-lg accept-icon"></i>
+                  </button>
+                  <button class="btn-circle-no btn-xl d-flex justify-content-center align-items-center" @click="onReject(application)">
+                    <i class="bi bi-x-lg reject-icon"></i></button>
+                </div>
+                <div v-if="application.state === 'Accettata'">
+                  <p style="color: springgreen">Accettata</p>
+                </div>
+                <div v-if="application.state === 'Rifiutata'">
+                  <p style="color: #D91A1A">Rifiutata</p>
+                </div>
+              </td>
+            </tr>
+          </template>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
-  <div v-if="!this.applicationPresent" class="d-flex justify-content-center">
-    <div class="no-applications align-items-center p-3">
-      <p>Non sono presenti candidature per questa università</p>
-    </div>
-  </div>
-  <div class="row d-flex justify-content-center">
-    <div v-if="this.applicationPresent" class="col-5">
-      <table class="table table-bordered">
-        <thead>
-        <tr>
-          <th scope="col"></th>
-          <th scope="col">Università</th>
-          <th scope="col">Studente</th>
-          <th scope="col">Data candidatura</th>
-          <th scope="col">Accettazione</th>
-        </tr>
-        </thead>
-        <tbody>
-        <template v-for="application in this.applications">
-          <tr v-if="university.name === application.university">
-            <th scope="row">1</th>
-            <td>{{application.university}}</td>
-            <td>{{application.student}}</td>
-            <td>{{application.date}}</td>
-            <td>
-              <div class="d-flex justify-content-end" v-if="application.state === 'Attesa'">
-                <button class="btn-circle-yes btn-xl d-flex justify-content-center align-items-center" @click="onAccept(application)">
-                  <i class="bi bi-check-lg accept-icon"></i>
-                </button>
-                <button class="btn-circle-no btn-xl d-flex justify-content-center align-items-center" @click="onReject(application)">
-                  <i class="bi bi-x-lg reject-icon"></i></button>
-              </div>
-              <div v-if="application.state === 'Accettata'">
-                <p style="color: springgreen">Accettata</p>
-              </div>
-              <div v-if="application.state === 'Rifiutata'">
-                <p style="color: #D91A1A">Rifiutata</p>
-              </div>
-            </td>
-          </tr>
-        </template>
-        </tbody>
-      </table>
-    </div>
-  </div>
+
 </template>
 
 <script>
