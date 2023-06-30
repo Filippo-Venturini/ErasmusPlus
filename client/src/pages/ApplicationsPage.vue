@@ -50,7 +50,6 @@ export default defineComponent({
     this.getAllUniversities();
     this.socket.on('APPLICATIONS', (data) => {
       this.applications = data;//JSON.parse(data);
-      this.prova = true;
     })
     this.socket.on('UNIVERSITIES', (data) => {
       this.universities = data;//JSON.parse(data);

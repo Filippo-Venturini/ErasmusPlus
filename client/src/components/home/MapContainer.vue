@@ -101,7 +101,7 @@ export default defineComponent({
 <style scoped>
 .map{
   width: 100%;
-  height: 1000px;
+  height: 88vh;
 }
 .marker:hover{
   transform: scale(1.20);
