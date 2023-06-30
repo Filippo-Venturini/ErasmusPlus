@@ -43,6 +43,9 @@ export default defineComponent({
     }
   },
   mounted() {
+    if(sessionStorage.getItem('role') !== "Admin"){
+      window.location.replace("/404");
+    }
     this.getAllApplications();
     this.getAllUniversities();
     this.socket.on('APPLICATIONS', (data) => {

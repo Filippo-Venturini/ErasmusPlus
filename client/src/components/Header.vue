@@ -29,10 +29,17 @@
             <div class="boxNotifications" id="boxNotificationsId" v-if="boxMenuIsOpen === false">
               <div v-if="newNotifications">
                 <template v-for="notification in notifications">
-                  <p class="textNotification" id="textNotificationID" @click="this.clickNotification(notification)"><i class="bi bi-envelope-fill"></i>&ensp;&ensp;&ensp;&ensp;  {{notification.text}} </p>
+                  <div class="row mb-3 textNotification">
+                    <div class="col-md-2 d-flex justify-content-center align-items-center">
+                      <i class="bi bi-envelope-fill"></i>
+                    </div>
+                    <div class="col-md-10 d-flex align-items-center">
+                      <p class="align-middle m-0" id="textNotificationID" @click="this.clickNotification(notification)">{{notification.text}} </p>
+                    </div>
+                  </div>
                 </template>
               </div>
-              <div v-else class="textNotification" style="text-align: center">Hai letto tutte le notifiche!</div>
+              <div v-else class="textNotification" style="text-align: center; font-weight: lighter; font-size: 18px">Hai letto tutte le notifiche!</div>
             </div>
 
             <div class="boxMenu"  id="boxMenuId" v-if="boxNotificationsIsOpen === false">
@@ -267,10 +274,13 @@ export default defineComponent({
   border-radius:10px;
   padding:10px 10px 10px 36px;
   cursor: pointer;
+  font-weight: lighter;
+  font-size: 18px
 }
 
 .textNotification:hover{
-  font-weight: bold;
+
+  font-size: 20px;
 }
 
 .menuItems{

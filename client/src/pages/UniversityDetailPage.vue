@@ -395,7 +395,7 @@ export default defineComponent({
 
       let jsonNotification = {
         id: sessionStorage.getItem("idUser"),
-        text: "Ti sei candidato per l'fferta relativa a " + this.offerUniversity.name + "!",
+        text: "Ti sei candidato per l'offerta relativa a " + this.offerUniversity.name + "!",
         read: "false",
         goto: "/userdetail"
       };

@@ -284,6 +284,9 @@ export default defineComponent({
     }
   },
   mounted() {
+    if(sessionStorage.getItem('role') !== "Admin"){
+      window.location.replace("/404");
+    }
     this.id = this.$route.params.id;
     this.getOriginalOffer(this.id);
     if(sessionStorage.getItem('role') !== "Admin"){

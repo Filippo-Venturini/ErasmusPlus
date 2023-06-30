@@ -263,6 +263,11 @@ export default defineComponent({
       })
     }
 
+  },
+  mounted() {
+    if(sessionStorage.getItem('role') !== "Admin"){
+      window.location.replace("/404");
+    }
   }
 });
 </script>
