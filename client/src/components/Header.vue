@@ -13,7 +13,7 @@
             <i class="bi bi-list menu " id="menuId" @click="this.showMenuBox()"></i>
             <div v-if="newNotifications">
               <i class="bi bi-bell-fill bellWithNotifications" @click="this.showNotificationsBox()">
-                <span class="position-absolute translate-middle p-2  rounded-circle badgeNotification">
+                <span class="position-absolute translate-middle p-2 rounded-circle badgeNotification">
                   <span class="visually-hidden">New alerts</span>
                 </span>
               </i>
@@ -287,8 +287,8 @@ export default defineComponent({
 .badgeNotification{
   margin-top: 14px;
   margin-left: -5px;
-  background-color: white;
-  border: 1px solid black;
+  background-color: #008AC7;
+  border: 1px solid #008AC7;
 }
 
 </style>
