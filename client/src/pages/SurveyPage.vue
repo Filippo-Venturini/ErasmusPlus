@@ -26,7 +26,12 @@
   <div class="row">
     <div class="col-2"></div>
     <div class="col-8">
-      <label class="justify-content-center text-center" style="margin-bottom: 30px;">Questa è la spiegazione di questo questionario, Ventu appena riesce scriverà un bellissimo testo che invogli a compilarlo e a non lasciarlo tutto vuoto.</label>
+      <label class="justify-content-center text-center" style="margin-bottom: 30px;">Compilando il questionario aiuterai altri
+        studenti che sono interessati a partecipare al programma Erasmus+. Il tuo contributo è fondamentale
+        per facilitare la scelta di altri colleghi, in base alla tua esperienza. Il questionario richiede
+        di esprimere un giudizio su tutte le questioni di massimo interesse che riguardano la Città, il Campus, la Didattica e gli Alloggi.
+        Per ogni voce è necessario inserire un grado di soddisfazione (1 totalmente insoddisfatto, 5 molto soddisfatto).
+      Si ricorda che il questionario è totalmente anonimo e verrà rielaborato per redigere le statistiche dell'offerta corrispondente.</label>
     </div>
   </div>
 
@@ -60,7 +65,7 @@
                @firstRow="onCostoAlloggio" @secondRow="onAlloggiDisponibili" @thirdRow="onQualitaAlloggi" @fourthRow="onVicinanza"></SurveyPanel>
 
 
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center mb-5 pb-5 mt-5 pt-5">
       <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#finishedSurveyModal">Invia questionario</button>
     </div>
 </template>
