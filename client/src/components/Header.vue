@@ -148,10 +148,10 @@ export default defineComponent({
     }
   },
   mounted() {
-    this.showNotifications();
     if(sessionStorage.getItem('mail') === null){
       window.location.replace("/login");
     }
+    this.showNotifications();
     this.role = sessionStorage.getItem('role');
   }
 });

@@ -96,7 +96,7 @@
     <div class="col-md-2"></div>
   </div>
 
-  <div class="row" style="margin-top: 300px">
+  <div class="row" style="margin-top: 200px">
     <div class="col-md-2"></div>
     <div class="col-md-1">
       <CircleIcon class="circleIconExchangePeriod" :icon="iconExchangePeriod" :styleIcon="styleCSSIcon"></CircleIcon>
@@ -106,7 +106,7 @@
     </div>
   </div>
 
-  <div class="row mb-5 pb-5" style="margin-top: 300px">
+  <div class="row mb-5 pb-5" style="margin-top: 200px">
     <div class="col-md-9">
       <InfoPanelSX :title="msgFieldOfStudy" :msgDescribe="msgDescribeFieldOfStudy" :icon="iconFieldOfStudy" :styleIcon="styleCSSIconMessage" :offerUniversity="msgInfoFieldOfStudy" :key="offerUniversity.id" class="bgRedFieldOfStudy"></InfoPanelSX>
     </div>
@@ -458,22 +458,22 @@ export default defineComponent({
 
 .title{
   font-weight: bold;
-  font-size: 50px;
+  font-size: 55px;
 }
 
 .place{
-  font-size: 30px;
+  font-size: 35px;
 }
 
 .plot{
-  font-size: 20px;
+  font-size: 25px;
   margin-top: 100px;
 }
 
 .bgRedApplicationsAvailable{
   background-color: #BB2E29;
   color: white;
-  height: 250px;
+  padding-bottom: 60px;
 
 }
 .circleIconApplicationsAvailable{
@@ -484,7 +484,7 @@ export default defineComponent({
   background-color: #717171;
   float: right;
   color: white;
-  height: 250px;
+  padding-bottom: 60px;
 
 }
 .circleIconExchangePeriod{
