@@ -20,21 +20,21 @@
     </div>
   </div>
 
-  <div class="d-flex justify-content-center" style="margin-bottom: 10px; margin-top: 50px;" data-bs-toggle="modal" data-bs-target="#surveyExplainModal">
+  <div class="d-flex justify-content-center mt-5" data-bs-toggle="modal" data-bs-target="#surveyExplainModal">
     <h1>Valutazione Esperienza</h1>
   </div>
-  <div class="row">
-    <div class="col-2"></div>
-    <div class="col-8">
-      <label class="justify-content-center text-center" style="margin-bottom: 30px;">Compilando il questionario aiuterai altri
+
+  <div class="row mt-5 pt-3 mb-5 pb-3">
+    <div class="col-3"></div>
+    <div class="col-6">
+      <p class="justify-content-center text-center explaination p-4" style="font-weight: lighter; font-size: 18px">Compilando il questionario aiuterai altri
         studenti che sono interessati a partecipare al programma Erasmus+. Il tuo contributo è fondamentale
         per facilitare la scelta di altri colleghi, in base alla tua esperienza. Il questionario richiede
         di esprimere un giudizio su tutte le questioni di massimo interesse che riguardano la Città, il Campus, la Didattica e gli Alloggi.
         Per ogni voce è necessario inserire un grado di soddisfazione (1 totalmente insoddisfatto, 5 molto soddisfatto).
-      Si ricorda che il questionario è totalmente anonimo e verrà rielaborato per redigere le statistiche dell'offerta corrispondente.</label>
+        Si ricorda che il questionario è totalmente anonimo e verrà rielaborato per redigere le statistiche dell'offerta corrispondente.</p>
     </div>
   </div>
-
 
   <SurveyPanel title="Campus"
                first-row-label="Servizi offerti (Mensa, biblioteca ecc.)"
@@ -63,6 +63,8 @@
                third-row-label="Qualità"
                fourth-row-label="Vicinanza al campus"
                @firstRow="onCostoAlloggio" @secondRow="onAlloggiDisponibili" @thirdRow="onQualitaAlloggi" @fourthRow="onVicinanza"></SurveyPanel>
+
+
 
 
     <div class="d-flex justify-content-center mb-5 pb-5 mt-5 pt-5">
@@ -239,5 +241,9 @@ export default defineComponent({
 </script>
 
 <style scoped>
-
+.explaination{
+  background:#e3f7fc  no-repeat 10px 50%;
+  border:1px solid #8ed9f6;
+  border-radius:10px;
+}
 </style>
