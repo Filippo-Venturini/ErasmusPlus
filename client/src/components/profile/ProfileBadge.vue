@@ -1,7 +1,7 @@
 <template>
   <img :src="getImageUrl()" class="rounded-circle circleIcon mx-auto d-block h" alt="...">
   <h1 class="text-center">{{ user.name }}  {{user.surname}}</h1>
-  <h3 class="text-center">{{ user.identificationNumber}}</h3>
+  <p class="text-center" style="font-weight: lighter; font-size: 30px">{{ user.identificationNumber}}</p>
 </template>
 
 <script>

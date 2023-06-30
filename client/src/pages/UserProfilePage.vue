@@ -2,10 +2,15 @@
   <Header></Header>
   <ProfileBadge :user="user" :key="user.id"></ProfileBadge>
   <div v-if="this.user.role === 'Studente'">
-    <div class="row d-flex text-center" style="margin-top: 120px">
+    <div class="row d-flex text-center mt-5 pt-5">
       <h2>Le mie candidature</h2>
     </div>
-    <div v-if="applicationsLoaded" class="row d-flex justify-content-center">
+    <div v-if="this.applicationsLoaded && this.applications.length === 0" class="d-flex justify-content-center">
+      <div class="no-applications align-items-center p-5 mt-5">
+        <p style="font-weight: lighter; font-size: 20px">Non hai ancora presentato nessuna candidatura</p>
+      </div>
+    </div>
+    <div v-if="applicationsLoaded && this.applications.length !== 0" class="row d-flex justify-content-center">
       <div class="col-5 m-3">
         <table class="table table-bordered">
           <thead>
@@ -35,7 +40,7 @@
       </div>
     </div>
   </div>
-  <div class="row" style="margin-top: 100px">
+  <div class="row" style="margin-top: 130px">
     <div class="col-7">
       <ProfileInfoPanel :title="msgContacts" :user="user" class="bgGrayContacts"></ProfileInfoPanel>
     </div>
@@ -138,9 +143,13 @@ export default defineComponent ({
 .circleIconContacts{
   float: left;
 }
-
 .circleIconCol{
   margin-top: 50px
+}
+.no-applications{
+  background:#e3f7fc  no-repeat 10px 50%;
+  border:1px solid #8ed9f6;
+  border-radius:10px;
 }
 
 
