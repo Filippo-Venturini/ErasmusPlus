@@ -1,0 +1,11 @@
+Università: ETH Zurich
+
+Città: Zurigo
+
+Stato: Svizzera
+
+Latitudine: 47.376887
+
+Longitudine: 8.541694
+
+Descrizione: Il Politecnico federale di Zurigo, noto anche con la sigla ETH dalla denominazione ufficiale Eidgenössische Technische Hochschule Zürich, è considerato il più prestigioso istituto universitario politecnico della Svizzera e uno dei più importanti centri di ricerca al mondo. Fondato nel 1855 sull'esempio dell'École polytechnique a Parigi, forma studenti in campo scientifico e tecnico, si dedica alla ricerca, offre corsi di perfezionamento per specialisti e mette a disposizione servizi di natura tecnica e scientifica.
