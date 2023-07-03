@@ -27,12 +27,13 @@
           <template v-for="(application, index) in this.applications">
             <tr>
               <th scope="row">{{index+1}}</th>
-              <td @click="goToUniversityByName(application.university)" style="cursor: pointer">{{application.university}}</td>
+              <td class="universityName" @click="goToUniversityByName(application.university)" style="cursor: pointer">{{application.university}}</td>
               <td>{{application.city}}</td>
               <td>{{application.date}}</td>
-              <td v-if="application.state === 'Accettata'" style="color: limegreen">{{application.state}}</td>
-              <td v-else-if="application.state === 'Rifiutata'" style="color: red">{{application.state}}</td>
-              <td v-else>{{application.state}}</td>
+              <td v-if="application.state === 'Accettata'" style="color: limegreen; font-weight: bold">{{application.state}}</td>
+              <td v-else-if="application.state === 'Rifiutata'" style="color: red; font-weight: bold">{{application.state}}</td>
+              <td v-else-if="application.state === 'Attesa'" style="color: #FFC107; font-weight: bold">{{application.state}}</td>
+              <td v-else style="font-weight: bold">{{application.state}}</td>
             </tr>
           </template>
           </tbody>
@@ -127,6 +128,9 @@ export default defineComponent ({
 
 <style scoped>
 
+.universityName:hover{
+  font-weight: bold;
+}
 .bgRedPersonalInfo{
   background-color: #BB2E29;
   color: #FFFFFF;
