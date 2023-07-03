@@ -9,11 +9,11 @@
         <label for="floatingInput">Email address</label>
       </div>
       <div class="form-floating">
-        <input type="password" class="form-control" v-model="password" id="floatingPassword" placeholder="Password">
+        <input type="password" class="form-control" v-model="password" id="floatingPassword" placeholder="Password" @keyup.enter="login()">
         <label for="floatingPassword">Password</label>
       </div>
       <label id="passwordErrorLabel" style="display: none; color: #D91A1A; font-weight: bold;">Password o email sbagliata!</label>
-      <button class="w-100 btn btn-lg" style="background: #BB2E29; color: white" @click="login()">Sign in</button>
+      <button class="w-100 btn btn-lg" style="background: #BB2E29; color: white" autofocus @click="login()">Sign in</button>
     </div>
   </div>
 </template>
