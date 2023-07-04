@@ -48,11 +48,12 @@
   <div class="row me-5">
     <div class="col-md-1"></div>
     <div v-if="applicationsLoaded" class="col-md-2 mt-4 text-center">
-      <button id="btnAccettata" v-if="checkIsApplied() === 'Accettata'" class="btn btn-success" disabled>Accettata</button>
+      <button id="btnAccettata" v-if="checkIsApplied() === 'Accettata'" class="btn btn-success col-md-4" disabled>Accettata</button>
 
-      <RouterLink class="nav-link" :to="{path: '/survey/'+this.offerUniversity._id}">
-        <button id="btnTermina" v-if="checkIsApplied() === 'Accettata'"  class="btn btn-outline-warning" style="margin-left: 60px" @click="changeToTerminated()">Termina</button>
+      <RouterLink class="nav-link col-md-4 mt-3 ms-5" :to="{path: '/survey/'+this.offerUniversity._id}">
+        <button id="btnTermina" v-if="checkIsApplied() === 'Accettata'"  class="btn btn-outline-warning ps-3 pe-3" style="margin-left: 50px" @click="changeToTerminated()">Termina</button>
       </RouterLink>
+
       <button id="btnTerminata" v-if="checkIsApplied() === 'Terminata'" class="btn success" disabled>Terminata</button>
 
       <button id="btnRifiutata" v-if="checkIsApplied() === 'Rifiutata'" class="btn btn-danger" disabled>Rifiutata</button>
