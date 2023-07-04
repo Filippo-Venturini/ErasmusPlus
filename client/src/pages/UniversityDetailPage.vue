@@ -299,7 +299,39 @@ export default defineComponent({
       })
     },
     deleteUniversity(){
-      axios.delete('http://localhost:3000/deleteOffer'+this.offerUniversity.name).then(this.$router.push('/'));
+      var uniName = this.offerUniversity.name;
+      axios.delete('http://localhost:3000/deleteOffer'+this.offerUniversity.name).then(() => {
+
+        axios.get('http://localhost:3000/users').then(response =>{
+          this.users = response.data;
+          const jsonNotifications = [];
+          this.users.forEach(function(user){
+
+            jsonNotifications.push({
+              id: user.identificationNumber,
+              text: "L'offerta delariva a " +uniName + " è stata eliminata!",
+              read: "false",
+              goto: "/"
+            })
+          });
+          jsonNotifications.forEach(function (json){
+            try{
+              axios.post('http://localhost:3000/sendNotificationToUser', json, {
+                headers: {
+                  // Overwrite Axios's automatically set Content-Type
+                  'Content-Type': 'application/json'
+                }
+              })
+            } catch (e) {
+              console.log(e)
+            }
+          })
+
+        }).catch(err => {
+          console.log(err);
+        })
+        this.$router.push('/');
+      });
     },
     applyToUniversity(){
       this.getApplication();

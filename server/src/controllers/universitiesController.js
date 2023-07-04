@@ -118,5 +118,6 @@ exports.delete_offer = async (req, res) => {
     await universitiesModel.deleteOne(
         {name: req.params.name}
     )
+    res.sendStatus(200);
 
 }
