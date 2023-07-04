@@ -107,16 +107,16 @@
     </div>
   </div>
 
-  <div class="row mb-5 pb-5" style="margin-top: 200px">
+  <div class="row" style="margin-top: 200px">
     <div class="col-md-9">
       <InfoPanelSX :title="msgFieldOfStudy" :msgDescribe="msgDescribeFieldOfStudy" :icon="iconFieldOfStudy" :styleIcon="styleCSSIconMessage" :offerUniversity="msgInfoFieldOfStudy" :key="offerUniversity.id" class="bgRedFieldOfStudy"></InfoPanelSX>
     </div>
     <div class="col-md-1">
       <CircleIcon class="circleIconFieldOfStudy" :icon="iconFieldOfStudy" :styleIcon="styleCSSIcon"></CircleIcon>
     </div>
-    <div class="col-md-2"></div>
-  </div>
 
+  </div>
+  <div class="row m-5"></div>
   <div v-if="this.statisticsComputed">
     <div class="row">
       <div class="col-1 me-5"></div>
@@ -527,7 +527,6 @@ export default defineComponent({
 .bgRedFieldOfStudy{
   background-color: #BB2E29;
   color: white;
-  height: 250px;
 }
 .circleIconFieldOfStudy{
   float: right;

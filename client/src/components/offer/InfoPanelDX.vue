@@ -8,6 +8,7 @@
       <div class="col-md-1"></div>
       <p class="col-md-11 panel-body" style="margin-top: 10px; padding-right: 50px; font-size: 20px;">{{msgDescribe}}</p>
     </div>
+    <div class="row m-2"></div>
   </div>
 </template>
 
