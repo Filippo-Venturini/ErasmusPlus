@@ -1,7 +1,7 @@
 <template>
   <div class="mb-5 pb-5">
     <div class="row d-flex justify-content-center mt-5">
-      <div class="col-5">
+      <div class="col-md-5">
         <h2>{{ university.name }}</h2>
         <div class="m-lg-3">
           <p style="font-weight: lighter; font-size: 20px">Posti disponibili: {{university.offer.places}}</p>
@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="row d-flex justify-content-center mt-4">
-      <div v-if="this.applicationPresent" class="col-5">
+      <div v-if="this.applicationPresent" class="col-md-5">
         <table class="table table-bordered">
           <thead>
           <tr>
