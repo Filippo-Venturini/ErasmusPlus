@@ -11,7 +11,7 @@
       </div>
     </div>
     <div v-if="applicationsLoaded && this.applications.length !== 0" class="row d-flex justify-content-center">
-      <div class="col-5 m-3">
+      <div class="col-md-5 m-3">
         <table class="table table-bordered">
           <thead>
           <tr>
@@ -42,26 +42,23 @@
     </div>
   </div>
   <div class="row" style="margin-top: 130px">
-    <div class="col-7">
+    <div class="col-md-7">
       <ProfileInfoPanel :title="msgContacts" :user="user" class="bgGrayContacts"></ProfileInfoPanel>
     </div>
-    <div class="col-2"></div>
-    <div class="col-3 circleIconCol" style="margin-top: 50px; padding-left: 90px">
+    <div class="col-md-2"></div>
+    <div class="col-md-3 circleIconCol" style="margin-top: 50px; padding-left: 90px">
       <UserProfileCircleIcon :title="msgContacts" class="circleIconContacts"></UserProfileCircleIcon>
     </div>
   </div>
   <div class="row" style="margin-top: 200px">
-    <div class="col-3 circleIconCol" style="padding-right: 90px">
+    <div class="col-md-3 circleIconCol" style="padding-right: 90px">
       <UserProfileCircleIcon :title="msgPersonalInfo" class="circleIconPersonalInfo"></UserProfileCircleIcon>
     </div>
-    <div class="col-2"></div>
-    <div class="col-7 mb-lg-5">
+    <div class="col-md-2"></div>
+    <div class="col-md-7 mb-lg-5">
       <ProfileInfoPanel  :title="msgPersonalInfo" :user="user" class="bgRedPersonalInfo"></ProfileInfoPanel>
     </div>
   </div>
-
-
-
 </template>
 
 <script>
