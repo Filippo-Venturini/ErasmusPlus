@@ -74,7 +74,7 @@
   <div class="row d-flex justify-content-center">
     <div class="mb-3 col-5 form-group">
       <label for="exampleFormControlSelect1">Ambito di studi:</label>
-      <select v-if="receivedOriginalOffer" class="form-control" id="exampleFormControlSelect1">
+      <select v-if="receivedOriginalOffer" class="form-control" id="exampleFormControlSelect1" v-model="field">
         <option value="Ingegneria Informatica" :selected="this.fieldOfStudySelected('Ingegneria Informatica')">Ingegneria Informatica</option>
         <option value="Artificial Intelligence" :selected="this.fieldOfStudySelected('Artificial Intelligence')">Artificial Intelligence</option>
         <option value="Data Science" :selected="this.fieldOfStudySelected('Data Science')">Data Science</option>
