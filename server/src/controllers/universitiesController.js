@@ -1,6 +1,5 @@
 const universitiesModel = require('../models/universitiesModel');
 const index = require('../../src/index');
-const usersModel = require("../models/usersModel");
 
 exports.all_universities = async(req, res) => {
     try{
