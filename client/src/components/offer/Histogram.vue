@@ -14,7 +14,7 @@
 import {defineComponent} from "vue";
 export default defineComponent({
   name: "Histogram",
-  props: ["data", "color", "title", "width"],
+  props: ["data", "color", "title", "width", "labels"],
   data(){
     return{
       options: {
@@ -22,7 +22,7 @@ export default defineComponent({
           id: 'vuechart'
         },
         xaxis: {
-          categories: ["Servizi offerti", "Aule", "Laboratori", "Spazi aperti"]
+          categories: this.labels
         },
         yaxis: {
           max: 5

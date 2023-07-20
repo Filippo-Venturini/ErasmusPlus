@@ -37,7 +37,7 @@
   </div>
 
   <SurveyPanel title="Campus"
-               first-row-label="Servizi offerti (Mensa, biblioteca ecc.)"
+               first-row-label="Servizi offerti (Mensa, ecc.)"
                second-row-label="Aule"
                third-row-label="Laboratori"
                fourth-row-label="Spazi aperti"
@@ -46,7 +46,7 @@
   <SurveyPanel title="Città"
                first-row-label="Clima"
                second-row-label="Costo della vita"
-               third-row-label="Svago (Discoteche, Bar, Musei ecc.)"
+               third-row-label="Svago (Discoteche, Musei ecc.)"
                fourth-row-label="Mezzi pubblici"
                @firstRow="onClima" @secondRow="onCostoVita" @thirdRow="onSvago" @fourthRow="onMezzi"></SurveyPanel>
 

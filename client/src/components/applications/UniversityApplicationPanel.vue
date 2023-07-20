@@ -28,7 +28,7 @@
           <tbody>
           <template v-for="application in this.applications">
             <tr v-if="university.name === application.university">
-              <th scope="row">1</th>
+              <th scope="row"></th>
               <td>{{application.university}}</td>
               <td>{{application.student}}</td>
               <td>{{application.date}}</td>
