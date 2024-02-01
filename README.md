@@ -1,4 +1,4 @@
-# ErasmusPlus
+# ErasmusPlus ✈️
 
 `Erasmus Plus` is a web application that is conceived for being integrated in an existing university's website for allowing students to apply for the Erasmus+ programme,
 and making administrators able to manage all the applications and the Erasmus+ offers. This project is developed for academic purposes for the course `Applicazioni e Servizi Web` of `University of Bologna` under the academic year 2022/2023.
